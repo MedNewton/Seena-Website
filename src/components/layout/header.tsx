@@ -1,9 +1,14 @@
 // src/old/layout/Header.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography } from "@mui/material";
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+import logo from "@/assets/images/Seena Logo-6.webp";
+import JoinUsButton from "@/components/ui/joinUsButton";
 
 type NavItem = {
   label: string;
@@ -18,34 +23,11 @@ const navItems: NavItem[] = [
   { label: "ABOUT", href: "/about" },
 ];
 
-const MAX_SCROLL_FOR_EFFECT = 160; // px until we're "fully frosted"
 const HEADER_OFFSET = 96; // px offset so section isn't hidden under header
 
+const MotionBox = motion(Box);
+
 const Header: React.FC = () => {
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
-
-  useEffect(() => {
-    const handleScroll = (): void => {
-      const y = window.scrollY;
-      const next = Math.min(Math.max(y / MAX_SCROLL_FOR_EFFECT, 0), 1);
-      setScrollProgress(next);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  // Interpolate values based on scrollProgress (0 → 1)
-  const blur = 4 + (24 - 4) * scrollProgress; // 4px → 24px
-  const bgAlphaStart = 0.96 + (0.5 - 0.96) * scrollProgress; // 0.96 → 0.50
-  const bgAlphaEnd = 0.92 + (0.55 - 0.92) * scrollProgress; // 0.92 → 0.55
-  const borderAlpha = 0.3 + (0.5 - 0.3) * scrollProgress; // 0.3 → 0.5
-  const shadowAlpha = 0.16 + (0.22 - 0.16) * scrollProgress; // 0.16 → 0.22
-
   const handleNavClick =
     (href: string) => (event: React.MouseEvent<HTMLAnchorElement>): void => {
       if (!href.startsWith("#")) {
@@ -80,41 +62,38 @@ const Header: React.FC = () => {
         left: "50%",
         transform: "translateX(-50%)",
         zIndex: (theme) => theme.zIndex.appBar + 1,
-        width: "min(1280px, 100% - 32px)",
+        width: "min(900px, 80% - 32px)",
       }}
     >
-      <Box
+      <MotionBox
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.6,
+          ease: "easeOut",
+          delay: 0.2, // delay after page load
+        }}
         sx={{
           position: "relative",
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
           borderRadius: 999,
-          px: 3,
-          py: 1.5,
+          pl: 2,
+          pr: 1,
+          py: 1,
           overflow: "hidden",
-          boxShadow: `0px 18px 40px rgba(15, 23, 42, ${shadowAlpha})`,
-          background: `linear-gradient(135deg, rgba(255,255,255,${bgAlphaStart}), rgba(255,255,255,${bgAlphaEnd}))`,
-          border: `1px solid rgba(255, 255, 255, ${borderAlpha})`,
-          backdropFilter: `blur(${blur}px)`,
-          WebkitBackdropFilter: `blur(${blur}px)`,
+          background: "rgba(255, 255, 255, 0.1)",
+          backdropFilter: "blur(24px)",
+          WebkitBackdropFilter: "blur(24px)",
           transition:
             "background 180ms ease-out, box-shadow 180ms ease-out, backdrop-filter 180ms ease-out, border-color 180ms ease-out",
         }}
       >
         {/* Left: Logo / Brand */}
-        <Typography
-          component={Link}
-          href="/"
-          sx={{
-            textDecoration: "none",
-            fontWeight: 500,
-            fontSize: 24,
-            color: "#111827",
-          }}
-        >
-          Seena
-        </Typography>
+        <Box sx={{ position: "relative", width: 80, height: 40 }}>
+          <Image src={logo} alt="Seena Logo" fill style={{ objectFit: "contain" }} />
+        </Box>
 
         {/* Center: Nav links */}
         <Stack
@@ -124,6 +103,7 @@ const Header: React.FC = () => {
             alignItems: "center",
             flex: 1,
             justifyContent: "center",
+            pt: 1,
           }}
         >
           {navItems.map((item) => (
@@ -139,7 +119,7 @@ const Header: React.FC = () => {
                 letterSpacing: 1.2,
                 fontWeight: 500,
                 textTransform: "uppercase",
-                color: "#4B5563",
+                color: "#111827",
                 pb: 0.5,
                 transition: "color 150ms ease-out",
                 "&::after": {
@@ -156,7 +136,7 @@ const Header: React.FC = () => {
                   transition: "transform 180ms ease-out",
                 },
                 "&:hover": {
-                  color: "#111827",
+                  color: "#4B5563",
                 },
                 "&:hover::after": {
                   transform: "scaleX(1)",
@@ -169,29 +149,8 @@ const Header: React.FC = () => {
         </Stack>
 
         {/* Right: CTA */}
-        <Button
-          component={Link}
-          href="/join"
-          sx={{
-            borderRadius: 999,
-            px: 4,
-            py: 1.2,
-            fontWeight: 600,
-            letterSpacing: 1,
-            fontSize: 14,
-            textTransform: "uppercase",
-            color: "#FFFFFF",
-            backgroundColor: "#F9733C",
-            boxShadow: "0px 2px 10px 2px rgba(249, 115, 60, 0.4)",
-            "&:hover": {
-              backgroundColor: "#fb6b2d",
-              boxShadow: "0px 2px 10px 2px rgba(249, 115, 60, 0.4)",
-            },
-          }}
-        >
-          Join us
-        </Button>
-      </Box>
+        <JoinUsButton />
+      </MotionBox>
     </Box>
   );
 };

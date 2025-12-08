@@ -1,10 +1,15 @@
+// src/app/page.tsx
+"use client";
+
 import { Stack } from "@mui/material";
-import Link from "next/link";
+import Hero from "@/components/home/hero";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
-    <Stack width={"100%"} gap={4} pt={4}>
-
+    <Stack width="100%">
+      <Hero />
     </Stack>
   );
-}
+};
+
+export default Home;

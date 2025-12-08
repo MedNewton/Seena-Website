@@ -24,7 +24,7 @@ const palette: PaletteOptions = {
 let theme = createTheme({
   palette,
   typography: {
-    fontFamily: "Inter",
+    fontFamily: "Bricolage Grotesque",
   },
 })
 

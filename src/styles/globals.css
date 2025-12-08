@@ -1,7 +1,11 @@
+@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+
 html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 a {
