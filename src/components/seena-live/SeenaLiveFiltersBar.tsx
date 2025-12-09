@@ -17,7 +17,7 @@ import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 
 const TAGS = ["Stress", "Mindfulness", "Sleep", "Physical", "Community"];
 
-const ExperiencesFiltersBar: FC = () => {
+const SeenaLiveFiltersBar: FC = () => {
   return (
     <Stack spacing={2.5}>
       {/* Search + controls row */}
@@ -55,7 +55,6 @@ const ExperiencesFiltersBar: FC = () => {
               color: "#E5E7EB",
               backdropFilter: "blur(18px)",
               WebkitBackdropFilter: "blur(18px)",
-              boxShadow: "0 18px 45px rgba(15,23,42,0.75)",
               "& fieldset": { border: "none" },
             },
             "& .MuiInputBase-input": {
@@ -81,7 +80,6 @@ const ExperiencesFiltersBar: FC = () => {
             backgroundColor: "rgba(15,23,42,0.4)",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
-            boxShadow: "0 14px 32px rgba(15,23,42,0.7)",
             flexShrink: 0,
             "&:hover": {
               borderColor: "rgba(191,219,254,0.95)",
@@ -120,7 +118,6 @@ const ExperiencesFiltersBar: FC = () => {
               backgroundColor: "rgba(15,23,42,0.4)",
               backdropFilter: "blur(18px)",
               WebkitBackdropFilter: "blur(18px)",
-              boxShadow: "0 14px 32px rgba(15,23,42,0.7)",
               "&:hover": {
                 backgroundColor: "rgba(15,23,42,0.65)",
               },
@@ -148,7 +145,6 @@ const ExperiencesFiltersBar: FC = () => {
               border: "1px solid rgba(148,163,184,0.7)",
               backdropFilter: "blur(16px)",
               WebkitBackdropFilter: "blur(16px)",
-              boxShadow: "0 12px 30px rgba(15,23,42,0.7)",
               "& .MuiChip-label": {
                 px: 1.8,
                 py: 0.7,
@@ -165,4 +161,4 @@ const ExperiencesFiltersBar: FC = () => {
   );
 };
 
-export default ExperiencesFiltersBar;
+export default SeenaLiveFiltersBar;

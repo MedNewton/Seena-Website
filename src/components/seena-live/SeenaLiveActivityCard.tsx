@@ -5,16 +5,16 @@ import type { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import Image, { type StaticImageData } from "next/image";
 import { motion } from "framer-motion";
-import type { ExperiencesActivity } from "./SeenaLiveSlider";
+import type { SeenaLiveActivity } from "./SeenaLiveSlider";
 
-type ExperiencesActivityCardProps = {
-  activity: ExperiencesActivity;
+type SeenaLiveActivityCardProps = {
+  activity: SeenaLiveActivity;
   isHighlighted?: boolean;
 };
 
 const MotionBox = motion.create(Box);
 
-const ExperiencesActivityCard: FC<ExperiencesActivityCardProps> = ({
+const SeenaLiveActivityCard: FC<SeenaLiveActivityCardProps> = ({
   activity,
   isHighlighted = false,
 }) => {
@@ -76,4 +76,4 @@ const ExperiencesActivityCard: FC<ExperiencesActivityCardProps> = ({
   );
 };
 
-export default ExperiencesActivityCard;
+export default SeenaLiveActivityCard;

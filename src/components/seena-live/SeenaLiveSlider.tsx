@@ -9,25 +9,25 @@ import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 import type { StaticImageData } from "next/image";
 import ExperiencesActivityCard from "./SeenaLiveActivityCard";
 
-export type ExperiencesActivity = {
+export type SeenaLiveActivity = {
   id: string;
   title: string;
   image: StaticImageData;
 };
 
-export type ExperiencesSectionConfig = {
+export type SeenaLiveSectionConfig = {
   id: string;
   title: string;
-  activities: ExperiencesActivity[];
+  activities: SeenaLiveActivity[];
 };
 
-export interface ExperiencesSectionSliderProps {
-  config: ExperiencesSectionConfig;
+export interface SeenaLiveSectionSliderProps {
+  config: SeenaLiveSectionConfig;
 }
 
 const MotionBox = motion.create(Box);
 
-const ExperiencesSectionSlider: FC<ExperiencesSectionSliderProps> = ({
+const SeenaLiveSectionSlider: FC<SeenaLiveSectionSliderProps> = ({
   config,
 }) => {
   const { title, activities } = config;
@@ -178,4 +178,4 @@ const ExperiencesSectionSlider: FC<ExperiencesSectionSliderProps> = ({
   );
 };
 
-export default ExperiencesSectionSlider;
+export default SeenaLiveSectionSlider;

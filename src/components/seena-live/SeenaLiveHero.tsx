@@ -4,12 +4,12 @@ import type { FC } from "react";
 import { Box, Typography } from "@mui/material";
 import Image, { type StaticImageData } from "next/image";
 
-export interface ExperiencesHeroProps {
+export interface SeenaLiveHeroProps {
   title: string;
   image: StaticImageData;
 }
 
-const ExperiencesHero: FC<ExperiencesHeroProps> = ({ title, image }) => {
+const SeenaLiveHero: FC<SeenaLiveHeroProps> = ({ title, image }) => {
   return (
     <Box
       sx={{
@@ -74,4 +74,4 @@ const ExperiencesHero: FC<ExperiencesHeroProps> = ({ title, image }) => {
   );
 };
 
-export default ExperiencesHero;
+export default SeenaLiveHero;
