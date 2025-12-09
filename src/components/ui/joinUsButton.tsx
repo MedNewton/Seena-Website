@@ -4,6 +4,9 @@ import type { FC, ReactNode } from "react";
 import { Button } from "@mui/material";
 import { keyframes, styled } from "@mui/material/styles";
 
+const GOLD_MAIN = "#D8A24B";
+const GOLD_SOFT = "#F3D9A5";
+
 const floatingPoints = keyframes`
   0% {
     transform: translateY(0);
@@ -40,8 +43,15 @@ const StyledButton = styled(Button)(() => ({
   justifyContent: "center",
   overflow: "hidden",
   transition: "all 0.25s ease",
-  background:
-    "radial-gradient(65.28% 65.28% at 50% 100%, #F8C657 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F8C657, #F8C657)",
+  // OUTER GOLD GLOW + BASE GOLD
+  background: `
+    radial-gradient(
+      65.28% 65.28% at 50% 100%,
+      ${GOLD_SOFT} 0%,
+      rgba(216, 162, 75, 0) 100%
+    ),
+    linear-gradient(0deg, ${GOLD_MAIN}, ${GOLD_MAIN})
+  `,
   borderRadius: 9999,
   border: "none",
   outline: "none",
@@ -67,8 +77,15 @@ const StyledButton = styled(Button)(() => ({
 
   "&::after": {
     inset: 2,
-    background:
-      "radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 165, 0, 0.8) 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F8C657, #F8C657)",
+    // INNER GOLD WASH + SOLID GOLD
+    background: `
+      radial-gradient(
+        65.28% 65.28% at 50% 100%,
+        rgba(243, 217, 165, 0.9) 0%,
+        rgba(216, 162, 75, 0) 100%
+      ),
+      linear-gradient(0deg, ${GOLD_MAIN}, ${GOLD_MAIN})
+    `,
   },
 
   "&:active": {
@@ -174,7 +191,10 @@ const JoinUsButton: FC<FloatingPointsButtonProps> = ({
     <StyledButton type={type} onClick={onClick} disableRipple>
       <PointsWrapper>
         {POINTS_CONFIG.map((config) => (
-          <Point key={`${config.left}-${config.duration}-${config.delay ?? 0}`} config={config} />
+          <Point
+            key={`${config.left}-${config.duration}-${config.delay ?? 0}`}
+            config={config}
+          />
         ))}
       </PointsWrapper>
 
