@@ -2,7 +2,7 @@
 "use client";
 
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, Link } from "@mui/material";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
@@ -16,6 +16,7 @@ const GOLD = "#D8A24B";
 type BranchCardProps = {
   title: string;
   description: string;
+  href: string;
   image: StaticImageData;
   isTall?: boolean;
 };
@@ -23,10 +24,12 @@ type BranchCardProps = {
 const MotionBox = motion.create(Box);
 const MotionTypography = motion.create(Typography);
 const MotionButton = motion.create(Button);
+const MotionLink = motion.create(Link);
 
 const BranchCard: React.FC<BranchCardProps> = ({
   title,
   description,
+  href,
   image,
   isTall = false,
 }) => {
@@ -259,6 +262,7 @@ const Branches: React.FC = () => {
             description="Community fitness & wellness events in your city."
             image={liveImg}
             isTall
+            href="/seena-live"
           />
         </MotionBox>
 
@@ -277,6 +281,7 @@ const Branches: React.FC = () => {
             description="Local & international wellness retreats designed to rejuvenate you."
             image={resetImg}
             isTall
+            href="/reset"
           />
         </MotionBox>
 
@@ -297,6 +302,7 @@ const Branches: React.FC = () => {
             title="Seena Dinner Club"
             description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space."
             image={dinnerImg}
+            href="/seena-dinner-club"
           />
         </MotionBox>
       </Box>

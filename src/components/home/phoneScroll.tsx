@@ -160,10 +160,10 @@ const PhoneScroll: React.FC = () => {
               justifyContent="center"
             >
               <motion.div style={{ opacity: f1Opacity, y: f1Y }}>
-                <FeatureItem title="Sustain" description={featureDescription} />
+                <FeatureItem title="Self-Awareness" description={"Reveals your energy signature and needs using daily checks and biometric data."} />
               </motion.div>
               <motion.div style={{ opacity: f2Opacity, y: f2Y }}>
-                <FeatureItem title="Sustain" description={featureDescription} />
+                <FeatureItem title="AI Coach" description={"Personalized routines for breathwork, movement, and inner equilibrium."} />
               </motion.div>
             </Stack>
 
@@ -193,10 +193,10 @@ const PhoneScroll: React.FC = () => {
               justifyContent="center"
             >
               <motion.div style={{ opacity: f3Opacity, y: f3Y }}>
-                <FeatureItem title="Sustain" description={featureDescription} />
+                <FeatureItem title="System Reset" description={"Guided practices to reset your stress response and stabilize your nervous system."} />
               </motion.div>
               <motion.div style={{ opacity: f4Opacity, y: f4Y }}>
-                <FeatureItem title="Sustain" description={featureDescription} />
+                <FeatureItem title="Progress Map" description={"Dynamic dashboard tracking your progress across Mind, Body, and Soul for peak flow."} />
               </motion.div>
             </Stack>
           </Box>
