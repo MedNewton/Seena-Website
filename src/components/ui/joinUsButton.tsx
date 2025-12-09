@@ -41,7 +41,7 @@ const StyledButton = styled(Button)(() => ({
   overflow: "hidden",
   transition: "all 0.25s ease",
   background:
-    "radial-gradient(65.28% 65.28% at 50% 100%, #F9733C 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F9733C, #F9733C)",
+    "radial-gradient(65.28% 65.28% at 50% 100%, #F8C657 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F8C657, #F8C657)",
   borderRadius: 9999,
   border: "none",
   outline: "none",
@@ -68,7 +68,7 @@ const StyledButton = styled(Button)(() => ({
   "&::after": {
     inset: 2,
     background:
-      "radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 165, 0, 0.8) 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F9733C, #f97316)",
+      "radial-gradient(65.28% 65.28% at 50% 100%, rgba(255, 165, 0, 0.8) 0%, rgba(255, 165, 0, 0) 100%), linear-gradient(0deg, #F8C657, #F8C657)",
   },
 
   "&:active": {
@@ -139,12 +139,12 @@ const Inner = styled("span")(() => ({
   gap: 6,
   position: "relative",
   width: "100%",
-  color: "#ffffff",
+  color: "#181818",
   display: "inline-flex",
   alignItems: "center",
   justifyContent: "center",
   fontSize: 16,
-  fontWeight: 500,
+  fontWeight: 600,
   lineHeight: 1.5,
   transition: "color 0.2s ease-in-out",
 
@@ -152,7 +152,7 @@ const Inner = styled("span")(() => ({
     width: 18,
     height: 18,
     transition: "transform 0.3s ease",
-    stroke: "#ffffff",
+    stroke: "#181818",
     fill: "none",
   },
 }));
