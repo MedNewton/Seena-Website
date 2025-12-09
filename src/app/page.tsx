@@ -8,6 +8,7 @@ import Explore from "@/components/home/explore";
 import PhoneScroll from "@/components/home/phoneScroll";
 import Branches from "@/components/home/branches";
 import Circles from "@/components/home/circles";
+import Footer from "@/components/layout/footer";
 
 const Home: React.FC = () => {
   return (
@@ -20,6 +21,7 @@ const Home: React.FC = () => {
         <Branches />
         <Circles />
       </Stack>
+      <Footer />
     </Stack>
   );
 };

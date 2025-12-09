@@ -17,6 +17,10 @@ type SimpleLink = {
   href: string;
 };
 
+type FooterProps = {
+  transparentFooter?: boolean;
+};
+
 const navigationLinks: SimpleLink[] = [
   { label: "Home", href: "/" },
   { label: "Digital Guidance", href: "/app" },
@@ -42,9 +46,9 @@ const socialLinks: SimpleLink[] = [
 const MotionCard = motion.create(Box);
 const MotionTypography = motion.create(Typography);
 const MotionColumn = motion.create(Box);
-const MotionBox = motion.create(Box); // <-- missing before
+const MotionBox = motion.create(Box);
 
-const Footer: React.FC = () => {
+const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
   return (
     <Box
       component="footer"
@@ -78,11 +82,21 @@ const Footer: React.FC = () => {
             xs: "0px 18px 45px rgba(15,23,42,0.35)",
             md: "0px 30px 80px rgba(15,23,42,0.55)",
           },
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-          backgroundRepeat: "repeat",
-          backgroundImage:
-            'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%223000%22 height=%221500%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%23D77A1E%22 d=%22M-1500-750h6000v3000h-6000z%22%2F%3E%3Cpath d=%22m-31-104-632 274 17 1192 1556-147%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22M2089-78 409 485l1966 1444 44-819%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22M2482 346 1381 1742l67 213L2918 656%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m656 435-1257 927L93 2369 1361 952%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22M1373 1141 319 3455l700 49 1601-518%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1182 1073-22 140 1215 1621 627-308%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-300%22 y=%22-300%22 width=%223600%22 height=%222100%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22300%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+
+          // background style depends on transparentFooter
+          ...(transparentFooter
+            ? {
+                border: "0.8px solid rgba(255, 255, 255, 0.10)",
+                background: "rgba(255, 255, 255, 0.05)",
+                backgroundImage: "none",
+              }
+            : {
+                backgroundSize: "cover",
+                backgroundPosition: "center center",
+                backgroundRepeat: "repeat",
+                backgroundImage:
+                  'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%223000%22 height=%221500%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%23D77A1E%22 d=%22M-1500-750h6000v3000h-6000z%22%2F%3E%3Cpath d=%22m-31-104-632 274 17 1192 1556-147%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22M2089-78 409 485l1966 1444 44-819%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22M2482 346 1381 1742l67 213L2918 656%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m656 435-1257 927L93 2369 1361 952%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22M1373 1141 319 3455l700 49 1601-518%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1182 1073-22 140 1215 1621 627-308%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-300%22 y=%22-300%22 width=%223600%22 height=%222100%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22300%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+              }),
         }}
       >
         {/* Top “Move / Heal / Grow” row */}
