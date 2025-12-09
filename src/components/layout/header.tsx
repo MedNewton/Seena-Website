@@ -97,7 +97,6 @@ const Header: React.FC = () => {
             "background 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out",
           "&:hover": {
             boxShadow: "0 24px 65px rgba(0,0,0,0.65)",
-            borderColor: "rgba(226,232,240,0.55)",
             transform: "translateY(-1px)",
           },
         })}
