@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 
 import digitalGuidanceImg from "@/assets/images/meditation1.webp";
 import realExperiencesImg from "@/assets/images/group-yoga1.webp";
+import { useRouter } from "next/navigation";
 
 type ExploreCardConfig = {
   id: "digital" | "real";
   title: string;
   subtitle: string;
   imageSrc: string;
+  href: string;
 };
 
 const GOLD = "#D8A24B";
@@ -23,12 +25,14 @@ const CARDS: ExploreCardConfig[] = [
     title: "Digital Guidance",
     subtitle: "AI coach | breathwork & fitness | Inner balance",
     imageSrc: digitalGuidanceImg.src,
+    href: "/app",
   },
   {
     id: "real",
     title: "Real Experiences",
     subtitle: "Live events | Retreats | Community",
     imageSrc: realExperiencesImg.src,
+    href: "/experiences",
   },
 ];
 
@@ -37,6 +41,7 @@ const MotionTypography = motion.create(Typography);
 const MotionButton = motion.create(Button);
 
 const Explore: React.FC = () => {
+  const router = useRouter();
   return (
     <MotionBox
       initial={{ opacity: 0, y: 24 }}
@@ -148,6 +153,9 @@ const Explore: React.FC = () => {
 
               <MotionButton
                 whileTap={{ scale: 0.97 }}
+                onClick={async () => {
+                  router.push(card.href);
+                }}
                 sx={{
                   position: "relative",
                   overflow: "hidden",

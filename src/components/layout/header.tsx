@@ -3,7 +3,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Link as MuiLink } from "@mui/material";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -104,13 +104,15 @@ const Header: React.FC = () => {
       >
         {/* Left: Logo / Brand */}
         <Box sx={{ position: "relative", width: 80, height: 40 }}>
-          <Image
-            src={logo}
-            alt="Seena Logo"
-            fill
-            style={{ objectFit: "contain" }}
-            priority
-          />
+          <MuiLink component={Link} href="/">
+            <Image
+              src={logo}
+              alt="Seena Logo"
+              fill
+              style={{ objectFit: "contain" }}
+              priority
+            />
+          </MuiLink>
         </Box>
 
         {/* Center: Nav links */}

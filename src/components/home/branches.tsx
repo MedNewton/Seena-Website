@@ -6,6 +6,7 @@ import { Box, Typography, Button, Link } from "@mui/material";
 import Image from "next/image";
 import type { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 import liveImg from "@/assets/images/training1.webp";
 import resetImg from "@/assets/images/retreat1.webp";
@@ -24,15 +25,15 @@ type BranchCardProps = {
 const MotionBox = motion.create(Box);
 const MotionTypography = motion.create(Typography);
 const MotionButton = motion.create(Button);
-const MotionLink = motion.create(Link);
-
 const BranchCard: React.FC<BranchCardProps> = ({
   title,
   description,
   href,
   image,
   isTall = false,
+  
 }) => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -144,6 +145,9 @@ const BranchCard: React.FC<BranchCardProps> = ({
           <MotionButton
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
+            onClick={() => {
+              router.push(href);
+            }}
             sx={{
               position: "relative",
               overflow: "hidden",
