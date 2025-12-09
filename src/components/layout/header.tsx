@@ -1,4 +1,4 @@
-// src/old/layout/Header.tsx
+// src/components/layout/Header.tsx
 "use client";
 
 import React from "react";
@@ -25,7 +25,10 @@ const navItems: NavItem[] = [
 
 const HEADER_OFFSET = 96; // px offset so section isn't hidden under header
 
-const MotionBox = motion(Box);
+// Framer Motion v11+
+const MotionBox = motion.create(Box);
+
+const GOLD = "#D8A24B";
 
 const Header: React.FC = () => {
   const handleNavClick =
@@ -73,7 +76,7 @@ const Header: React.FC = () => {
           ease: "easeOut",
           delay: 0.2, // delay after page load
         }}
-        sx={{
+        sx={(theme) => ({
           position: "relative",
           display: "flex",
           alignItems: "center",
@@ -83,27 +86,42 @@ const Header: React.FC = () => {
           pr: 1,
           py: 1,
           overflow: "hidden",
-          background: "rgba(255, 255, 255, 0.1)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
+          // darker, more consistent glass so links stay readable on dark hero
+          background:
+            "linear-gradient(120deg, rgba(15,23,42,0.85), rgba(15,23,42,0.65))",
+          backdropFilter: "blur(22px)",
+          WebkitBackdropFilter: "blur(22px)",
+          border: "1px solid rgba(148,163,184,0.35)", // subtle slate border
+          boxShadow: "0 22px 55px rgba(0,0,0,0.55)",
           transition:
-            "background 180ms ease-out, box-shadow 180ms ease-out, backdrop-filter 180ms ease-out, border-color 180ms ease-out",
-        }}
+            "background 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out",
+          "&:hover": {
+            boxShadow: "0 24px 65px rgba(0,0,0,0.65)",
+            borderColor: "rgba(226,232,240,0.55)",
+            transform: "translateY(-1px)",
+          },
+        })}
       >
         {/* Left: Logo / Brand */}
         <Box sx={{ position: "relative", width: 80, height: 40 }}>
-          <Image src={logo} alt="Seena Logo" fill style={{ objectFit: "contain" }} />
+          <Image
+            src={logo}
+            alt="Seena Logo"
+            fill
+            style={{ objectFit: "contain" }}
+            priority
+          />
         </Box>
 
         {/* Center: Nav links */}
         <Stack
           direction="row"
-          spacing={4}
+          spacing={3.5}
           sx={{
             alignItems: "center",
             flex: 1,
             justifyContent: "center",
-            pt: 1,
+            pt: 0.5,
           }}
         >
           {navItems.map((item) => (
@@ -112,16 +130,17 @@ const Header: React.FC = () => {
               component={Link}
               href={item.href}
               onClick={handleNavClick(item.href)}
-              sx={{
+              sx={(theme) => ({
                 position: "relative",
                 textDecoration: "none",
-                fontSize: 14,
-                letterSpacing: 1.2,
+                fontSize: 12,
+                letterSpacing: 1.8,
                 fontWeight: 500,
                 textTransform: "uppercase",
-                color: "#111827",
+                fontFamily: "var(--font-montserrat)",
+                color: "rgba(248,250,252,0.85)", // light slate/white
                 pb: 0.5,
-                transition: "color 150ms ease-out",
+                transition: "color 160ms ease-out",
                 "&::after": {
                   content: '""',
                   position: "absolute",
@@ -130,18 +149,18 @@ const Header: React.FC = () => {
                   width: "100%",
                   height: 2,
                   borderRadius: 999,
-                  backgroundColor: "#F9733C",
+                  backgroundColor: GOLD,
                   transform: "scaleX(0)",
                   transformOrigin: "left",
-                  transition: "transform 180ms ease-out",
+                  transition: "transform 190ms ease-out",
                 },
                 "&:hover": {
-                  color: "#4B5563",
+                  color: theme.palette.common.white,
                 },
                 "&:hover::after": {
                   transform: "scaleX(1)",
                 },
-              }}
+              })}
             >
               {item.label}
             </Typography>
