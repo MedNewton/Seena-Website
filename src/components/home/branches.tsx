@@ -233,16 +233,14 @@ const Branches: React.FC = () => {
           textAlign: "center",
           color: (theme) => theme.palette.text.primary,
           fontFamily: "var(--font-bricolage)",
-          fontSize: { xs: 24, md: 32 },
+          fontSize: { xs: 32, md: 64 },
           fontWeight: 300,
-          maxWidth: 820,
+          maxWidth: "100%",
           mx: "auto",
           mb: { xs: 4, md: 6 },
         }}
       >
-        Helping you create an environment you don&apos;t have to
-        <br />
-        fight against.
+        Helping you create an environment<br />you don&apos;t have to fight against.
       </MotionTypography>
 
       {/* Cards grid */}
