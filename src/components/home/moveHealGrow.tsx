@@ -36,7 +36,7 @@ const MoveHealGrow: React.FC = () => {
       {/* Small label above image */}
       <Typography
         sx={{
-          mb: { xs: 1.5, md: 6 },
+          mb: { xs: 1, md: 2 },
           fontSize: { xs: 12, md: 13 },
           letterSpacing: 2,
           textTransform: "uppercase",
@@ -46,6 +46,18 @@ const MoveHealGrow: React.FC = () => {
       >
         Coming in January 2026
       </Typography>
+
+      <Typography
+          component="h2"
+          sx={{
+            fontSize: { xs: 24, md: 48 },
+            fontWeight: 500,
+            mb: { xs: 1.5, md: 6 },
+            color: "#FFFFFF",
+          }}
+        >
+          Reset, Rise & Connect with Seena
+        </Typography>
 
       {/* Collage image */}
       <Box
@@ -90,18 +102,6 @@ const MoveHealGrow: React.FC = () => {
           Don&apos;t take our word for it. See why Seena is trusted and loved by
           people around the world who want to feel better, live longer, and
           train smarter.
-        </Typography>
-
-        <Typography
-          component="h2"
-          sx={{
-            fontSize: { xs: 24, md: 40 },
-            fontWeight: 500,
-            mb: 0.5,
-            color: "#FFFFFF",
-          }}
-        >
-          Reset, Rise & Connect with Seena
         </Typography>
 
         {/* Waitlist form */}
