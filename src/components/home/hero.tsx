@@ -6,6 +6,7 @@ import { Box, Stack, Typography, Button } from "@mui/material";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
 import NewButton from "@/components/ui/newButton";
+import { useRouter } from "next/navigation";
 
 import bg from "@/assets/images/bg1.webp";
 
@@ -44,6 +45,7 @@ const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
 
 const Hero: React.FC = () => {
+  const router = useRouter();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [isMiddleActive, setIsMiddleActive] = useState<boolean>(false);
 
@@ -217,6 +219,7 @@ const Hero: React.FC = () => {
           >
             {/* DIGITAL – primary */}
             <MotionButton
+            onClick={() => router.push("/experiences")}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -256,6 +259,7 @@ const Hero: React.FC = () => {
 
             {/* PHYSICAL – secondary outline */}
             <MotionButton
+            onClick={() => router.push("/app")}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
