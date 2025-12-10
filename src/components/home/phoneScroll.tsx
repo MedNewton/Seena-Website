@@ -24,15 +24,15 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
   >
     <Box
       sx={{
-        width: 56,
-        height: 56,
+        width: 64,
+        height: 64,
         borderRadius: "50%",
         border: "2px solid rgba(255,255,255,0.95)",
       }}
     />
     <Typography
       sx={{
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 400,
       }}
     >
@@ -40,10 +40,10 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     </Typography>
     <Typography
       sx={{
-        fontSize: 13,
+        fontSize: 16,
         fontWeight: 300,
         lineHeight: 1.6,
-        maxWidth: 190,
+        maxWidth: 300,
         color: "rgba(249,250,251,0.9)",
       }}
     >
@@ -87,6 +87,8 @@ const PhoneScroll: React.FC = () => {
         minHeight: { xs: "220vh", md: "260vh" },
         pt: { xs: 8, md: 10 },
         scrollMarginTop: "120px",
+        maxWidth: 1440,
+        mx: "auto",
       }}
     >
       {/* Sticky container (heading + card) */}
@@ -100,6 +102,8 @@ const PhoneScroll: React.FC = () => {
           alignItems: "center",
           justifyContent: "flex-start",
           pb: { xs: 4, md: 6 },
+          maxWidth: 1440,
+          mx: "auto",
         }}
       >
         {/* Top heading */}
@@ -107,7 +111,7 @@ const PhoneScroll: React.FC = () => {
           sx={{
             textAlign: "center",
             color: "#FFFFFF",
-            fontSize: { xs: 24, md: 32 },
+            fontSize: { xs: 24, md: 64 },
             fontWeight: 300,
             mb: { xs: 4, md: 6 },
           }}
@@ -120,7 +124,7 @@ const PhoneScroll: React.FC = () => {
           sx={{
             position: "relative",
             width: "100%",
-            maxWidth: 1280,
+            maxWidth: 1440,
             mx: "auto",
             borderRadius: 6,
             overflow: "hidden",
@@ -179,7 +183,7 @@ const PhoneScroll: React.FC = () => {
                 src={phoneImage}
                 alt="Seena app on phone"
                 style={{
-                  maxHeight: 450,
+                  maxHeight: 480,
                   width: "auto",
                 }}
                 priority

@@ -60,7 +60,6 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         backgroundColor: (theme) => theme.palette.background.default,
       }}
     >
-      {/* Card-like footer container */}
       <MotionCard
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -71,19 +70,16 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         }}
         sx={{
           position: "relative",
-          maxWidth: 1280,
+          maxWidth: 1440,
           mx: "auto",
           borderRadius: { xs: 4, md: 6 },
           overflow: "hidden",
           pt: { xs: 6, md: 10 },
-          pb: { xs: 4, md: 6 },
-          px: { xs: 3, md: 4 },
+          pb: 0, // so the big word can touch the bottom
           boxShadow: {
             xs: "0px 18px 45px rgba(15,23,42,0.35)",
             md: "0px 30px 80px rgba(15,23,42,0.55)",
           },
-
-          // background style depends on transparentFooter
           ...(transparentFooter
             ? {
                 border: "0.8px solid rgba(255, 255, 255, 0.10)",
@@ -99,175 +95,92 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
               }),
         }}
       >
-        {/* Top “Move / Heal / Grow” row */}
-        <MoveHealGrow />
+        {/* Content wrapper with horizontal padding */}
+        <Box sx={{ px: { xs: 3, md: 4 } }}>
+          {/* Top “Move / Heal / Grow” row */}
+          <MoveHealGrow />
 
-        {/* Main content grid */}
-        <Box
-          sx={{
-            position: "relative",
-            mt: { xs: 6, md: 8 },
-          }}
-        >
+          {/* Main content grid */}
           <Box
             sx={{
-              display: "grid",
-              gridTemplateColumns: {
-                xs: "1fr",
-                md: "minmax(0, 2.2fr) minmax(0, 3fr)",
-              },
-              gap: { xs: 6, md: 10 },
-              alignItems: "flex-start",
+              position: "relative",
+              mt: { xs: 6, md: 8 },
             }}
           >
-            {/* Left: main text */}
-            <MotionBox
-              initial={{ opacity: 0, y: 18 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
-              transition={{
-                duration: 0.55,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.1,
-              }}
-              sx={{ maxWidth: 420 }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: 28, md: 44 },
-                  fontWeight: 500,
-                  lineHeight: 1.1,
-                  fontFamily: "var(--font-bricolage)",
-                }}
-              >
-                Master Your
-                <br />
-                Inner World
-                <br />
-              </Typography>
-
-              <Typography
-                sx={{
-                  mt: 2,
-                  fontSize: { xs: 14, md: 16 },
-                  fontWeight: 300,
-                  fontFamily: "var(--font-inter)",
-                  maxWidth: 256,
-                }}
-              >
-                Find your momentum, regain control, and move from surviving to
-                thriving.
-              </Typography>
-            </MotionBox>
-
-            {/* Right: link columns */}
             <Box
               sx={{
                 display: "grid",
                 gridTemplateColumns: {
-                  xs: "repeat(2, minmax(0, 1fr))",
-                  md: "repeat(3, minmax(0, 1fr))",
+                  xs: "1fr",
+                  md: "minmax(0, 2.2fr) minmax(0, 3fr)",
                 },
-                gap: { xs: 4, md: 6 },
+                gap: { xs: 6, md: 10 },
+                alignItems: "flex-start",
               }}
             >
-              {/* Navigation */}
-              <MotionColumn
-                initial={{ opacity: 0, y: 20 }}
+              {/* Left: main text */}
+              <MotionBox
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
+                viewport={{ once: true, amount: 0.4 }}
                 transition={{
-                  duration: 0.5,
+                  duration: 0.55,
                   ease: [0.22, 1, 0.36, 1],
-                  delay: 0.18,
+                  delay: 0.1,
                 }}
+                sx={{ maxWidth: 420 }}
               >
-                <Stack spacing={1.5}>
-                  <Typography
-                    sx={{
-                      fontSize: 14,
-                      fontWeight: 500,
-                      textTransform: "uppercase",
-                      letterSpacing: 1,
-                      mb: 1,
-                      fontFamily: "var(--font-montserrat)",
-                    }}
-                  >
-                    Navigation
-                  </Typography>
-                  {navigationLinks.map((link) => (
-                    <MuiLink
-                      key={link.label}
-                      component={NextLink}
-                      href={link.href}
-                      underline="none"
-                      sx={{
-                        fontSize: 14,
-                        color: "rgba(255,255,255,0.9)",
-                        "&:hover": { color: "#FFFFFF" },
-                      }}
-                    >
-                      {link.label}
-                    </MuiLink>
-                  ))}
-                </Stack>
-              </MotionColumn>
+                <Typography
+                  sx={{
+                    fontSize: { xs: 28, md: 44 },
+                    fontWeight: 500,
+                    lineHeight: 1.1,
+                    fontFamily: "var(--font-bricolage)",
+                  }}
+                >
+                  Master Your
+                  <br />
+                  Inner World
+                  <br />
+                </Typography>
 
-              {/* More Pages */}
-              <MotionColumn
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: 0.26,
-                }}
-              >
-                <Stack spacing={1.5}>
-                  <Typography
-                    sx={{
-                      fontSize: 14,
-                      fontWeight: 500,
-                      textTransform: "uppercase",
-                      letterSpacing: 1,
-                      mb: 1,
-                      fontFamily: "var(--font-montserrat)",
-                    }}
-                  >
-                    More Pages
-                  </Typography>
-                  {morePagesLinks.map((link) => (
-                    <MuiLink
-                      key={link.label}
-                      component={NextLink}
-                      href={link.href}
-                      underline="none"
-                      sx={{
-                        fontSize: 14,
-                        color: "rgba(255,255,255,0.9)",
-                        "&:hover": { color: "#FFFFFF" },
-                      }}
-                    >
-                      {link.label}
-                    </MuiLink>
-                  ))}
-                </Stack>
-              </MotionColumn>
+                <Typography
+                  sx={{
+                    mt: 2,
+                    fontSize: { xs: 14, md: 16 },
+                    fontWeight: 300,
+                    fontFamily: "var(--font-inter)",
+                    maxWidth: 256,
+                  }}
+                >
+                  Find your momentum, regain control, and move from surviving to
+                  thriving.
+                </Typography>
+              </MotionBox>
 
-              {/* Contact + Social */}
-              <MotionColumn
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: 0.34,
+              {/* Right: link columns */}
+              <Box
+                sx={{
+                  display: "grid",
+                  gridTemplateColumns: {
+                    xs: "repeat(2, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
+                  },
+                  gap: { xs: 4, md: 6 },
                 }}
               >
-                <Stack spacing={2}>
-                  <Box>
+                {/* Navigation */}
+                <MotionColumn
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.18,
+                  }}
+                >
+                  <Stack spacing={1.5}>
                     <Typography
                       sx={{
                         fontSize: 14,
@@ -278,22 +191,38 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                         fontFamily: "var(--font-montserrat)",
                       }}
                     >
-                      Contact
+                      Navigation
                     </Typography>
-                    <MuiLink
-                      href="mailto:hello@seena.com"
-                      underline="none"
-                      sx={{
-                        fontSize: 14,
-                        color: "rgba(255,255,255,0.9)",
-                        "&:hover": { color: "#FFFFFF" },
-                      }}
-                    >
-                      hello@seena.com
-                    </MuiLink>
-                  </Box>
+                    {navigationLinks.map((link) => (
+                      <MuiLink
+                        key={link.label}
+                        component={NextLink}
+                        href={link.href}
+                        underline="none"
+                        sx={{
+                          fontSize: 14,
+                          color: "rgba(255,255,255,0.9)",
+                          "&:hover": { color: "#FFFFFF" },
+                        }}
+                      >
+                        {link.label}
+                      </MuiLink>
+                    ))}
+                  </Stack>
+                </MotionColumn>
 
-                  <Box>
+                {/* More Pages */}
+                <MotionColumn
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.26,
+                  }}
+                >
+                  <Stack spacing={1.5}>
                     <Typography
                       sx={{
                         fontSize: 14,
@@ -304,60 +233,132 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                         fontFamily: "var(--font-montserrat)",
                       }}
                     >
-                      Social Media
+                      More Pages
                     </Typography>
-                    <Stack spacing={0.5}>
-                      {socialLinks.map((link) => (
-                        <MuiLink
-                          key={link.label}
-                          href={link.href}
-                          target="_blank"
-                          rel="noreferrer"
-                          underline="none"
-                          sx={{
-                            fontSize: 14,
-                            color: "rgba(255,255,255,0.9)",
-                            "&:hover": { color: "#FFFFFF" },
-                          }}
-                        >
-                          {link.label}
-                        </MuiLink>
-                      ))}
-                    </Stack>
-                  </Box>
-                </Stack>
-              </MotionColumn>
+                    {morePagesLinks.map((link) => (
+                      <MuiLink
+                        key={link.label}
+                        component={NextLink}
+                        href={link.href}
+                        underline="none"
+                        sx={{
+                          fontSize: 14,
+                          color: "rgba(255,255,255,0.9)",
+                          "&:hover": { color: "#FFFFFF" },
+                        }}
+                      >
+                        {link.label}
+                      </MuiLink>
+                    ))}
+                  </Stack>
+                </MotionColumn>
+
+                {/* Contact + Social */}
+                <MotionColumn
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{
+                    duration: 0.5,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.34,
+                  }}
+                >
+                  <Stack spacing={2}>
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                          textTransform: "uppercase",
+                          letterSpacing: 1,
+                          mb: 1,
+                          fontFamily: "var(--font-montserrat)",
+                        }}
+                      >
+                        Contact
+                      </Typography>
+                      <MuiLink
+                        href="mailto:hello@seena.com"
+                        underline="none"
+                        sx={{
+                          fontSize: 14,
+                          color: "rgba(255,255,255,0.9)",
+                          "&:hover": { color: "#FFFFFF" },
+                        }}
+                      >
+                        hello@seena.com
+                      </MuiLink>
+                    </Box>
+
+                    <Box>
+                      <Typography
+                        sx={{
+                          fontSize: 14,
+                          fontWeight: 500,
+                          textTransform: "uppercase",
+                          letterSpacing: 1,
+                          mb: 1,
+                          fontFamily: "var(--font-montserrat)",
+                        }}
+                      >
+                        Social Media
+                      </Typography>
+                      <Stack spacing={0.5}>
+                        {socialLinks.map((link) => (
+                          <MuiLink
+                            key={link.label}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            underline="none"
+                            sx={{
+                              fontSize: 14,
+                              color: "rgba(255,255,255,0.9)",
+                              "&:hover": { color: "#FFFFFF" },
+                            }}
+                          >
+                            {link.label}
+                          </MuiLink>
+                        ))}
+                      </Stack>
+                    </Box>
+                  </Stack>
+                </MotionColumn>
+              </Box>
             </Box>
           </Box>
-
-          {/* Big low-contrast word spanning across the footer card */}
-          <MotionTypography
-            aria-hidden="true"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{
-              duration: 0.7,
-              ease: [0.22, 1, 0.36, 1],
-              delay: 0.45,
-            }}
-            sx={{
-              mt: { xs: 6, md: 18 },
-              fontSize: { xs: 56, md: 140 },
-              fontWeight: 500,
-              letterSpacing: { xs: 6, md: 12 },
-              textTransform: "uppercase",
-              width: "100%",
-              textAlign: "center",
-              background: "linear-gradient(90deg, #5B9EC9 0%, #FFFFFF 100%)",
-              backgroundClip: "text",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            ACTIVE SPIRITS
-          </MotionTypography>
         </Box>
+
+        {/* Big low-contrast word spanning across the full card */}
+        <MotionTypography
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{
+            duration: 0.7,
+            ease: [0.22, 1, 0.36, 1],
+            delay: 0.45,
+          }}
+          sx={{
+            mt: { xs: 6, md: 18 },
+            ml: 1,
+            fontSize: { xs: 56, md: 174 },
+            fontWeight: 500,
+            letterSpacing: { xs: 6, md: 12 },
+            lineHeight: 0.7,
+            textTransform: "uppercase",
+            width: "100%",
+            textAlign: "center",
+            background: "linear-gradient(90deg, #5B9EC9 0%, #FFFFFF 100%)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          ACTIVE SPIRITS
+        </MotionTypography>
       </MotionCard>
     </Box>
   );

@@ -75,7 +75,9 @@ const ModernOverdriveSection: React.FC = () => {
         py: { xs: 10, md: 16 },
       }}
     >
-      <Container maxWidth="lg">
+      <Container maxWidth={false} sx={{
+        maxWidth: 1440,
+      }}>
         <Stack
           spacing={{ xs: 4, md: 7 }}
           alignItems="center"
