@@ -79,7 +79,7 @@ const MoveHealGrow: React.FC = () => {
         <Typography
           component="h2"
           sx={{
-            fontSize: { xs: 24, md: 32 },
+            fontSize: { xs: 24, md: 37 },
             fontWeight: 500,
             mb: 0.5,
             color: "#FFFFFF",
