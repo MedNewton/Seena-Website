@@ -21,6 +21,7 @@ const MoveHealGrow: React.FC = () => {
 
   return (
     <Box
+    id="join"
       component="section"
       sx={{
         width: "100%",

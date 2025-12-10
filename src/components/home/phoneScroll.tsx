@@ -185,6 +185,7 @@ const PhoneScroll: React.FC = () => {
                 style={{
                   maxHeight: 480,
                   width: "auto",
+                  scale: 1.2,
                 }}
                 priority
               />

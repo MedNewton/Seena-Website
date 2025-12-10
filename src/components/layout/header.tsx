@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import logo from "@/assets/images/Seena Logo-6.webp";
 import JoinUsButton from "@/components/ui/joinUsButton";
 import NewButton from "@/components/ui/newButton";
+import { useRouter } from "next/navigation";
 type NavItem = {
   label: string;
   href: string;
@@ -31,6 +32,7 @@ const MotionBox = motion.create(Box);
 const GOLD = "#D8A24B";
 
 const Header: React.FC = () => {
+  const router = useRouter();
   const handleNavClick =
     (href: string) => (event: React.MouseEvent<HTMLAnchorElement>): void => {
       if (!href.startsWith("#")) {
@@ -169,7 +171,7 @@ const Header: React.FC = () => {
         </Stack>
 
         {/* Right: CTA */}
-        <NewButton label="Join Us" />
+        <NewButton label="Join Us" onClick={() => router.push("/#join")} />
       </MotionBox>
     </Box>
   );

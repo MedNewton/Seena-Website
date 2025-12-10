@@ -210,7 +210,7 @@ const Hero: React.FC = () => {
           {/* CTA row – larger + more visible */}
           <Stack
             direction="row"
-            spacing={{ xs: 2.5, md: 6 }}
+            spacing={{ xs: 2.5, md: 18 }}
             alignItems="center"
             justifyContent="center"
             sx={{

@@ -130,8 +130,9 @@ const Circles: React.FC<CirclesProps> = ({
           >
             From Burnout to
             <br />
+            balance&nbsp;
             <Box component="span" sx={{ color: GOLD }}>
-              balance together!
+              together!
             </Box>
           </MotionTypography>
 
@@ -204,7 +205,7 @@ const Circles: React.FC<CirclesProps> = ({
               },
             }}
           >
-            Join Community
+            Explore
           </MotionButton>
         </MotionStack>
       </MotionBox>

@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
           borderRadius: { xs: 4, md: 6 },
           overflow: "hidden",
           pt: { xs: 6, md: 10 },
-          pb: 0, // so the big word can touch the bottom
+          pb: { xs: 6, md: 8 }, // padding for the content; big word is absolute
           boxShadow: {
             xs: "0px 18px 45px rgba(15,23,42,0.35)",
             md: "0px 30px 80px rgba(15,23,42,0.55)",
@@ -95,12 +95,17 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
               }),
         }}
       >
-        {/* Content wrapper with horizontal padding */}
-        <Box sx={{ px: { xs: 3, md: 4 } }}>
-          {/* Top “Move / Heal / Grow” row */}
+        {/* Content wrapper (above the big word) */}
+        <Box
+          sx={{
+            px: { xs: 3, md: 4 },
+            mb: { xs: 16, md: 20 },
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
           <MoveHealGrow />
 
-          {/* Main content grid */}
           <Box
             sx={{
               position: "relative",
@@ -330,7 +335,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
           </Box>
         </Box>
 
-        {/* Big low-contrast word spanning across the full card */}
+        {/* Big word – absolute, edge to edge, single line, always centered */}
         <MotionTypography
           aria-hidden="true"
           initial={{ opacity: 0, y: 40 }}
@@ -342,15 +347,28 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             delay: 0.45,
           }}
           sx={{
-            mt: { xs: 6, md: 18 },
-            ml: 1,
-            fontSize: { xs: 56, md: 174 },
-            fontWeight: 500,
-            letterSpacing: { xs: 6, md: 12 },
-            lineHeight: 0.7,
-            textTransform: "uppercase",
+            position: "absolute",
+            left: 0,
+            right: 0,
+            bottom: 0,
             width: "100%",
+            // much larger so it visually reaches the inner edges
+            fontSize: {
+              xs: "11vw",   // mobile
+              sm: "10vw",
+              md: "9vw",
+              lg: "10vw",
+              xl: "11vw",
+            },
+            fontWeight: 900,
+            letterSpacing: { xs: 4, md: 6 },
+            lineHeight: 0.9,
+            textTransform: "uppercase",
             textAlign: "center",
+            whiteSpace: "nowrap", // always one line
+            overflow: "hidden",
+            pointerEvents: "none",
+            zIndex: 0,
             background: "linear-gradient(90deg, #5B9EC9 0%, #FFFFFF 100%)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
