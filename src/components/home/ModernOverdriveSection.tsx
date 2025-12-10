@@ -6,6 +6,8 @@ import { Box, Container, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 
 const GOLD = "#D8A24B";
+const GOLD_GRADIENT =
+  "linear-gradient(135deg, #F5E0A3 0%, #D8A24B 40%, #F8E6B8 100%)";
 
 const pillars = [
   {
@@ -75,13 +77,13 @@ const ModernOverdriveSection: React.FC = () => {
     >
       <Container maxWidth="lg">
         <Stack
-          spacing={{ xs: 4, md: 7 }} // less vertical spacing overall
+          spacing={{ xs: 4, md: 7 }}
           alignItems="center"
           textAlign="center"
         >
-          {/* 1. Main title */}
+          {/* 1. Main title – bigger */}
           <MotionTypography
-            variant="h3"
+            variant="h2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -92,42 +94,16 @@ const ModernOverdriveSection: React.FC = () => {
             }}
             sx={{
               fontFamily: "var(--font-bricolage)",
-              fontWeight: 400,
-              fontSize: { xs: 28, md: 40 },
-              lineHeight: 1.4,
+              fontWeight: 500,
+              fontSize: { xs: 32, md: 64 },
+              lineHeight: 1.25,
               color: (theme) => theme.palette.text.primary,
             }}
           >
             Modern Life Rewards Overdrive
           </MotionTypography>
 
-          {/* 1.5 Intro paragraph */}
-          <MotionTypography
-            variant="body1"
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{
-              duration: 0.55,
-              ease: [0.25, 0.8, 0.25, 1],
-              delay: 0.25,
-            }}
-            sx={{
-              maxWidth: 640,
-              fontFamily: "var(--font-inter)",
-              fontWeight: 300,
-              fontSize: { xs: 14, md: 16 },
-              lineHeight: 1.7,
-              color: "rgba(248,250,252,0.8)",
-            }}
-          >
-            Hyper-connection, constant performance pressure and an always-on
-            nervous system have become the default. We push harder, sleep
-            less, and call it ambition – while our bodies quietly interpret
-            it as a long, slow emergency.
-          </MotionTypography>
-
-          {/* 2. Subtitle */}
+          {/* 2. Subtitle – two lines, animated gold words */}
           <MotionTypography
             variant="h6"
             variants={subtitleVariants}
@@ -137,59 +113,80 @@ const ModernOverdriveSection: React.FC = () => {
             sx={{
               fontFamily: "var(--font-inter)",
               fontWeight: 400,
-              fontSize: { xs: 17, md: 22 },
+              fontSize: { xs: 18, md: 28 },
               lineHeight: 1.6,
               color: (theme) => theme.palette.text.primary,
             }}
           >
-            <Box component="span" sx={{ color: "inherit" }}>
+            {/* Line 1 */}
+            <Box component="span" sx={{ display: "block" }}>
               Our body calls it{" "}
-            </Box>
-
-            <Box
-              component="span"
-              sx={{
-                position: "relative",
-                display: "inline-flex",
-                overflow: "hidden",
-              }}
-            >
-              <motion.span
-                variants={goldWordVariants}
-                style={{
-                  display: "inline-block",
-                  color: GOLD,
+              <Box
+                component="span"
+                sx={{
+                  position: "relative",
+                  display: "inline-flex",
+                  overflow: "hidden",
                 }}
               >
-                inflation
-              </motion.span>
+                <motion.span
+                  variants={goldWordVariants}
+                  style={{
+                    display: "inline-block",
+                    color: GOLD,
+                  }}
+                >
+                  inflation
+                </motion.span>
+              </Box>
             </Box>
 
-            <Box component="span" sx={{ color: "inherit" }}>
-              , our mind calls it{" "}
-            </Box>
-
-            <Box
-              component="span"
-              sx={{
-                position: "relative",
-                display: "inline-flex",
-                overflow: "hidden",
-              }}
-            >
-              <motion.span
-                variants={goldWordVariants}
-                style={{
-                  display: "inline-block",
-                  color: GOLD,
+            {/* Line 2 */}
+            <Box component="span" sx={{ display: "block", mt: 0.5 }}>
+              Our mind calls it{" "}
+              <Box
+                component="span"
+                sx={{
+                  position: "relative",
+                  display: "inline-flex",
+                  overflow: "hidden",
                 }}
               >
-                burnout
-              </motion.span>
+                <motion.span
+                  variants={goldWordVariants}
+                  style={{
+                    display: "inline-block",
+                    color: GOLD,
+                  }}
+                >
+                  burnout
+                </motion.span>
+              </Box>
             </Box>
           </MotionTypography>
 
-          {/* 3. Middle title */}
+          {/* 3. Connecting golden line (problem -> solution) */}
+          <MotionBox
+            initial={{ scaleY: 0, opacity: 0 }}
+            whileInView={{ scaleY: 1, opacity: 1 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{
+              duration: 0.65,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.4,
+            }}
+            sx={{
+              width: 3,
+              height: { xs: 90, md: 120 }, // longer line
+              borderRadius: 999,
+              backgroundImage: GOLD_GRADIENT,
+              mt: { xs: 1, md: 1.5 }, // slightly less spacing
+              mb: { xs: 1, md: 1.75 }, // slightly less spacing
+              transformOrigin: "top",
+            }}
+          />
+
+          {/* 4. Solution title */}
           <MotionTypography
             variant="h4"
             initial={{ opacity: 0, y: 20 }}
@@ -203,10 +200,9 @@ const ModernOverdriveSection: React.FC = () => {
             sx={{
               fontFamily: "var(--font-bricolage)",
               fontWeight: 400,
-              fontSize: { xs: 26, md: 36 },
+              fontSize: { xs: 32, md: 64 },
               lineHeight: 1.4,
               color: (theme) => theme.palette.text.primary,
-              mt: { xs: 1.5, md: 3 }, // smaller top margin
             }}
           >
             Seena restores your{" "}
@@ -220,11 +216,11 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 4. Four pillars + connectors */}
+          {/* 5. Four pillars with golden 3D-ish flipping circles + gradient connectors */}
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={{ xs: 5, md: 0 }}
-            sx={{ width: "100%", mt: { xs: 3, md: 4 } }} // a bit closer to titles
+            sx={{ width: "100%", mt: { xs: 3, md: 4 } }}
             justifyContent="center"
             alignItems={{ xs: "stretch", md: "center" }}
           >
@@ -253,18 +249,28 @@ const ModernOverdriveSection: React.FC = () => {
                       px: { xs: 1.5, md: 2 },
                     }}
                   >
-                    <Box
-                      sx={{
-                        width: 52,
-                        height: 52,
+                    {/* Golden gradient coin-flip circle */}
+                    <motion.div
+                      style={{
+                        width: 64,
+                        height: 64,
                         borderRadius: "50%",
-                        border: "1px solid rgba(255,255,255,0.6)",
-                        mb: 2.5,
+                        backgroundImage: GOLD_GRADIENT,
+                        boxShadow: "0 0 0 1px rgba(248,250,252,0.45)", // neutral outline, no blue
+                        transformStyle: "preserve-3d",
+                      }}
+                      initial={{ rotateY: 0 }}
+                      animate={{ rotateY: 0 }}
+                      transition={{
+                        duration: 4,
+                        repeat: 1,
+                        ease: "linear",
                       }}
                     />
 
                     <Typography
                       sx={{
+                        mt: 2.5,
                         fontFamily: "var(--font-montserrat)",
                         fontWeight: 500,
                         fontSize: 16,
@@ -290,7 +296,7 @@ const ModernOverdriveSection: React.FC = () => {
                     </Typography>
                   </MotionBox>
 
-                  {/* Connector – desktop only */}
+                  {/* Connector – desktop only, golden gradient */}
                   {index < pillars.length - 1 && (
                     <MotionBox
                       initial={{ scaleX: 0, opacity: 0 }}
@@ -305,11 +311,11 @@ const ModernOverdriveSection: React.FC = () => {
                         display: { xs: "none", md: "block" },
                         alignSelf: "center",
                         transformOrigin: "left",
-                        height: 2,
+                        height: 3,
                         width: 112,
                         mx: 1,
                         borderRadius: 999,
-                        backgroundColor: "rgba(255,255,255,0.7)",
+                        backgroundImage: GOLD_GRADIENT,
                       }}
                     />
                   )}

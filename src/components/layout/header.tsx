@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 
 import logo from "@/assets/images/Seena Logo-6.webp";
 import JoinUsButton from "@/components/ui/joinUsButton";
-
+import NewButton from "@/components/ui/newButton";
 type NavItem = {
   label: string;
   href: string;
@@ -169,7 +169,7 @@ const Header: React.FC = () => {
         </Stack>
 
         {/* Right: CTA */}
-        <JoinUsButton />
+        <NewButton label="Join Us" />
       </MotionBox>
     </Box>
   );
