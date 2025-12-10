@@ -30,9 +30,14 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Seena",
-  description: "Seena",
+  title: "Seena | Reset Your Body, Mind, and Soul",
+  description: "Seena | Reset Your Body, Mind, and Soul",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  openGraph: {
+    title: "Seena | Reset Your Body, Mind, and Soul",
+    description: "Seena | Reset Your Body, Mind, and Soul",
+    images: "/og-image.png",
+  },
 };
 
 export default function RootLayout({
