@@ -78,18 +78,6 @@ const MoveHealGrow: React.FC = () => {
         }}
       >
         <Typography
-          component="h2"
-          sx={{
-            fontSize: { xs: 24, md: 37 },
-            fontWeight: 500,
-            mb: 0.5,
-            color: "#FFFFFF",
-          }}
-        >
-          Resert, Rise & Connect with Seena
-        </Typography>
-
-        <Typography
           sx={{
             maxWidth: 560,
             mx: "auto",
@@ -102,6 +90,18 @@ const MoveHealGrow: React.FC = () => {
           Don&apos;t take our word for it. See why Seena is trusted and loved by
           people around the world who want to feel better, live longer, and
           train smarter.
+        </Typography>
+
+        <Typography
+          component="h2"
+          sx={{
+            fontSize: { xs: 24, md: 40 },
+            fontWeight: 500,
+            mb: 0.5,
+            color: "#FFFFFF",
+          }}
+        >
+          Reset, Rise & Connect with Seena
         </Typography>
 
         {/* Waitlist form */}

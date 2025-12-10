@@ -354,11 +354,11 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             width: "100%",
             // much larger so it visually reaches the inner edges
             fontSize: {
-              xs: "11vw",   // mobile
-              sm: "10vw",
-              md: "9vw",
-              lg: "10vw",
-              xl: "11vw",
+              xs: "11.5vw",   // mobile
+              sm: "11.5vw",
+              md: "11.5vw",
+              lg: "11.5vw",
+              xl: "11.5vw",
             },
             fontWeight: 900,
             letterSpacing: { xs: 4, md: 6 },
