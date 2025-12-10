@@ -73,11 +73,21 @@ const ModernOverdriveSection: React.FC = () => {
         width: "100%",
         bgcolor: (theme) => theme.palette.background.default,
         py: { xs: 10, md: 16 },
+        // vertical centering for the whole block
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        minHeight: { xs: "auto", md: "80vh" },
       }}
     >
-      <Container maxWidth={false} sx={{
-        maxWidth: 1440,
-      }}>
+      <Container
+        maxWidth={false}
+        sx={{
+          maxWidth: 1440,
+          mx: "auto",
+          px: { xs: 2, md: 0 },
+        }}
+      >
         <Stack
           spacing={{ xs: 4, md: 7 }}
           alignItems="center"
@@ -179,11 +189,11 @@ const ModernOverdriveSection: React.FC = () => {
             }}
             sx={{
               width: 3,
-              height: { xs: 90, md: 120 }, // longer line
+              height: { xs: 90, md: 120 },
               borderRadius: 999,
               backgroundImage: GOLD_GRADIENT,
-              mt: { xs: 1, md: 1.5 }, // slightly less spacing
-              mb: { xs: 1, md: 1.75 }, // slightly less spacing
+              mt: { xs: 1, md: 1.5 },
+              mb: { xs: 1, md: 1.75 },
               transformOrigin: "top",
             }}
           />
@@ -218,7 +228,7 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 5. Four pillars with golden 3D-ish flipping circles + gradient connectors */}
+          {/* 5. Four pillars row */}
           <Stack
             direction={{ xs: "column", md: "row" }}
             spacing={{ xs: 5, md: 0 }}
@@ -251,21 +261,22 @@ const ModernOverdriveSection: React.FC = () => {
                       px: { xs: 1.5, md: 2 },
                     }}
                   >
-                    {/* Golden gradient coin-flip circle */}
+                    {/* Golden gradient circle */}
                     <motion.div
                       style={{
                         width: 64,
                         height: 64,
                         borderRadius: "50%",
                         backgroundImage: GOLD_GRADIENT,
-                        boxShadow: "0 0 0 1px rgba(248,250,252,0.45)", // neutral outline, no blue
+                        boxShadow:
+                          "0 0 0 1px rgba(248,250,252,0.45)",
                         transformStyle: "preserve-3d",
                       }}
                       initial={{ rotateY: 0 }}
                       animate={{ rotateY: 0 }}
                       transition={{
-                        duration: 4,
-                        repeat: 1,
+                        duration: 8,
+                        repeat: Infinity,
                         ease: "linear",
                       }}
                     />
@@ -298,7 +309,7 @@ const ModernOverdriveSection: React.FC = () => {
                     </Typography>
                   </MotionBox>
 
-                  {/* Connector – desktop only, golden gradient */}
+                  {/* Connector – desktop only */}
                   {index < pillars.length - 1 && (
                     <MotionBox
                       initial={{ scaleX: 0, opacity: 0 }}
