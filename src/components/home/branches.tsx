@@ -241,7 +241,7 @@ const Branches: React.FC = () => {
           mb: { xs: 4, md: 6 },
         }}
       >
-        Helping you create an environment<br />you don&apos;t have to fight against.
+        <span style={{ color: "#D8A24B" }}>Helping</span> you create an <span style={{ color: "#D8A24B" }}>environment</span><br />you don&apos;t have to <span style={{ color: "#D8A24B" }}>fight</span> against.
       </MotionTypography>
 
       {/* Cards grid */}

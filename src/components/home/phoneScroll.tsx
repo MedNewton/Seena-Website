@@ -27,13 +27,14 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
         width: 64,
         height: 64,
         borderRadius: "50%",
-        border: "2px solid rgba(255,255,255,0.95)",
+        background: "linear-gradient(135deg, #F5E0A3 0%, #D8A24B 40%, #F8E6B8 100%)",
       }}
     />
     <Typography
       sx={{
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 400,
+        color: "#D8A24B"
       }}
     >
       {title}
@@ -185,7 +186,7 @@ const PhoneScroll: React.FC = () => {
                 style={{
                   maxHeight: 480,
                   width: "auto",
-                  scale: 1.2,
+                  scale: 1.3,
                 }}
                 priority
               />

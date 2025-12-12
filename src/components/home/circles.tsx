@@ -4,7 +4,7 @@
 import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { motion } from "motion/react";
-import circlesHero from "@/assets/images/circles1.webp";
+import circlesHero from "@/assets/images/circles.webp";
 
 type CirclesProps = {
   backgroundImageUrl?: string;
@@ -108,7 +108,7 @@ const Circles: React.FC<CirclesProps> = ({
           <MotionTypography
             variants={itemVariants}
             sx={{
-              fontSize: 14,
+              fontSize: 16,
               letterSpacing: 2,
               textTransform: "uppercase",
               fontWeight: 400,
@@ -140,7 +140,7 @@ const Circles: React.FC<CirclesProps> = ({
             variants={itemVariants}
             sx={{
               fontFamily: "var(--font-inter)",
-              fontSize: { xs: 14, md: 18 },
+              fontSize: { xs: 16, md: 20 },
               lineHeight: 1.6,
               fontWeight: 300,
               color: "rgba(249,250,251,0.92)",

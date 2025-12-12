@@ -5,8 +5,8 @@ import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
 
-import digitalGuidanceImg from "@/assets/images/meditation1.webp";
-import realExperiencesImg from "@/assets/images/group-yoga1.webp";
+import digitalGuidanceImg from "@/assets/images/digital.webp";
+import realExperiencesImg from "@/assets/images/physical.webp";
 import { useRouter } from "next/navigation";
 
 type ExploreCardConfig = {

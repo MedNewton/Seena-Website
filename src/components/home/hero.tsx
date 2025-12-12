@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
           {/* Headline row */}
           <Stack
             direction="row"
-            spacing={{ xs: 1.5, md: 4 }}
+            spacing={{ xs: 1.5, md: 8 }}
             alignItems="baseline"
             justifyContent="center"
           >
@@ -141,9 +141,9 @@ const Hero: React.FC = () => {
                 delay: 0.3,
               }}
               sx={{
-                fontSize: { xs: 36, md: 96 },
+                fontSize: { xs: 36, md: 110 },
                 lineHeight: 1,
-                fontWeight: 300,
+                fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
               }}
             >
@@ -172,12 +172,13 @@ const Hero: React.FC = () => {
                     <Typography
                       component="span"
                       sx={{
-                        fontSize: { xs: 40, md: 96 },
+                        fontSize: { xs: 40, md: 110 },
                         lineHeight: 1,
-                        fontWeight: 400,
+                        fontWeight: 500,
                         fontStyle: "italic",
                         whiteSpace: "nowrap",
                         fontFamily: "var(--font-bricolage)",
+                        className: "animated-gradient-text",
                       }}
                     >
                       {capitalizedWord}
@@ -197,9 +198,9 @@ const Hero: React.FC = () => {
                 delay: 0.4,
               }}
               sx={{
-                fontSize: { xs: 36, md: 96 },
+                fontSize: { xs: 36, md: 110 },
                 lineHeight: 1,
-                fontWeight: 300,
+                fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
               }}
             >
@@ -210,11 +211,13 @@ const Hero: React.FC = () => {
           {/* CTA row – larger + more visible */}
           <Stack
             direction="row"
-            spacing={{ xs: 2.5, md: 18 }}
+            width="100%"
+            spacing={{ xs: 2.5, md: 24 }}
+            px={18}
             alignItems="center"
-            justifyContent="center"
+            justifyContent="space-between"
             sx={{
-              transform: "translateY(8rem)",
+              transform: "translateY(12rem)",
             }}
           >
             {/* DIGITAL – primary */}
@@ -232,9 +235,9 @@ const Hero: React.FC = () => {
               sx={{
                 borderRadius: 999,
                 minWidth: { xs: 190, md: 230 },
-                px: { xs: 4, md: 5.5 },
-                py: { xs: 1.6, md: 1.9 },
-                fontSize: { xs: 13.5, md: 15 },
+                px: { xs: 4, md: 5.2 },
+                py: { xs: 1.6, md: 1.8 },
+                fontSize: { xs: 13.5, md: 18 },
                 letterSpacing: 2,
                 textTransform: "uppercase",
                 fontWeight: 700,
@@ -272,9 +275,9 @@ const Hero: React.FC = () => {
               sx={{
                 borderRadius: 999,
                 minWidth: { xs: 190, md: 230 },
-                px: { xs: 4, md: 5.5 },
-                py: { xs: 1.6, md: 1.9 },
-                fontSize: { xs: 13.5, md: 15 },
+                px: { xs: 4, md: 5.2 },
+                py: { xs: 1.6, md: 1.8 },
+                fontSize: { xs: 13.5, md: 18 },
                 letterSpacing: 2,
                 textTransform: "uppercase",
                 fontWeight: 700,

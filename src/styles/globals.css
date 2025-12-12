@@ -14,3 +14,25 @@ a {
 * {
   box-sizing: border-box;
 }
+
+.animated-gradient-text {
+  display: inline;
+}
+
+.animated-gradient-text {
+  background: linear-gradient(90deg, #DCB821, #FFD586, #DCB821, #FFD586);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 0%;
+  }
+}
