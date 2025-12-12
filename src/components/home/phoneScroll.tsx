@@ -97,7 +97,7 @@ const PhoneScroll: React.FC = () => {
     offset: ["start start", "end 1.1"],
   });
 
-  // Desktop feature animations (unchanged)
+  // DESKTOP feature animations (unchanged)
   const f1Opacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
   const f1Y = useTransform(scrollYProgress, [0.05, 0.2], [40, 0]);
 
@@ -110,19 +110,30 @@ const PhoneScroll: React.FC = () => {
   const f4Opacity = useTransform(scrollYProgress, [0.65, 0.8], [0, 1]);
   const f4Y = useTransform(scrollYProgress, [0.65, 0.8], [40, 0]);
 
-  // Mobile: active feature index (0–3), changing as user scrolls
+  // MOBILE: active feature index (0–3), changing more slowly as user scrolls
   const [activeFeatureIndex, setActiveFeatureIndex] = useState<number>(0);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     if (!isMobile) return;
 
-    // Divide scroll into 4 equal ranges
-    const rawIndex = Math.floor(latest * FEATURES.length);
-    const clamped = Math.min(FEATURES.length - 1, Math.max(0, rawIndex));
-    setActiveFeatureIndex(clamped);
+    // Chunk scroll into slower ranges so fast scroll doesn't flick through features
+    let nextIndex = 0;
+
+    if (latest < 0.22) {
+      nextIndex = 0;
+    } else if (latest < 0.48) {
+      nextIndex = 1;
+    } else if (latest < 0.74) {
+      nextIndex = 2;
+    } else {
+      nextIndex = 3;
+    }
+
+    setActiveFeatureIndex((prev) => (prev === nextIndex ? prev : nextIndex));
   });
 
-  const activeFeature: FeatureConfig = FEATURES[activeFeatureIndex] ?? { title: "", description: "" };
+  const activeFeature: FeatureConfig =
+    FEATURES[activeFeatureIndex] ?? { title: "", description: "" };
 
   return (
     <Box
@@ -131,7 +142,8 @@ const PhoneScroll: React.FC = () => {
       component="section"
       sx={{
         width: "100%",
-        minHeight: { xs: "220vh", md: "260vh" }, // space for sticky scene
+        // a bit taller on mobile to give each step more breathing room
+        minHeight: { xs: "260vh", md: "260vh" },
         pt: { xs: 8, md: 10 },
         scrollMarginTop: "120px",
         maxWidth: 1440,
@@ -159,13 +171,15 @@ const PhoneScroll: React.FC = () => {
           sx={{
             textAlign: "center",
             color: "#FFFFFF",
-            fontSize: { xs: 24, md: 64 },
+            fontSize: { xs: 26, md: 64 },
             fontWeight: 300,
             mb: { xs: 4, md: 6 },
-            pt: 2
+            pt: 2,
           }}
         >
-          <span style={{ color: "#D8A24B" }}>Think</span> better, <span style={{ color: "#D8A24B" }}>move</span> better, and <span style={{ color: "#D8A24B" }}>live</span> better.
+          <span style={{ color: "#D8A24B" }}>Think</span> better,{" "}
+          <span style={{ color: "#D8A24B" }}>move</span> better, and{" "}
+          <span style={{ color: "#D8A24B" }}>live</span> better.
         </Typography>
 
         {/* Card with mesh gradient */}
@@ -236,15 +250,24 @@ const PhoneScroll: React.FC = () => {
                 justifyContent: "center",
                 alignItems: "center",
                 order: { xs: 1, md: "unset" },
+                // make phone slightly smaller on mobile
+                "& img": {
+                  maxHeight: { xs: 360, md: 480 },
+                  width: "auto",
+                  transform: {
+                    xs: "scale(1.05)",
+                    md: "scale(1.25)",
+                  },
+                  transformOrigin: "center center",
+                },
               }}
             >
               <Image
                 src={phoneImage}
                 alt="Seena app on phone"
                 style={{
-                  maxHeight: 480,
                   width: "auto",
-                  scale: 1.25,
+                  height: "auto",
                 }}
                 priority
               />
@@ -271,9 +294,9 @@ const PhoneScroll: React.FC = () => {
               </motion.div>
             </Stack>
 
-            {/* MOBILE FEATURE – below phone, one at a time */}
+            {/* MOBILE FEATURE – below phone, one at a time, more emphasis on text */}
             <Stack
-              spacing={1.5}
+              spacing={1.75}
               alignItems="center"
               justifyContent="center"
               sx={{
@@ -286,8 +309,8 @@ const PhoneScroll: React.FC = () => {
             >
               <Typography
                 sx={{
-                  fontSize: 18,
-                  fontWeight: 400,
+                  fontSize: 21,
+                  fontWeight: 500,
                   color: "#D8A24B",
                 }}
               >
@@ -295,10 +318,10 @@ const PhoneScroll: React.FC = () => {
               </Typography>
               <Typography
                 sx={{
-                  fontSize: 15,
+                  fontSize: 16.5,
                   fontWeight: 300,
-                  lineHeight: 1.6,
-                  maxWidth: 320,
+                  lineHeight: 1.7,
+                  maxWidth: 340,
                   color: "rgba(249,250,251,0.9)",
                 }}
               >
