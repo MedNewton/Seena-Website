@@ -62,6 +62,83 @@ const goldWordVariants = {
   },
 } as const;
 
+// Reusable card for a single pillar
+type Pillar = (typeof pillars)[number];
+
+type PillarCardProps = {
+  pillar: Pillar;
+  delay: number;
+};
+
+const PillarCard: React.FC<PillarCardProps> = ({ pillar, delay }) => {
+  return (
+    <MotionBox
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{
+        duration: 0.55,
+        ease: [0.22, 1, 0.36, 1],
+        delay,
+      }}
+      sx={{
+        flex: 1,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        textAlign: "center",
+        px: { xs: 1.5, md: 2 },
+      }}
+    >
+      {/* Golden gradient circle */}
+      <motion.div
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: "50%",
+          backgroundImage: GOLD_GRADIENT,
+          boxShadow: "0 0 0 1px rgba(248,250,252,0.45)",
+          transformStyle: "preserve-3d",
+        }}
+        initial={{ rotateY: 0 }}
+        animate={{ rotateY: 0 }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      />
+
+      <Typography
+        sx={{
+          mt: 2.5,
+          fontFamily: "var(--font-montserrat)",
+          fontWeight: 500,
+          fontSize: 16,
+          letterSpacing: 0.5,
+          textTransform: "none",
+          color: (theme) => theme.palette.text.primary,
+          mb: 1,
+        }}
+      >
+        {pillar.title}
+      </Typography>
+
+      <Typography
+        sx={{
+          fontFamily: "var(--font-inter)",
+          fontWeight: 300,
+          fontSize: 13,
+          lineHeight: 1.7,
+          color: "rgba(255,255,255,0.72)",
+        }}
+      >
+        {pillar.description}
+      </Typography>
+    </MotionBox>
+  );
+};
+
 const ModernOverdriveSection: React.FC = () => {
   const baseDelay = 0.9;
   const step = 0.16;
@@ -73,7 +150,6 @@ const ModernOverdriveSection: React.FC = () => {
         width: "100%",
         bgcolor: (theme) => theme.palette.background.default,
         py: { xs: 10, md: 16 },
-        // vertical centering for the whole block
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -93,7 +169,7 @@ const ModernOverdriveSection: React.FC = () => {
           alignItems="center"
           textAlign="center"
         >
-          {/* 1. Main title – bigger */}
+          {/* 1. Main title */}
           <MotionTypography
             variant="h2"
             initial={{ opacity: 0, y: 20 }}
@@ -115,7 +191,7 @@ const ModernOverdriveSection: React.FC = () => {
             Modern Life Rewards Overdrive
           </MotionTypography>
 
-          {/* 2. Subtitle – two lines, animated gold words */}
+          {/* 2. Subtitle with animated gold words */}
           <MotionTypography
             variant="h6"
             variants={subtitleVariants}
@@ -130,7 +206,6 @@ const ModernOverdriveSection: React.FC = () => {
               color: (theme) => theme.palette.text.primary,
             }}
           >
-            {/* Line 1 */}
             <Box component="span" sx={{ display: "block" }}>
               Our body calls it{" "}
               <Box
@@ -153,7 +228,6 @@ const ModernOverdriveSection: React.FC = () => {
               </Box>
             </Box>
 
-            {/* Line 2 */}
             <Box component="span" sx={{ display: "block", mt: 0.5 }}>
               Our mind calls it{" "}
               <Box
@@ -177,7 +251,7 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 3. Connecting golden line (problem -> solution) */}
+          {/* 3. Connecting vertical line */}
           <MotionBox
             initial={{ scaleY: 0, opacity: 0 }}
             whileInView={{ scaleY: 1, opacity: 1 }}
@@ -228,13 +302,17 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 5. Four pillars row */}
+          {/* 5A. Desktop layout – 4 in a row with 3 connectors */}
           <Stack
-            direction={{ xs: "column", md: "row" }}
-            spacing={{ xs: 5, md: 0 }}
-            sx={{ width: "100%", mt: { xs: 3, md: 4 } }}
-            justifyContent="center"
-            alignItems={{ xs: "stretch", md: "center" }}
+            direction="row"
+            spacing={0}
+            sx={{
+              width: "100%",
+              mt: { xs: 0, md: 4 },
+              justifyContent: "center",
+              alignItems: "center",
+              display: { xs: "none", md: "flex" },
+            }}
           >
             {pillars.map((pillar, index) => {
               const pillarDelay = baseDelay + index * step;
@@ -242,74 +320,8 @@ const ModernOverdriveSection: React.FC = () => {
 
               return (
                 <React.Fragment key={pillar.title}>
-                  {/* Pillar */}
-                  <MotionBox
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{
-                      duration: 0.55,
-                      ease: [0.22, 1, 0.36, 1],
-                      delay: pillarDelay,
-                    }}
-                    sx={{
-                      flex: 1,
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      textAlign: "center",
-                      px: { xs: 1.5, md: 2 },
-                    }}
-                  >
-                    {/* Golden gradient circle */}
-                    <motion.div
-                      style={{
-                        width: 64,
-                        height: 64,
-                        borderRadius: "50%",
-                        backgroundImage: GOLD_GRADIENT,
-                        boxShadow:
-                          "0 0 0 1px rgba(248,250,252,0.45)",
-                        transformStyle: "preserve-3d",
-                      }}
-                      initial={{ rotateY: 0 }}
-                      animate={{ rotateY: 0 }}
-                      transition={{
-                        duration: 8,
-                        repeat: Infinity,
-                        ease: "linear",
-                      }}
-                    />
+                  <PillarCard pillar={pillar} delay={pillarDelay} />
 
-                    <Typography
-                      sx={{
-                        mt: 2.5,
-                        fontFamily: "var(--font-montserrat)",
-                        fontWeight: 500,
-                        fontSize: 16,
-                        letterSpacing: 0.5,
-                        textTransform: "none",
-                        color: (theme) => theme.palette.text.primary,
-                        mb: 1,
-                      }}
-                    >
-                      {pillar.title}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        fontFamily: "var(--font-inter)",
-                        fontWeight: 300,
-                        fontSize: 13,
-                        lineHeight: 1.7,
-                        color: "rgba(255,255,255,0.72)",
-                      }}
-                    >
-                      {pillar.description}
-                    </Typography>
-                  </MotionBox>
-
-                  {/* Connector – desktop only */}
                   {index < pillars.length - 1 && (
                     <MotionBox
                       initial={{ scaleX: 0, opacity: 0 }}
@@ -321,7 +333,6 @@ const ModernOverdriveSection: React.FC = () => {
                         delay: connectorDelay,
                       }}
                       sx={{
-                        display: { xs: "none", md: "block" },
                         alignSelf: "center",
                         transformOrigin: "left",
                         height: 3,
@@ -335,6 +346,68 @@ const ModernOverdriveSection: React.FC = () => {
                 </React.Fragment>
               );
             })}
+          </Stack>
+
+          {/* 5B. Mobile layout – 2×2 grid, connectors between 1–2 and 3–4 */}
+          <Stack
+            spacing={4}
+            sx={{
+              width: "100%",
+              mt: 3,
+              display: { xs: "flex", md: "none" },
+            }}
+          >
+            {Array.from({ length: Math.ceil(pillars.length / 2) }).map(
+              (_, rowIndex) => {
+                const leftIndex = rowIndex * 2;
+                const rightIndex = leftIndex + 1;
+                const leftPillar = pillars[leftIndex];
+                const rightPillar = pillars[rightIndex];
+
+                const leftDelay = baseDelay + leftIndex * step;
+                const rightDelay = baseDelay + rightIndex * step;
+                const connectorDelay =
+                  baseDelay + (leftIndex + 0.4) * step;
+
+                return (
+                  <Stack
+                    key={rowIndex}
+                    direction="row"
+                    spacing={2}
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    {leftPillar && (
+                      <PillarCard pillar={leftPillar} delay={leftDelay} />
+                    )}
+
+                    {rightPillar && (
+                      <>
+                        {/* horizontal connector between the two cards */}
+                        <MotionBox
+                          initial={{ scaleX: 0, opacity: 0 }}
+                          whileInView={{ scaleX: 1, opacity: 1 }}
+                          viewport={{ once: true, amount: 0.3 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: [0.22, 1, 0.36, 1],
+                            delay: connectorDelay,
+                          }}
+                          sx={{
+                            height: 3,
+                            width: 40,
+                            borderRadius: 999,
+                            backgroundImage: GOLD_GRADIENT,
+                            flexShrink: 0,
+                          }}
+                        />
+                        <PillarCard pillar={rightPillar} delay={rightDelay} />
+                      </>
+                    )}
+                  </Stack>
+                );
+              }
+            )}
           </Stack>
         </Stack>
       </Container>

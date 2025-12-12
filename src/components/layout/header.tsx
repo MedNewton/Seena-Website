@@ -119,7 +119,7 @@ const Header: React.FC = () => {
         {/* Center: Nav links */}
         <Stack
           direction="row"
-          spacing={3.5}
+          spacing={3}
           sx={{
             alignItems: "center",
             flex: 1,
@@ -136,7 +136,7 @@ const Header: React.FC = () => {
               sx={(theme) => ({
                 position: "relative",
                 textDecoration: "none",
-                fontSize: 12,
+                fontSize: 14,
                 letterSpacing: 1.8,
                 fontWeight: 500,
                 textTransform: "uppercase",

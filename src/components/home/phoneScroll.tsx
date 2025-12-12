@@ -1,12 +1,45 @@
-// src/components/home/phoneScroll.tsx (same as your code, with one change)
+// src/components/home/phoneScroll.tsx
 "use client";
 
-import React, { useRef } from "react";
-import { Box, Stack, Typography } from "@mui/material";
+import React, { useRef, useState } from "react";
+import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useMotionValueEvent,
+} from "motion/react";
 
 import phoneImage from "@/assets/images/phone1.webp";
+
+type FeatureConfig = {
+  title: string;
+  description: string;
+};
+
+const FEATURES: FeatureConfig[] = [
+  {
+    title: "Self-Awareness",
+    description:
+      "Reveals your energy signature and needs using daily checks and biometric data.",
+  },
+  {
+    title: "AI Coach",
+    description:
+      "Personalized routines for breathwork, movement, and inner equilibrium.",
+  },
+  {
+    title: "System Reset",
+    description:
+      "Guided practices to reset your stress response and stabilize your nervous system.",
+  },
+  {
+    title: "Progress Map",
+    description:
+      "Dynamic dashboard tracking your progress across Mind, Body, and Soul for peak flow.",
+  },
+];
 
 type FeatureProps = {
   title: string;
@@ -27,14 +60,15 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
         width: 64,
         height: 64,
         borderRadius: "50%",
-        background: "linear-gradient(135deg, #F5E0A3 0%, #D8A24B 40%, #F8E6B8 100%)",
+        background:
+          "linear-gradient(135deg, #F5E0A3 0%, #D8A24B 40%, #F8E6B8 100%)",
       }}
     />
     <Typography
       sx={{
         fontSize: 20,
         fontWeight: 400,
-        color: "#D8A24B"
+        color: "#D8A24B",
       }}
     >
       {title}
@@ -53,18 +87,17 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
   </Stack>
 );
 
-const featureDescription =
-  "Discover your unique energy signature and baseline patterns";
-
 const PhoneScroll: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end 1.1"],
   });
 
-  // Each feature uses a slightly later window of progress
+  // Desktop feature animations (unchanged)
   const f1Opacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
   const f1Y = useTransform(scrollYProgress, [0.05, 0.2], [40, 0]);
 
@@ -77,6 +110,20 @@ const PhoneScroll: React.FC = () => {
   const f4Opacity = useTransform(scrollYProgress, [0.65, 0.8], [0, 1]);
   const f4Y = useTransform(scrollYProgress, [0.65, 0.8], [40, 0]);
 
+  // Mobile: active feature index (0–3), changing as user scrolls
+  const [activeFeatureIndex, setActiveFeatureIndex] = useState<number>(0);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (!isMobile) return;
+
+    // Divide scroll into 4 equal ranges
+    const rawIndex = Math.floor(latest * FEATURES.length);
+    const clamped = Math.min(FEATURES.length - 1, Math.max(0, rawIndex));
+    setActiveFeatureIndex(clamped);
+  });
+
+  const activeFeature: FeatureConfig = FEATURES[activeFeatureIndex] ?? { title: "", description: "" };
+
   return (
     <Box
       id="app"
@@ -84,30 +131,30 @@ const PhoneScroll: React.FC = () => {
       component="section"
       sx={{
         width: "100%",
-        // taller than viewport so the sticky part has room to play
-        minHeight: { xs: "220vh", md: "260vh" },
+        minHeight: { xs: "220vh", md: "260vh" }, // space for sticky scene
         pt: { xs: 8, md: 10 },
         scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",
       }}
     >
-      {/* Sticky container (heading + card) */}
+      {/* Sticky viewport area */}
       <Box
         sx={{
           position: "sticky",
           top: 0,
-          height: "100vh",                 // <- key: pinned scene
+          height: "100vh",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
-          pb: { xs: 4, md: 6 },
+          pb: { xs: 2, md: 4 },
+          px: { xs: 2, md: 0 },
           maxWidth: 1440,
           mx: "auto",
         }}
       >
-        {/* Top heading */}
+        {/* Title */}
         <Typography
           sx={{
             textAlign: "center",
@@ -115,12 +162,13 @@ const PhoneScroll: React.FC = () => {
             fontSize: { xs: 24, md: 64 },
             fontWeight: 300,
             mb: { xs: 4, md: 6 },
+            pt: 2
           }}
         >
-          Think better, move better, and live better.
+          <span style={{ color: "#D8A24B" }}>Think</span> better, <span style={{ color: "#D8A24B" }}>move</span> better, and <span style={{ color: "#D8A24B" }}>live</span> better.
         </Typography>
 
-        {/* Card with mesh gradient background */}
+        {/* Card with mesh gradient */}
         <Box
           sx={{
             position: "relative",
@@ -130,54 +178,64 @@ const PhoneScroll: React.FC = () => {
             borderRadius: 6,
             overflow: "hidden",
             minHeight: { xs: 420, md: 520 },
-            boxShadow: {
-              xs: "0px 18px 45px rgba(15,23,42,0.35)",
-              md: "0px 30px 80px rgba(15,23,42,0.5)",
-            },
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "repeat",
             backgroundImage:
-              'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%223000%22 height=%221500%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%230F2027%22 d=%22M-1500-750h6000v3000h-6000z%22%2F%3E%3Cpath d=%22M-549.75-531.75-793.5 1185l253.5 656.25L1499.25 799.5%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22m524.25-438.75-331.5 864 777 1086.75 1392-1239.75%22 fill=%22%233f4d62%22%2F%3E%3Cpath d=%22M3039.75 429 1242 2151.75l93.75 520.5 2292.75-1866%22 fill=%22%235c6f89%22%2F%3E%3Cpath d=%22m1130.25 535.5-1506 733.5L795 1976.25l468-1066.5%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22M1771.5 1405.5 567 2607l543 858.75 1426.5-511.5%22 fill=%22%2309172B%22%2F%3E%3Cpath d=%22m1822.5 1393.5-524.25 1446L2232 3315l1050-1263%22 fill=%22%230F2027%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-300%22 y=%22-300%22 width=%223600%22 height=%222100%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22300%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+              'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%2311233d%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m1716.928 545.21-616 409 353 762 838-859%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m1829.24 4.365-101 448 575 510 429-349%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m396.575-424.497-269 258 1073 937 211-909%22 fill=%22%2311233d%22%2F%3E%3Cpath d=%22m1596.251 654.479-659 893 702 90 432-752%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m1205.719 384.838-1194 1088 190 61 1105-347%22 fill=%22%2311233d%22%2F%3E%3Cpath d=%22m1084 830-39 162 1169 1292 318-1361%22 fill=%22%230f2027%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
           }}
         >
-          {/* Content */}
           <Box
             sx={{
               position: "relative",
               zIndex: 1,
               height: "100%",
-              display: "grid",
+              display: {
+                xs: "flex",
+                md: "grid",
+              },
+              flexDirection: {
+                xs: "column",
+                md: "unset",
+              },
               gridTemplateColumns: {
-                xs: "1fr",
                 md: "1fr auto 1fr",
               },
               alignItems: "center",
+              justifyContent: "center",
               gap: { xs: 4, md: 6 },
               px: { xs: 4, md: 8 },
               py: { xs: 5, md: 7 },
             }}
           >
-            {/* Left column */}
+            {/* LEFT COLUMN – desktop only */}
             <Stack
               spacing={{ xs: 4, md: 6 }}
               alignItems="center"
               justifyContent="center"
+              sx={{ display: { xs: "none", md: "flex" } }}
             >
               <motion.div style={{ opacity: f1Opacity, y: f1Y }}>
-                <FeatureItem title="Self-Awareness" description={"Reveals your energy signature and needs using daily checks and biometric data."} />
+                <FeatureItem
+                  title={FEATURES[0]?.title ?? ""}
+                  description={FEATURES[0]?.description ?? ""}
+                />
               </motion.div>
               <motion.div style={{ opacity: f2Opacity, y: f2Y }}>
-                <FeatureItem title="AI Coach" description={"Personalized routines for breathwork, movement, and inner equilibrium."} />
+                <FeatureItem
+                  title={FEATURES[1]?.title ?? ""}
+                  description={FEATURES[1]?.description ?? ""}
+                />
               </motion.div>
             </Stack>
 
-            {/* Phone in the center */}
+            {/* PHONE */}
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
+                order: { xs: 1, md: "unset" },
               }}
             >
               <Image
@@ -186,24 +244,77 @@ const PhoneScroll: React.FC = () => {
                 style={{
                   maxHeight: 480,
                   width: "auto",
-                  scale: 1.3,
+                  scale: 1.25,
                 }}
                 priority
               />
             </Box>
 
-            {/* Right column */}
+            {/* RIGHT COLUMN – desktop only */}
             <Stack
               spacing={{ xs: 4, md: 6 }}
               alignItems="center"
               justifyContent="center"
+              sx={{ display: { xs: "none", md: "flex" } }}
             >
               <motion.div style={{ opacity: f3Opacity, y: f3Y }}>
-                <FeatureItem title="System Reset" description={"Guided practices to reset your stress response and stabilize your nervous system."} />
+                <FeatureItem
+                  title={FEATURES[2]?.title ?? ""}
+                  description={FEATURES[2]?.description ?? ""}
+                />
               </motion.div>
               <motion.div style={{ opacity: f4Opacity, y: f4Y }}>
-                <FeatureItem title="Progress Map" description={"Dynamic dashboard tracking your progress across Mind, Body, and Soul for peak flow."} />
+                <FeatureItem
+                  title={FEATURES[3]?.title ?? ""}
+                  description={FEATURES[3]?.description ?? ""}
+                />
               </motion.div>
+            </Stack>
+
+            {/* MOBILE FEATURE – below phone, one at a time */}
+            <Stack
+              spacing={1.5}
+              alignItems="center"
+              justifyContent="center"
+              sx={{
+                display: { xs: "flex", md: "none" },
+                order: 2,
+                mt: 2,
+                textAlign: "center",
+                color: "#FFFFFF",
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: 18,
+                  fontWeight: 400,
+                  color: "#D8A24B",
+                }}
+              >
+                {activeFeature.title}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: 15,
+                  fontWeight: 300,
+                  lineHeight: 1.6,
+                  maxWidth: 320,
+                  color: "rgba(249,250,251,0.9)",
+                }}
+              >
+                {activeFeature.description}
+              </Typography>
+              <Typography
+                sx={{
+                  mt: 1,
+                  fontSize: 11,
+                  letterSpacing: 1.4,
+                  textTransform: "uppercase",
+                  color: "rgba(249,250,251,0.6)",
+                }}
+              >
+                {activeFeatureIndex + 1} / {FEATURES.length}
+              </Typography>
             </Stack>
           </Box>
         </Box>

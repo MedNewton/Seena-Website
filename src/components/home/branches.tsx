@@ -8,8 +8,8 @@ import type { StaticImageData } from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-import liveImg from "@/assets/images/training1.webp";
-import resetImg from "@/assets/images/retreat1.webp";
+import liveImg from "@/assets/images/live.webp";
+import resetImg from "@/assets/images/reset.webp";
 import dinnerImg from "@/assets/images/dinner.webp";
 
 const GOLD = "#D8A24B";
@@ -49,7 +49,6 @@ const BranchCard: React.FC<BranchCardProps> = ({
         justifyContent: "end",
         height: "100% !important",
         cursor: "pointer",
-        boxShadow: "0px 24px 60px rgba(15, 23, 42, 0.40)",
         "&:hover .branch-image": {
           transform: "scale(1.05)",
         },
@@ -213,7 +212,8 @@ const Branches: React.FC = () => {
       id="experiences"
       sx={{
         width: "100%",
-        py: { xs: 8, md: 10 },
+        pt: { xs: 2, md: 4 },
+        pb: { xs: 8, md: 10 },
         scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",
