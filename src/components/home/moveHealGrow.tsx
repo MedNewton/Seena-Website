@@ -86,7 +86,7 @@ const MoveHealGrow: React.FC = () => {
         spacing={2.5}
         alignItems="center"
         sx={{
-          transform: "translateY(-20vh)",
+          transform: {xs: "none", md: "translateY(-20vh)"},
         }}
       >
         <Typography

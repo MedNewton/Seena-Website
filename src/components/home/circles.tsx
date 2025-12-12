@@ -53,6 +53,7 @@ const Circles: React.FC<CirclesProps> = ({
       sx={{
         width: "100%",
         scrollMarginTop: "120px",
+        px: { xs: 2, md: 0 },
       }}
     >
       <MotionBox

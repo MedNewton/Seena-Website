@@ -222,7 +222,7 @@ const Hero: React.FC = () => {
           >
             {/* DIGITAL – primary */}
             <MotionButton
-            onClick={() => router.push("/experiences")}
+            onClick={() => router.push("/#app")}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -262,7 +262,7 @@ const Hero: React.FC = () => {
 
             {/* PHYSICAL – secondary outline */}
             <MotionButton
-            onClick={() => router.push("/app")}
+            onClick={() => router.push("/#circles")}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{

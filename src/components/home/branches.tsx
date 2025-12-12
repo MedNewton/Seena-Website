@@ -256,6 +256,7 @@ const Branches: React.FC = () => {
             md: "repeat(2, minmax(0, 1fr))",
           },
           gap: { xs: 3, md: 4 },
+          px: { xs: 2, md: 0 },
         }}
       >
         <MotionBox

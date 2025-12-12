@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
           borderRadius: { xs: 4, md: 6 },
           overflow: "hidden",
           pt: { xs: 6, md: 10 },
-          pb: { xs: 6, md: 8 }, // padding for the content; big word is absolute
+          pb: { xs: 6, md: 8 },
           boxShadow: {
             xs: "0px 18px 45px rgba(15,23,42,0.35)",
             md: "0px 30px 80px rgba(15,23,42,0.55)",
@@ -141,6 +141,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     fontWeight: 500,
                     lineHeight: 1.1,
                     fontFamily: "var(--font-bricolage)",
+                    textAlign: { xs: "center", md: "left" },
                   }}
                 >
                   Master Your
@@ -155,11 +156,12 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     fontSize: { xs: 14, md: 16 },
                     fontWeight: 300,
                     fontFamily: "var(--font-inter)",
-                    maxWidth: 256,
+                    maxWidth: { xs: "100%", md: 256 },
+                    textAlign: { xs: "center", md: "left" },
+                    px: { xs: 4, md: 0 },
                   }}
                 >
-                  Find your momentum, regain control, and move from surviving to
-                  thriving.
+                  Find your momentum, regain control, and move from surviving to thriving.
                 </Typography>
               </MotionBox>
 
@@ -339,8 +341,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         <MotionTypography
           aria-hidden="true"
           initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
+          animate={{ opacity: 1, y: 0 }}  // <-- animate on mount instead of whileInView
           transition={{
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],
@@ -352,9 +353,8 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             right: 0,
             bottom: 0,
             width: "100%",
-            // much larger so it visually reaches the inner edges
             fontSize: {
-              xs: "11.5vw",   // mobile
+              xs: "10.5vw",
               sm: "11.5vw",
               md: "11.5vw",
               lg: "11.5vw",
@@ -365,7 +365,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             lineHeight: 0.9,
             textTransform: "uppercase",
             textAlign: "center",
-            whiteSpace: "nowrap", // always one line
+            whiteSpace: "nowrap",
             overflow: "hidden",
             pointerEvents: "none",
             zIndex: 0,
