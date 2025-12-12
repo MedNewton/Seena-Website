@@ -12,16 +12,13 @@ import {
 import Image from "next/image";
 
 import reviewsCollage from "@/assets/images/healgrow.webp";
+import { useWaitlist } from "@/hooks/useWaitlist";
 
 const MoveHealGrow: React.FC = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    // TODO: hook up to your waitlist API
-  };
+  const { submitting, submitted, error, handleSubmit } = useWaitlist();
 
   return (
     <Box
-    id="join"
       component="section"
       sx={{
         width: "100%",
@@ -48,16 +45,16 @@ const MoveHealGrow: React.FC = () => {
       </Typography>
 
       <Typography
-          component="h2"
-          sx={{
-            fontSize: { xs: 24, md: 48 },
-            fontWeight: 500,
-            mb: { xs: 1.5, md: 6 },
-            color: "#FFFFFF",
-          }}
-        >
-          Reset, Rise & Connect with Seena
-        </Typography>
+        component="h2"
+        sx={{
+          fontSize: { xs: 24, md: 48 },
+          fontWeight: 500,
+          mb: { xs: 1.5, md: 6 },
+          color: "#FFFFFF",
+        }}
+      >
+        Reset, Rise & Connect with Seena
+      </Typography>
 
       {/* Collage image */}
       <Box
@@ -82,11 +79,12 @@ const MoveHealGrow: React.FC = () => {
 
       {/* Text + form, pulled up over the image */}
       <Stack
+      id="join"
         direction="column"
         spacing={2.5}
         alignItems="center"
         sx={{
-          transform: {xs: "none", md: "translateY(-20vh)"},
+          transform: { xs: "none", md: "translateY(-20vh)" },
         }}
       >
         <Typography
@@ -118,16 +116,18 @@ const MoveHealGrow: React.FC = () => {
           }}
         >
           <TextField
+            name="email"
             type="email"
             placeholder="YOUR EMAIL"
             required
             fullWidth
             variant="outlined"
+            disabled={submitting || submitted}
             sx={{
-              maxWidth: 420, // narrower
+              maxWidth: 420,
               "& .MuiOutlinedInput-root": {
                 borderRadius: 999,
-                paddingY: 0.75, // less tall
+                paddingY: 0.75,
                 color: "#FFFFFF",
                 backgroundColor: "transparent",
                 "& .MuiOutlinedInput-notchedOutline": {
@@ -141,7 +141,7 @@ const MoveHealGrow: React.FC = () => {
                   borderColor: "#FFFFFF",
                 },
                 "& input": {
-                  paddingY: 1.5, // tighten inner input padding
+                  paddingY: 1.5,
                   textAlign: "center",
                 },
                 "& input::placeholder": {
@@ -157,12 +157,13 @@ const MoveHealGrow: React.FC = () => {
 
           <Button
             type="submit"
+            disabled={submitting}
             sx={{
               mt: 1,
               width: "100%",
-              maxWidth: 420, // same width as TextField
+              maxWidth: 420,
               borderRadius: 999,
-              py: 1.2, // similar height
+              py: 1.2,
               fontSize: 14,
               fontWeight: 500,
               textTransform: "uppercase",
@@ -176,8 +177,24 @@ const MoveHealGrow: React.FC = () => {
               },
             }}
           >
-            Join waitlist
+            {submitting
+              ? "Joining..."
+              : submitted
+              ? "Thanks for joining !"
+              : "Join waitlist"}
           </Button>
+
+          {error && (
+            <Typography
+              sx={{
+                mt: 1,
+                fontSize: 12,
+                color: "#FCA5A5",
+              }}
+            >
+              {error}
+            </Typography>
+          )}
         </Box>
       </Stack>
     </Box>
