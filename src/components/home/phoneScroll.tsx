@@ -172,14 +172,13 @@ const PhoneScroll: React.FC = () => {
             textAlign: "center",
             color: "#FFFFFF",
             fontSize: { xs: 26, md: 64 },
-            fontWeight: 500,
+            fontWeight: 600,
             mb: { xs: 4, md: 6 },
+            px: {xs: 2, md: 4},
             pt: 2,
           }}
         >
-          <span style={{ color: "#D8A24B" }}>Think</span> better,{" "}
-          <span style={{ color: "#D8A24B" }}>move</span> better, and{" "}
-          <span style={{ color: "#D8A24B" }}>live</span> better.
+          So your <span style={{ color: "#D8A24B" }}>health</span> doesn&apos;t feel like <span style={{ color: "#D8A24B" }}>another thing</span> to manage
         </Typography>
 
         {/* Card with mesh gradient */}

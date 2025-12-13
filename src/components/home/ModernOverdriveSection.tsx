@@ -183,7 +183,7 @@ const ModernOverdriveSection: React.FC = () => {
             }}
             sx={{
               fontFamily: "var(--font-bricolage)",
-              fontWeight: 500,
+              fontWeight: 600,
               fontSize: { xs: 32, md: 64 },
               lineHeight: 1.25,
               color: (theme) => theme.palette.text.primary,
@@ -286,7 +286,7 @@ const ModernOverdriveSection: React.FC = () => {
             }}
             sx={{
               fontFamily: "var(--font-bricolage)",
-              fontWeight: 400,
+              fontWeight: 600,
               fontSize: { xs: 32, md: 64 },
               lineHeight: 1.4,
               color: (theme) => theme.palette.text.primary,
