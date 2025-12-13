@@ -66,8 +66,8 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     />
     <Typography
       sx={{
-        fontSize: 20,
-        fontWeight: 400,
+        fontSize: {xs:24, md: 20},
+        fontWeight: 600,
         color: "#D8A24B",
       }}
     >
