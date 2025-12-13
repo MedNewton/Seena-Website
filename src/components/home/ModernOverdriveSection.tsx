@@ -224,7 +224,7 @@ const ModernOverdriveSection: React.FC = () => {
                     color: GOLD,
                   }}
                 >
-                  inflamation
+                  inflammation
                 </motion.span>
               </Box>
             </Box>
