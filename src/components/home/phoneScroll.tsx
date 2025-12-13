@@ -219,7 +219,8 @@ const PhoneScroll: React.FC = () => {
               justifyContent: "center",
               gap: { xs: 4, md: 6 },
               px: { xs: 4, md: 8 },
-              py: { xs: 5, md: 7 },
+              pt: { xs: 5, md: 4 },
+              pb: { xs: 5, md: 8 },
             }}
           >
             {/* LEFT COLUMN – desktop only */}
