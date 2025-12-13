@@ -149,7 +149,8 @@ const ModernOverdriveSection: React.FC = () => {
       sx={{
         width: "100%",
         bgcolor: (theme) => theme.palette.background.default,
-        py: { xs: 10, md: 16 },
+        pt: { xs: 10, md: 10 },
+        pb: { xs: 10, md: 16 },
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -201,7 +202,7 @@ const ModernOverdriveSection: React.FC = () => {
             sx={{
               fontFamily: "var(--font-inter)",
               fontWeight: 400,
-              fontSize: { xs: 18, md: 28 },
+              fontSize: { xs: 18, md: 30 },
               lineHeight: 1.6,
               color: (theme) => theme.palette.text.primary,
             }}
@@ -223,7 +224,7 @@ const ModernOverdriveSection: React.FC = () => {
                     color: GOLD,
                   }}
                 >
-                  inflation
+                  inflamation
                 </motion.span>
               </Box>
             </Box>
