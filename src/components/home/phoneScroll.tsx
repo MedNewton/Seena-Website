@@ -66,12 +66,12 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     />
     <Typography
       sx={{
-        fontSize: {xs:24, md: 20},
+        fontSize: {xs:28, md: 20},
         fontWeight: 600,
         color: "#D8A24B",
       }}
     >
-      {title}
+      {title}cc
     </Typography>
     <Typography
       sx={{
@@ -309,8 +309,8 @@ const PhoneScroll: React.FC = () => {
             >
               <Typography
                 sx={{
-                  fontSize: 21,
-                  fontWeight: 500,
+                  fontSize: 28,
+                  fontWeight: 600,
                   color: "#D8A24B",
                 }}
               >
