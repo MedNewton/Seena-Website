@@ -213,7 +213,7 @@ const Hero: React.FC = () => {
             direction="row"
             width="100%"
             spacing={{ xs: 2.5, md: 24 }}
-            px={18}
+            px={20}
             alignItems="center"
             justifyContent="space-between"
             sx={{
