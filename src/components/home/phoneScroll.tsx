@@ -171,7 +171,7 @@ const PhoneScroll: React.FC = () => {
           sx={{
             textAlign: "center",
             color: "#FFFFFF",
-            fontSize: { xs: 26, md: 64 },
+            fontSize: { xs: 32, md: 64 },
             fontWeight: 600,
             mb: { xs: 4, md: 6 },
             px: {xs: 2, md: 4},

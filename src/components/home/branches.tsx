@@ -235,7 +235,7 @@ const Branches: React.FC = () => {
           fontFamily: "var(--font-bricolage)",
           fontSize: { xs: 32, md: 64 },
           lineHeight: 1.2,
-          fontWeight: 500,
+          fontWeight: 600,
           maxWidth: "100%",
           mx: "auto",
           mb: { xs: 4, md: 6 },
