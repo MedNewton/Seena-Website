@@ -203,7 +203,7 @@ const ModernOverdriveSection: React.FC = () => {
               fontFamily: "var(--font-inter)",
               fontWeight: 400,
               fontSize: { xs: 18, md: 30 },
-              lineHeight: 1.6,
+              lineHeight: 1.2,
               color: (theme) => theme.palette.text.primary,
             }}
           >

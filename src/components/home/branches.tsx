@@ -235,7 +235,7 @@ const Branches: React.FC = () => {
           fontFamily: "var(--font-bricolage)",
           fontSize: { xs: 32, md: 64 },
           lineHeight: 1.2,
-          fontWeight: 300,
+          fontWeight: 500,
           maxWidth: "100%",
           mx: "auto",
           mb: { xs: 4, md: 6 },
@@ -311,7 +311,7 @@ const Branches: React.FC = () => {
           }}
         >
           <BranchCard
-            title="Seena Dinner Club"
+            title="Seena Summit Club"
             description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space."
             image={dinnerImg}
             href="/seena-dinner-club"
