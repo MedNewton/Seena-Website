@@ -56,27 +56,6 @@ const MoveHealGrow: React.FC = () => {
         Reset, Rise & Connect with Seena
       </Typography>
 
-      {/* Collage image */}
-      <Box
-        sx={{
-          maxWidth: 1280,
-          mx: "auto",
-          mb: { xs: 4, md: 5 },
-        }}
-      >
-        <Image
-          src={reviewsCollage}
-          alt="Seena community collage"
-          style={{
-            width: "100%",
-            height: "auto",
-            display: "block",
-            borderRadius: 32,
-          }}
-          priority={false}
-        />
-      </Box>
-
       {/* Text + form, pulled up over the image */}
       <Stack
       id="join"
@@ -84,7 +63,7 @@ const MoveHealGrow: React.FC = () => {
         spacing={2.5}
         alignItems="center"
         sx={{
-          transform: { xs: "none", md: "translateY(-20vh)" },
+          transform: { xs: "none", md: "translateY(-2vh)" },
         }}
       >
         <Typography
@@ -97,9 +76,7 @@ const MoveHealGrow: React.FC = () => {
             color: "#FFFFFF",
           }}
         >
-          Don&apos;t take our word for it. See why Seena is trusted and loved by
-          people around the world who want to feel better, live longer, and
-          train smarter.
+          Always on, rarely calm? This is for you. Get early access.
         </Typography>
 
         {/* Waitlist form */}
@@ -197,6 +174,30 @@ const MoveHealGrow: React.FC = () => {
           )}
         </Box>
       </Stack>
+
+      {/* Collage image */}
+      <Box
+        sx={{
+          maxWidth: 1280,
+          mx: "auto",
+          mb: { xs: 4, md: 5 },
+          mt: { xs: 4, md: 5 },
+        }}
+      >
+        <Image
+          src={reviewsCollage}
+          alt="Seena community collage"
+          style={{
+            width: "100%",
+            height: "auto",
+            display: "block",
+            borderRadius: 32,
+          }}
+          priority={false}
+        />
+      </Box>
+
+      
     </Box>
   );
 };
