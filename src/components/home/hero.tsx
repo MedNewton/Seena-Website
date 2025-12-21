@@ -266,7 +266,7 @@ const Hero: React.FC = () => {
 
             {/* PHYSICAL – secondary outline */}
             <MotionButton
-              onClick={() => router.push("/#circles")}
+              onClick={() => router.push("/#experiences")}
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{

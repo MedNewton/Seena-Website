@@ -234,7 +234,7 @@ const Branches: React.FC = () => {
           color: (theme) => theme.palette.text.primary,
           fontFamily: "var(--font-bricolage)",
           fontSize: { xs: 32, md: 64 },
-          lineHeight: 1.2,
+          lineHeight: 1.1,
           fontWeight: 600,
           maxWidth: "100%",
           mx: "auto",

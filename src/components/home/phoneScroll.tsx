@@ -176,6 +176,7 @@ const PhoneScroll: React.FC = () => {
             mb: { xs: 4, md: 6 },
             px: {xs: 2, md: 4},
             pt: 2,
+            lineHeight: 1.1,
           }}
         >
           So your <span style={{ color: "#D8A24B" }}>health</span> doesn&apos;t feel like <span style={{ color: "#D8A24B" }}>another thing</span> to manage

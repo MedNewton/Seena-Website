@@ -127,7 +127,7 @@ const Circles: React.FC<CirclesProps> = ({
             sx={{
               fontFamily: "var(--font-bricolage)",
               fontSize: { xs: 32, md: 64 },
-              lineHeight: { xs: 1.15, md: 1.05 },
+              lineHeight: 1,
               fontWeight: 400,
             }}
           >
