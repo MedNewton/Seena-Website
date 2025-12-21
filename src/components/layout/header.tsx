@@ -152,14 +152,20 @@ const Header: React.FC = () => {
         >
           {/* Left: Logo / Brand */}
           <Box sx={{ position: "relative", width: 80, height: 40 }}>
-            <MuiLink component={Link} href="/">
-              <Image
-                src={logo}
-                alt="Seena Logo"
-                fill
-                style={{ objectFit: "contain" }}
-                priority
-              />
+            <MuiLink component={Link} href="/" underline="none">
+              <Typography
+                sx={{
+                  fontFamily: "var(--font-raleway)",
+                  fontSize: 24,
+                  fontWeight: 800,
+                  color: "#FFFFFF",
+                  fontStyle: "italic",
+                  letterSpacing: 1.75,
+                  textTransform: "uppercase",
+                }}
+              >
+                Seena
+              </Typography>
             </MuiLink>
           </Box>
 
