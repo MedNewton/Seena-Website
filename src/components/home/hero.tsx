@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
           {/* Headline row */}
           <Stack
             direction="row"
-            spacing={{ xs: 1.5, md: 8 }}
+            spacing={{ xs: 1.5, md: 0 }}
             alignItems="baseline"
             justifyContent="center"
           >
@@ -145,6 +145,7 @@ const Hero: React.FC = () => {
                 lineHeight: 1,
                 fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
+                minWidth: { xs: 140, md: 460 },
               }}
             >
               Find
@@ -202,9 +203,74 @@ const Hero: React.FC = () => {
                 lineHeight: 1,
                 fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
+                minWidth: { xs: 140, md: 460 },
               }}
             >
               within
+            </MotionTypography>
+          </Stack>
+
+          <Stack
+            direction="row"
+            spacing={{ xs: 1.5, md: 32 }}
+            pt={4}
+            alignItems="baseline"
+            justifyContent="center"
+          >
+            {/* Left word */}
+            <MotionTypography
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: 0.45,
+              }}
+              sx={{
+                fontSize: { xs: 36, md: 36 },
+                lineHeight: 1,
+                fontWeight: 400,
+                fontFamily: "var(--font-bricolage)",
+              }}
+            >
+              Mind
+            </MotionTypography>
+
+            <MotionTypography
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: 0.45,
+              }}
+              sx={{
+                fontSize: { xs: 36, md: 36 },
+                lineHeight: 1,
+                fontWeight: 400,
+                fontFamily: "var(--font-bricolage)",
+              }}
+            >
+              Body
+            </MotionTypography>
+
+            {/* Right word */}
+            <MotionTypography
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: 0.45,
+              }}
+              sx={{
+                fontSize: { xs: 36, md: 36 },
+                lineHeight: 1,
+                fontWeight: 400,
+                fontFamily: "var(--font-bricolage)",
+              }}
+            >
+              Soul
             </MotionTypography>
           </Stack>
 
@@ -212,12 +278,12 @@ const Hero: React.FC = () => {
           <Stack
             direction="row"
             width="100%"
-            spacing={{ xs: 2.5, md: 24 }}
-            px={20}
+            spacing={{ xs: 2.5, md: 20 }}
+            px={32}
             alignItems="center"
             justifyContent="space-between"
             sx={{
-              transform: "translateY(12rem)",
+              transform: "translateY(10rem)",
             }}
           >
             {/* DIGITAL – primary */}

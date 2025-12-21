@@ -133,7 +133,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                   ease: [0.22, 1, 0.36, 1],
                   delay: 0.1,
                 }}
-                sx={{ maxWidth: 420 }}
+                sx={{ maxWidth: 600 }}
               >
                 <Typography
                   sx={{
@@ -144,9 +144,9 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     textAlign: { xs: "center", md: "left" },
                   }}
                 >
-                  Master Your
+                  Where mental clarity
                   <br />
-                  Inner World
+                  meets physical strength
                   <br />
                 </Typography>
 
@@ -156,7 +156,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     fontSize: { xs: 14, md: 16 },
                     fontWeight: 300,
                     fontFamily: "var(--font-inter)",
-                    maxWidth: { xs: "100%", md: 256 },
+                    maxWidth: { xs: "100%", md: 360 },
                     textAlign: { xs: "center", md: "left" },
                     px: { xs: 4, md: 0 },
                   }}
