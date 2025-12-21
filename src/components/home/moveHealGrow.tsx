@@ -158,7 +158,7 @@ const MoveHealGrow: React.FC = () => {
               ? "Joining..."
               : submitted
               ? "Thanks for joining !"
-              : "Join waitlist"}
+              : "Get early access"}
           </Button>
 
           {error && (
