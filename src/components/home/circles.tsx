@@ -111,7 +111,7 @@ const Circles: React.FC<CirclesProps> = ({
           <MotionTypography
             variants={itemVariants}
             sx={{
-              fontSize: 16,
+              fontSize: 20,
               letterSpacing: 2,
               textTransform: "uppercase",
               fontWeight: 400,

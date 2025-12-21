@@ -271,7 +271,7 @@ const Branches: React.FC = () => {
         >
           <BranchCard
             title="Seena Live"
-            description="Community fitness & wellness events in your city."
+            description="Community fitness & wellness events in your city"
             image={liveImg}
             isTall
             href="/seena-live"
@@ -290,7 +290,7 @@ const Branches: React.FC = () => {
         >
           <BranchCard
             title="Seena Reset"
-            description="Local & international wellness retreats designed to rejuvenate you."
+            description="Local & international wellness retreats designed to rejuvenate you"
             image={resetImg}
             isTall
             href="/reset"
@@ -312,7 +312,7 @@ const Branches: React.FC = () => {
         >
           <BranchCard
             title="Seena Summit Club"
-            description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space."
+            description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space"
             image={dinnerImg}
             href="/dinner-club"
           />
