@@ -314,7 +314,7 @@ const Branches: React.FC = () => {
             title="Seena Summit Club"
             description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space."
             image={dinnerImg}
-            href="/seena-dinner-club"
+            href="/dinner-club"
           />
         </MotionBox>
       </Box>
