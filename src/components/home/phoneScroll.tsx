@@ -71,7 +71,7 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
         color: "#D8A24B",
       }}
     >
-      {title}cc
+      {title}
     </Typography>
     <Typography
       sx={{
