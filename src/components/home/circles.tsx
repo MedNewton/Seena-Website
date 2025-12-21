@@ -5,6 +5,7 @@ import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { motion } from "motion/react";
 import circlesHero from "@/assets/images/circles.webp";
+import { useRouter } from "next/navigation";
 
 type CirclesProps = {
   backgroundImageUrl?: string;
@@ -46,6 +47,7 @@ const itemVariants = {
 const Circles: React.FC<CirclesProps> = ({
   backgroundImageUrl = circlesHero.src,
 }) => {
+  const router = useRouter();
   return (
     <Box
       id="circles"
@@ -156,6 +158,7 @@ const Circles: React.FC<CirclesProps> = ({
             variants={itemVariants}
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.02 }}
+            onClick={() => router.push("/circles")}
             sx={{
               mt: { xs: 2, md: 3 },
               position: "relative",
