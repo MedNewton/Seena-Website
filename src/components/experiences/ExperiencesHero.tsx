@@ -21,7 +21,7 @@ const ExperiencesHero: FC<ExperiencesHeroProps> = ({ title, image }) => {
         alignItems: "center",
         justifyContent: "center",
         // higher hero
-        minHeight: { xs: 240, md: 320, lg: 360 },
+        minHeight: { xs: 240, md: 320, lg: 460 },
         boxShadow: "0px 24px 60px rgba(15,23,42,0.55)",
       }}
     >

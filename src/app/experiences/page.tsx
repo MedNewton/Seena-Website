@@ -11,7 +11,7 @@ import ExperiencesSectionSlider, {
 } from "@/components/experiences/ExperiencesSectionSlider";
 import Footer from "@/components/layout/footer";
 
-import heroImg from "@/assets/images/training1.webp"; // adjust path
+import heroImg from "@/assets/images/circles.webp"; // adjust path
 import cardImg1 from "@/assets/images/retreat1.webp";
 import cardImg2 from "@/assets/images/retreat1.webp";
 import cardImg3 from "@/assets/images/retreat1.webp";
