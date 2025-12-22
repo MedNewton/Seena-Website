@@ -14,7 +14,7 @@ const Home: React.FC = () => {
   return (
     <Stack width="100%">
       <Hero />
-      <Stack gap={4}>
+      <Stack gap={2}>
         <ModernOverdriveSection />
         <Explore />
         <PhoneScroll />

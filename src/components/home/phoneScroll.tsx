@@ -144,7 +144,7 @@ const PhoneScroll: React.FC = () => {
         width: "100%",
         // a bit taller on mobile to give each step more breathing room
         minHeight: { xs: "260vh", md: "260vh" },
-        pt: { xs: 8, md: 10 },
+        pt: { xs: 8, md: 4 },
         scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",

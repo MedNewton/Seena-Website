@@ -325,7 +325,7 @@ const ModernOverdriveSection: React.FC = () => {
         width: "100%",
         bgcolor: (theme) => theme.palette.background.default,
         pt: { xs: 10, md: 10 },
-        pb: { xs: 10, md: 16 },
+        pb: { xs: 10, md: 10 },
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
