@@ -212,7 +212,7 @@ const Branches: React.FC = () => {
       id="experiences"
       sx={{
         width: "100%",
-        pt: { xs: 2, md: 6 },
+        pt: { xs: 2, md: 12 },
         pb: { xs: 8, md: 2 },
         scrollMarginTop: "120px",
         maxWidth: 1440,

@@ -191,7 +191,7 @@ const PhoneScroll: React.FC = () => {
             mx: "auto",
             borderRadius: 6,
             overflow: "hidden",
-            minHeight: { xs: 420, md: 520 },
+            minHeight: { xs: 420, md: 580 },
             backgroundSize: "cover",
             backgroundPosition: "center center",
             backgroundRepeat: "repeat",
@@ -219,7 +219,7 @@ const PhoneScroll: React.FC = () => {
               justifyContent: "center",
               gap: { xs: 4, md: 6 },
               px: { xs: 4, md: 8 },
-              pt: { xs: 5, md: 4 },
+              pt: { xs: 5, md: 6 },
               pb: { xs: 5, md: 8 },
             }}
           >
