@@ -62,7 +62,182 @@ const goldWordVariants = {
   },
 } as const;
 
-// Reusable card for a single pillar
+// --- Marquee config ---
+
+const MARQUEE_ROW_1_ITEMS: string[] = [
+  "Migraines",
+  "Tension Headaches",
+  "TMJ / Jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle Tension",
+  "Migraines",
+  "Tension Headaches",
+  "TMJ / Jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle Tension",
+  "Migraines",
+  "Tension Headaches",
+  "TMJ / Jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle Tension",
+  "Migraines",
+  "Tension Headaches",
+  "TMJ / Jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle Tension",
+  "Migraines",
+  "Tension Headaches",
+  "TMJ / Jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle Tension",
+];
+
+const MARQUEE_ROW_2_ITEMS: string[] = [
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
+  "Brain fog",
+  "Anxiety",
+  "Depression",
+  "Chronic Fatigue Syndrome",
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
+  "Brain fog",
+  "Anxiety",
+  "Depression",
+  "Chronic Fatigue Syndrome",
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
+  "Brain fog",
+  "Anxiety",
+  "Depression",
+  "Chronic Fatigue Syndrome",
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
+  "Brain fog",
+  "Anxiety",
+  "Depression",
+  "Chronic Fatigue Syndrome",
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
+  "Brain fog",
+  "Anxiety",
+  "Depression",
+  "Chronic Fatigue Syndrome",
+];
+
+type MarqueeDirection = "left" | "right";
+
+type MarqueeRowProps = {
+  items: string[];
+  direction: MarqueeDirection;
+};
+
+const MarqueeRow: React.FC<MarqueeRowProps> = ({ items, direction }) => {
+  const content = items.join("   •   ");
+
+  return (
+    <Box
+      sx={(theme) => ({
+        position: "relative",
+        width: "100%",
+        overflow: "hidden",
+        borderRadius: 999,
+        backgroundColor: "transparent",
+        border: "none",
+        px: { xs: 0, md: 0 },
+        py: { xs: 0.75, md: 1 },
+
+        // Left fade / shadow
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          width: { xs: 32, md: 64 },
+          pointerEvents: "none",
+          background: `linear-gradient(to right, ${theme.palette.background.default}, rgba(15,23,42,0))`,
+        },
+
+        // Right fade / shadow
+        "&::after": {
+          content: '""',
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: { xs: 32, md: 64 },
+          pointerEvents: "none",
+          background: `linear-gradient(to left, ${theme.palette.background.default}, rgba(15,23,42,0))`,
+        },
+      })}
+    >
+      <motion.div
+        style={{
+          display: "inline-flex",
+          whiteSpace: "nowrap",
+        }}
+        animate={{
+          x:
+            direction === "left"
+              ? ["0%", "-50%"] // right → left
+              : ["-50%", "0%"], // left → right
+        }}
+        transition={{
+          duration: 72,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        <Typography
+          sx={{
+            fontFamily: "var(--font-inter)",
+            fontSize: { xs: 12, md: 14 },
+            letterSpacing: 1.6,
+            fontWeight: 500,
+            textTransform: "uppercase",
+            color: "rgba(248,250,252,0.85)",
+          }}
+        >
+          {content}
+        </Typography>
+      </motion.div>
+    </Box>
+  );
+};
+
+// --- Pillars ---
+
 type Pillar = (typeof pillars)[number];
 
 type PillarCardProps = {
@@ -192,7 +367,25 @@ const ModernOverdriveSection: React.FC = () => {
             Modern Life Rewards Overdrive
           </MotionTypography>
 
-          {/* 2. Subtitle with animated gold words */}
+          {/* 2. Marquees */}
+          <Stack
+            spacing={1.5}
+            sx={{
+              width: "100%",
+              px: { xs: 0, md: 2 },
+            }}
+          >
+            <MarqueeRow
+              items={MARQUEE_ROW_1_ITEMS}
+              direction="left"
+            />
+            <MarqueeRow
+              items={MARQUEE_ROW_2_ITEMS}
+              direction="right"
+            />
+          </Stack>
+
+          {/* 3. Subtitle with animated gold words */}
           <MotionTypography
             variant="h6"
             variants={subtitleVariants}
@@ -252,7 +445,7 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 3. Connecting vertical line */}
+          {/* 4. Connecting vertical line */}
           <MotionBox
             initial={{ scaleY: 0, opacity: 0 }}
             whileInView={{ scaleY: 1, opacity: 1 }}
@@ -273,7 +466,7 @@ const ModernOverdriveSection: React.FC = () => {
             }}
           />
 
-          {/* 4. Solution title */}
+          {/* 5. Solution title */}
           <MotionTypography
             variant="h4"
             initial={{ opacity: 0, y: 20 }}
@@ -303,7 +496,7 @@ const ModernOverdriveSection: React.FC = () => {
             </Box>
           </MotionTypography>
 
-          {/* 5A. Desktop layout – 4 in a row with 3 connectors */}
+          {/* 6A. Desktop layout – 4 in a row with 3 connectors */}
           <Stack
             direction="row"
             spacing={0}
@@ -349,7 +542,7 @@ const ModernOverdriveSection: React.FC = () => {
             })}
           </Stack>
 
-          {/* 5B. Mobile layout – 2×2 grid, connectors between 1–2 and 3–4 */}
+          {/* 6B. Mobile layout – 2×2 grid, connectors between 1–2 and 3–4 */}
           <Stack
             spacing={4}
             sx={{
@@ -384,7 +577,6 @@ const ModernOverdriveSection: React.FC = () => {
 
                     {rightPillar && (
                       <>
-                        {/* horizontal connector between the two cards */}
                         <MotionBox
                           initial={{ scaleX: 0, opacity: 0 }}
                           whileInView={{ scaleX: 1, opacity: 1 }}
@@ -402,7 +594,10 @@ const ModernOverdriveSection: React.FC = () => {
                             flexShrink: 0,
                           }}
                         />
-                        <PillarCard pillar={rightPillar} delay={rightDelay} />
+                        <PillarCard
+                          pillar={rightPillar}
+                          delay={rightDelay}
+                        />
                       </>
                     )}
                   </Stack>
