@@ -60,6 +60,7 @@ const FullSeenaAssessmentSection: FC = () => {
               fontSize: { xs: 32, md: 46 },
               fontWeight: 500,
               lineHeight: 1.1,
+              color: "#1F1306",
             }}
           >
             Full Seena Assessment
@@ -105,6 +106,7 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
+                    color: "#1F1306",
                   }}
                 >
                   Comprehensive Coverage
@@ -143,7 +145,7 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
-                    color: theme.palette.text.primary,
+                    color: "#1F1306",
                   }}
                 >
                   30–45 Minutes
@@ -182,7 +184,7 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
-                    color: theme.palette.text.primary,
+                    color: "#1F1306",
                   }}
                 >
                   Personalized Insights

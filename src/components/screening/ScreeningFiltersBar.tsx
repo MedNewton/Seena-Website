@@ -1,3 +1,4 @@
+// src/components/screening/ScreeningFiltersBar.tsx
 "use client";
 
 import type { FC } from "react";
@@ -7,88 +8,113 @@ import {
   TextField,
   InputAdornment,
   Typography,
-  Button,
   Chip,
   IconButton,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
-import PlaceOutlinedIcon from "@mui/icons-material/PlaceOutlined";
 import TuneOutlinedIcon from "@mui/icons-material/TuneOutlined";
 
-const TAGS = ["Stress", "Mindfulness", "Sleep", "Physical", "Community"];
+const TAGS = [
+  "For you",
+  "Psychological & emotional",
+  "Physical health",
+  "Cognitive & behavioral",
+  "Social & relational",
+  "Work & purpose",
+  "Lifestyle & environment",
+  "Life meaning & growth",
+];
 
 const ScreeningFiltersBar: FC = () => {
   return (
     <Stack spacing={2.5}>
-      {/* Search + controls row */}
+      {/* Search row */}
+      <TextField
+        fullWidth
+        variant="outlined"
+        placeholder="SEARCH SCREENING TOOLS"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon sx={{ fontSize: 22, color: "#9CA3AF" }} />
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 999,
+            backgroundColor: "#FFFFFF",
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#E5E7EB",
+              borderWidth: 1,
+            },
+            "&:hover .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#CBD5E1",
+            },
+            "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#0F172A",
+            },
+          },
+          "& .MuiInputBase-input": {
+            paddingY: 1.8,
+            fontSize: 15,
+            color: "#111827",
+          },
+          "& .MuiInputBase-input::placeholder": {
+            textTransform: "uppercase",
+            letterSpacing: 1.6,
+            fontSize: 13,
+            color: "#9CA3AF",
+            opacity: 1,
+          },
+        }}
+      />
+
+      {/* Tags + Sort row */}
       <Stack
         direction="row"
-        spacing={2}
-        alignItems="center"
+        alignItems="start"
+        spacing={1.5}
         sx={{
           width: "100%",
-          flexWrap: { xs: "wrap", md: "nowrap" },
+          flexWrap: "wrap",
         }}
       >
-        {/* Search */}
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Search by activity"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon
-                  sx={{ fontSize: 20, color: "rgba(248,250,252,0.9)" }}
-                />
-              </InputAdornment>
-            ),
-          }}
+        {/* Tags */}
+        <Box
           sx={{
-            maxWidth: "100%",
-            "& .MuiOutlinedInput-root": {
-              borderRadius: 999,
-              fontSize: 14,
-              paddingRight: 1.5,
-              backgroundColor: "rgba(15,23,42,0.45)",
-              border: "1px solid rgba(148,163,184,0.6)",
-              color: "#E5E7EB",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              "& fieldset": { border: "none" },
-            },
-            "& .MuiInputBase-input": {
-              paddingY: 1.4,
-            },
-          }}
-        />
-
-        {/* Location */}
-        <Button
-          variant="outlined"
-          startIcon={<PlaceOutlinedIcon sx={{ fontSize: 18 }} />}
-          sx={{
-            borderRadius: 999,
-            whiteSpace: "nowrap",
-            px: 2.8,
-            py: 1.1,
-            fontSize: 12,
-            textTransform: "uppercase",
-            letterSpacing: 0.9,
-            color: "#E5E7EB",
-            borderColor: "rgba(148,163,184,0.7)",
-            backgroundColor: "rgba(15,23,42,0.4)",
-            backdropFilter: "blur(18px)",
-            WebkitBackdropFilter: "blur(18px)",
-            flexShrink: 0,
-            "&:hover": {
-              borderColor: "rgba(191,219,254,0.95)",
-              backgroundColor: "rgba(15,23,42,0.6)",
-            },
+            display: "flex",
+            flexWrap: "wrap",
+            gap: 1,
+            flex: 1,
+            pr: 2,
           }}
         >
-          Location
-        </Button>
+          {TAGS.map((tag) => (
+            <Chip
+              key={tag}
+              label={tag}
+              clickable
+              sx={{
+                borderRadius: 999,
+                backgroundColor: "#FFFFFF",
+                border: "1px solid #E5E7EB",
+                boxShadow: "0 1px 3px rgba(15,23,42,0.04)",
+                color: "#111827",
+                "& .MuiChip-label": {
+                  px: 2.4,
+                  py: 1,
+                  fontSize: 13,
+                  fontWeight: 500,
+                },
+                "&:hover": {
+                  borderColor: "#0F172A",
+                  backgroundColor: "#F9FAFB",
+                },
+              }}
+            />
+          ))}
+        </Box>
 
         {/* Sort */}
         <Stack
@@ -96,16 +122,14 @@ const ScreeningFiltersBar: FC = () => {
           spacing={0.75}
           alignItems="center"
           sx={{
-            display: { xs: "none", sm: "flex" },
+            ml: "auto",
             flexShrink: 0,
           }}
         >
           <Typography
             sx={{
-              fontSize: 12,
-              textTransform: "uppercase",
-              letterSpacing: 0.7,
-              color: "rgba(209,213,219,0.85)",
+              fontSize: 14,
+              color: "#111827",
             }}
           >
             Sort
@@ -114,48 +138,17 @@ const ScreeningFiltersBar: FC = () => {
             size="small"
             sx={{
               borderRadius: 999,
-              border: "1px solid rgba(148,163,184,0.7)",
-              backgroundColor: "rgba(15,23,42,0.4)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
+              border: "1px solid #E5E7EB",
+              backgroundColor: "#FFFFFF",
+              boxShadow: "0 1px 2px rgba(15,23,42,0.06)",
               "&:hover": {
-                backgroundColor: "rgba(15,23,42,0.65)",
+                backgroundColor: "#F3F4F6",
               },
             }}
           >
-            <TuneOutlinedIcon sx={{ fontSize: 18, color: "#E5E7EB" }} />
+            <TuneOutlinedIcon sx={{ fontSize: 20, color: "#111827" }} />
           </IconButton>
         </Stack>
-      </Stack>
-
-      {/* Tags row */}
-      <Stack direction="row" spacing={1} flexWrap="wrap">
-        {TAGS.map((tag) => (
-          <Chip
-            key={tag}
-            label={tag}
-            clickable
-            sx={{
-              borderRadius: 999,
-              fontSize: 12,
-              textTransform: "uppercase",
-              letterSpacing: 0.7,
-              color: "rgba(226,232,240,0.98)",
-              backgroundColor: "rgba(15,23,42,0.35)",
-              border: "1px solid rgba(148,163,184,0.7)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
-              "& .MuiChip-label": {
-                px: 1.8,
-                py: 0.7,
-              },
-              "&:hover": {
-                backgroundColor: "rgba(56,189,248,0.35)",
-                borderColor: "rgba(191,219,254,1)",
-              },
-            }}
-          />
-        ))}
       </Stack>
     </Stack>
   );

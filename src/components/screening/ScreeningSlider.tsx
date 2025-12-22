@@ -1,3 +1,4 @@
+// src/components/screening/ScreeningSlider.tsx
 "use client";
 
 import type { FC } from "react";
@@ -6,13 +7,14 @@ import { Box, Stack, Typography, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import type { StaticImageData } from "next/image";
 import ScreeningActivityCard from "./ScreeningActivityCard";
 
 export type ScreeningActivity = {
   id: string;
   title: string;
-  image: StaticImageData;
+  description: string;
+  durationMinutes: number;
+  questionsCount: number;
 };
 
 export type ScreeningSectionConfig = {
@@ -45,37 +47,73 @@ const ScreeningSectionSlider: FC<ScreeningSectionSliderProps> = ({
   };
 
   return (
-    <Stack spacing={1.5}>
-      {/* Section header */}
+    <Stack spacing={2.5}>
+      {/* Section header + arrows (like screenshot) */}
       <Stack
         direction="row"
         alignItems="center"
         justifyContent="space-between"
+        sx={{ gap: 2 }}
       >
         <Typography
           sx={{
             fontFamily: "var(--font-bricolage)",
-            fontSize: { xs: 16, md: 18 },
-            fontWeight: 400,
-            color: "#E5E7EB",
+            fontSize: { xs: 18, md: 20 },
+            fontWeight: 500,
+            color: "#111827",
           }}
         >
           {title}
         </Typography>
 
-        <Typography
-          sx={{
-            fontSize: 11,
-            textTransform: "uppercase",
-            letterSpacing: 0.8,
-            color: "rgba(156,163,175,0.9)",
-          }}
+        <Stack
+          direction="row"
+          spacing={1}
+          alignItems="center"
+          sx={{ display: { xs: "none", sm: "flex" } }}
         >
-          View all &gt;
-        </Typography>
+          <IconButton
+            aria-label="Scroll left"
+            onClick={handleScroll("left")}
+            size="small"
+            sx={{
+              width: 32,
+              height: 32,
+              borderRadius: "999px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 1px 3px rgba(15,23,42,0.12)",
+              color: "#111827",
+              "&:hover": {
+                backgroundColor: "#F3F4F6",
+              },
+            }}
+          >
+            <ChevronLeftRoundedIcon sx={{ fontSize: 18 }} />
+          </IconButton>
+          <IconButton
+            aria-label="Scroll right"
+            onClick={handleScroll("right")}
+            size="small"
+            sx={{
+              width: 32,
+              height: 32,
+              borderRadius: "999px",
+              backgroundColor: "#FFFFFF",
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 1px 3px rgba(15,23,42,0.12)",
+              color: "#111827",
+              "&:hover": {
+                backgroundColor: "#F3F4F6",
+              },
+            }}
+          >
+            <ChevronRightRoundedIcon sx={{ fontSize: 18 }} />
+          </IconButton>
+        </Stack>
       </Stack>
 
-      {/* Slider with overlay arrows */}
+      {/* Slider with horizontal scroll (4 cards visible on desktop) */}
       <MotionBox
         initial={{ opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -89,7 +127,6 @@ const ScreeningSectionSlider: FC<ScreeningSectionSliderProps> = ({
           width: "100%",
         }}
       >
-        {/* Scrollable track */}
         <Box
           ref={scrollRef}
           sx={{
@@ -119,60 +156,6 @@ const ScreeningSectionSlider: FC<ScreeningSectionSliderProps> = ({
             ))}
           </Stack>
         </Box>
-
-        {/* Left arrow */}
-        <IconButton
-          aria-label="Scroll left"
-          onClick={handleScroll("left")}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            left: { xs: 4, md: 8 },
-            transform: "translateY(-50%)",
-            width: 44,
-            height: 44,
-            borderRadius: "999px",
-            backgroundColor: "rgba(0,0,0,0.7)",
-            border: "1px solid rgba(148,163,184,0.85)",
-            boxShadow: "0 18px 40px rgba(15,23,42,0.85)",
-            color: "rgba(249,250,251,0.96)",
-            backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
-            display: { xs: "none", sm: "flex" },
-            "&:hover": {
-              backgroundColor: "rgba(0,0,0,0.8)",
-            },
-          }}
-        >
-          <ChevronLeftRoundedIcon sx={{ fontSize: 24 }} />
-        </IconButton>
-
-        {/* Right arrow */}
-        <IconButton
-          aria-label="Scroll right"
-          onClick={handleScroll("right")}
-          sx={{
-            position: "absolute",
-            top: "50%",
-            right: { xs: 4, md: 8 },
-            transform: "translateY(-50%)",
-            width: 44,
-            height: 44,
-            borderRadius: "999px",
-            backgroundColor: "rgba(0,0,0,0.7)",
-            border: "1px solid rgba(148,163,184,0.85)",
-            boxShadow: "0 18px 40px rgba(15,23,42,0.85)",
-            color: "rgba(249,250,251,0.96)",
-            backdropFilter: "blur(14px)",
-            WebkitBackdropFilter: "blur(14px)",
-            display: { xs: "none", sm: "flex" },
-            "&:hover": {
-              backgroundColor: "rgba(0,0,0,0.8)",
-            },
-          }}
-        >
-          <ChevronRightRoundedIcon sx={{ fontSize: 24 }} />
-        </IconButton>
       </MotionBox>
     </Stack>
   );

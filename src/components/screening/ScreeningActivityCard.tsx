@@ -1,9 +1,10 @@
-// src/components/experiences/ExperiencesActivityCard.tsx
+// src/components/screening/ScreeningActivityCard.tsx
 "use client";
 
 import type { FC } from "react";
-import { Box, Typography } from "@mui/material";
-import Image, { type StaticImageData } from "next/image";
+import { Box, Button, Stack, Typography } from "@mui/material";
+import AccessTimeOutlinedIcon from "@mui/icons-material/AccessTimeOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
 import { motion } from "framer-motion";
 import type { ScreeningActivity } from "./ScreeningSlider";
 
@@ -18,59 +19,94 @@ const ScreeningActivityCard: FC<ScreeningActivityCardProps> = ({
   activity,
   isHighlighted = false,
 }) => {
-  const { title, image } = activity as { title: string; image: StaticImageData };
+  const { title, description, durationMinutes, questionsCount } = activity;
 
   return (
     <MotionBox
-      whileHover={{ y: -4, scale: 1.02 }}
-      transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, scale: 1.01 }}
+      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",
         borderRadius: 3,
         overflow: "hidden",
         cursor: "pointer",
         flexShrink: 0,
-        // Bigger cards
-        width: { xs: 220, md: 260, lg: 280 },
-        height: { xs: 140, md: 170, lg: 190 },
-        backgroundColor: "#020617",
+        width: { xs: 260, md: 280 },
+        minHeight: 220,
+        backgroundColor: "#FFFFFF",
+        border: "1px solid #E5E7EB",
+        display: "flex",
+        flexDirection: "column",
+        px: 2.5,
+        pt: 2.25,
+        pb: 2.1,
       }}
     >
-      {/* Background image */}
-      <Image
-        src={image}
-        alt={title}
-        fill
-        sizes="(max-width: 768px) 220px, 280px"
-        style={{ objectFit: "cover" }}
-      />
-
-      {/* Dark gradient overlay */}
-
-
-      {/* Bottom text */}
-      <Box
-        sx={{
-          position: "absolute",
-          left: 12,
-          right: 12,
-          bottom: 10,
-          display: "flex",
-          flexDirection: "column",
-          gap: 0.5,
-        }}
-      >
+      {/* Title + description */}
+      <Box sx={{ mb: 2.5 }}>
         <Typography
           sx={{
-            fontSize: 11,
-            fontWeight: 400,
-            letterSpacing: 0.3,
-            textTransform: "uppercase",
-            color: "rgba(249,250,251,0.85)",
+            fontSize: 15,
+            fontWeight: 600,
+            color: "#111827",
+            mb: 0.75,
           }}
         >
           {title}
         </Typography>
+        <Typography
+          sx={{
+            fontSize: 12,
+            lineHeight: 1.5,
+            color: "#6B7280",
+          }}
+        >
+          {description}
+        </Typography>
+      </Box>
+
+      {/* Meta row */}
+      <Stack
+        direction="row"
+        spacing={2}
+        alignItems="center"
+        sx={{ mb: 2.25, color: "#4B5563" }}
+      >
+        <Stack direction="row" spacing={0.75} alignItems="center">
+          <AccessTimeOutlinedIcon sx={{ fontSize: 16 }} />
+          <Typography sx={{ fontSize: 11.5 }}>
+            {durationMinutes} min
+          </Typography>
+        </Stack>
+        <Stack direction="row" spacing={0.75} alignItems="center">
+          <DescriptionOutlinedIcon sx={{ fontSize: 16 }} />
+          <Typography sx={{ fontSize: 11.5 }}>
+            {questionsCount} questions
+          </Typography>
+        </Stack>
+      </Stack>
+
+      {/* CTA button pinned to bottom */}
+      <Box sx={{ mt: "auto" }}>
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            borderRadius: 999,
+            textTransform: "uppercase",
+            fontSize: 12,
+            fontWeight: 600,
+            letterSpacing: 1,
+            py: 1.1,
+            backgroundColor: "#000000",
+            color: "#FFFFFF",
+            "&:hover": {
+              backgroundColor: "#111827",
+            },
+          }}
+        >
+          Start screening
+        </Button>
       </Box>
     </MotionBox>
   );
