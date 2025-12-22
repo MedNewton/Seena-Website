@@ -1,7 +1,7 @@
 // src/components/layout/Footer.tsx
 "use client";
 
-import React from "react";
+import React, { type ReactElement } from "react";
 import {
   Box,
   Stack,
@@ -11,10 +11,12 @@ import {
 import NextLink from "next/link";
 import { motion } from "framer-motion";
 import MoveHealGrow from "@/components/home/moveHealGrow";
+import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 
 type SimpleLink = {
   label: string;
   href: string;
+  icon?: ReactElement;
 };
 
 type FooterProps = {
@@ -38,9 +40,9 @@ const morePagesLinks: SimpleLink[] = [
 ];
 
 const socialLinks: SimpleLink[] = [
-  { label: "Facebook", href: "https://facebook.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "TikTok", href: "https://www.tiktok.com" },
+  { label: "Facebook", href: "https://facebook.com", icon: <FaFacebookF /> },
+  { label: "Instagram", href: "https://instagram.com", icon: <FaInstagram /> },
+  { label: "TikTok", href: "https://www.tiktok.com", icon: <FaTiktok /> },
 ];
 
 const MotionCard = motion.create(Box);
@@ -323,9 +325,13 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                               fontSize: 14,
                               color: "rgba(255,255,255,0.9)",
                               "&:hover": { color: "#FFFFFF" },
+                              display: "flex",
+                              flexDirection: "row",
+                              alignItems: "center",
+                              gap: 1,
                             }}
                           >
-                            {link.label}
+                            {link.icon} {link.label}
                           </MuiLink>
                         ))}
                       </Stack>
