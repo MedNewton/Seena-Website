@@ -89,14 +89,37 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                 backgroundImage: "none",
               }
             : {
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-                backgroundRepeat: "repeat",
-                backgroundImage:
-                  'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%23D77A1E%22 d=%22M-500-500h2000v2000H-500z%22%2F%3E%3Cpath d=%22m67.896-418.794-727 330 67 474 785-119%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22M480-183 206 105l520 527 291-693%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22m329.94 1003.18-785 28 427 989 543-236%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1158.299-460.12-435 760 143 129 699-791%22 fill=%22%231f1306%22%2F%3E%3Cpath d=%22m1009.836 770.776-518 107 69 767 851-678%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22m1473.463 695.254-811 819 589 60 301-132%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-91%22 y=%22-91%22 width=%221182%22 height=%221182%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%2291%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+                // base dark tone under the animated mesh
+                backgroundColor: "#1F1306",
               }),
         }}
       >
+        {/* Animated mesh gradient background (only when not transparent) */}
+        {!transparentFooter && (
+          <motion.div
+            style={{
+              position: "absolute",
+              inset: "-20%",
+              backgroundImage:
+                'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%23D77A1E%22 d=%22M-500-500h2000v2000H-500z%22%2F%3E%3Cpath d=%22m67.896-418.794-727 330 67 474 785-119%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22M480-183 206 105l520 527 291-693%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22m329.94 1003.18-785 28 427 989 543-236%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1158.299-460.12-435 760 143 129 699-791%22 fill=%22%231f1306%22%2F%3E%3Cpath d=%22m1009.836 770.776-518 107 69 767 851-678%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22m1473.463 695.254-811 819 589 60 301-132%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-91%22 y=%22-91%22 width=%221182%22 height=%221182%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%2291%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+            animate={{
+              scale: [1, 1.2, 1],
+              x: ["-4%", "4%", "-4%"],
+              y: ["-3%", "3%", "-3%"],
+            }}
+            transition={{
+              duration: 10,
+              ease: "easeInOut",
+              repeat: Infinity,
+            }}
+          />
+        )}
+
         {/* Content wrapper (above the big word) */}
         <Box
           sx={{
@@ -347,7 +370,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         <MotionTypography
           aria-hidden="true"
           initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}  // <-- animate on mount instead of whileInView
+          animate={{ opacity: 1, y: 0 }}
           transition={{
             duration: 0.7,
             ease: [0.22, 1, 0.36, 1],

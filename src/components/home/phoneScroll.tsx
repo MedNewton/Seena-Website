@@ -213,7 +213,7 @@ const PhoneScroll: React.FC = () => {
               pointerEvents: "none",
             }}
             animate={{
-              scale: [1, 2, 1],
+              scale: [1, 1.8, 1],
               x: ["-4%", "4%", "-4%"],
               y: ["-3%", "3%", "-3%"],
             }}
