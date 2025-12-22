@@ -10,6 +10,7 @@ import {
   Link as MuiLink,
   IconButton,
   Divider,
+  ClickAwayListener,
 } from "@mui/material";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -36,68 +37,64 @@ const navItems: NavItem[] = [
   { label: "ABOUT", href: "/about" },
 ];
 
-const HEADER_OFFSET = 96; // px offset so section isn't hidden under header
-
-// Framer Motion v11+
+const HEADER_OFFSET = 96;
 const MotionBox = motion.create(Box);
-
 const GOLD = "#D8A24B";
 
 const Header: React.FC = () => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
 
   const handleNavClick =
     (href: string) =>
-      (event: React.MouseEvent<HTMLAnchorElement>): void => {
-        if (!href.startsWith("#")) {
-          // normal navigation for real routes
-          return;
-        }
+    (event: React.MouseEvent<HTMLAnchorElement>): void => {
+      if (!href.startsWith("#")) {
+        // normal navigation
+        return;
+      }
 
-        event.preventDefault();
+      event.preventDefault();
 
+      const targetId = href.slice(1);
+      const element = document.getElementById(targetId);
+      if (!element) return;
+
+      const rect = element.getBoundingClientRect();
+      const elementTop = rect.top + window.scrollY;
+      const targetScrollTop = elementTop - HEADER_OFFSET;
+
+      window.scrollTo({
+        top: targetScrollTop,
+        behavior: "smooth",
+      });
+    };
+
+  const handleMobileNavClick =
+    (href: string) =>
+    (
+      event: React.MouseEvent<HTMLDivElement | HTMLSpanElement>
+    ): void => {
+      event.preventDefault();
+      setMobileMenuOpen(false);
+
+      if (href.startsWith("#")) {
         const targetId = href.slice(1);
         const element = document.getElementById(targetId);
-        if (!element) {
-          return;
-        }
+        if (!element) return;
 
-        const elementRect = element.getBoundingClientRect();
-        const elementTop = elementRect.top + window.scrollY;
+        const rect = element.getBoundingClientRect();
+        const elementTop = rect.top + window.scrollY;
         const targetScrollTop = elementTop - HEADER_OFFSET;
 
         window.scrollTo({
           top: targetScrollTop,
           behavior: "smooth",
         });
-      };
-
-  const handleMobileNavClick =
-    (href: string) =>
-      (event: React.MouseEvent<HTMLDivElement | HTMLSpanElement>) => {
-        event.preventDefault();
-        setMobileMenuOpen(false);
-
-        if (href.startsWith("#")) {
-          const targetId = href.slice(1);
-          const element = document.getElementById(targetId);
-          if (!element) {
-            return;
-          }
-
-          const elementRect = element.getBoundingClientRect();
-          const elementTop = elementRect.top + window.scrollY;
-          const targetScrollTop = elementTop - HEADER_OFFSET;
-
-          window.scrollTo({
-            top: targetScrollTop,
-            behavior: "smooth",
-          });
-        } else {
-          router.push(href);
-        }
-      };
+      } else {
+        router.push(href);
+      }
+    };
 
   return (
     <>
@@ -122,7 +119,7 @@ const Header: React.FC = () => {
           transition={{
             duration: 0.6,
             ease: "easeOut",
-            delay: 0.2, // delay after page load
+            delay: 0.2,
           }}
           sx={(theme) => ({
             position: "relative",
@@ -133,7 +130,7 @@ const Header: React.FC = () => {
             pl: 2,
             pr: 1,
             py: 1,
-            overflow: "hidden",
+            overflow: "visible", // allow dropdown to render outside
             background: {
               xs: "unset",
               md: "linear-gradient(120deg, rgba(15,23,42,0.88), rgba(15,23,42,0.7))",
@@ -177,51 +174,173 @@ const Header: React.FC = () => {
               alignItems: "center",
               flex: 1,
               justifyContent: "center",
-              pt: 0.5,
               display: { xs: "none", md: "flex" },
             }}
           >
-            {navItems.map((item) => (
-              <Typography
-                key={item.href}
-                component={Link}
-                href={item.href}
-                onClick={handleNavClick(item.href)}
-                sx={(theme) => ({
-                  position: "relative",
-                  textDecoration: "none",
-                  fontSize: 14,
-                  letterSpacing: 1.8,
-                  fontWeight: 500,
-                  textTransform: "uppercase",
-                  fontFamily: "var(--font-montserrat)",
-                  color: "rgba(248,250,252,0.85)",
-                  pb: 0.5,
-                  transition: "color 160ms ease-out",
-                  "&::after": {
-                    content: '""',
-                    position: "absolute",
-                    left: 0,
-                    bottom: 0,
-                    width: "100%",
-                    height: 2,
-                    borderRadius: 999,
-                    backgroundColor: GOLD,
-                    transform: "scaleX(0)",
-                    transformOrigin: "left",
-                    transition: "transform 190ms ease-out",
-                  },
-                  "&:hover": {
-                    color: theme.palette.common.white,
-                  },
-                  "&:hover::after": {
-                    transform: "scaleX(1)",
-                  },
-                })}
-              >
-                {item.label}
-              </Typography>
-            ))}
+            {navItems.map((item) => {
+              const isAbout = item.label === "ABOUT";
+
+              if (!isAbout) {
+                return (
+                  <Typography
+                    key={item.href}
+                    component={Link}
+                    href={item.href}
+                    onClick={handleNavClick(item.href)}
+                    sx={(theme) => ({
+                      position: "relative",
+                      textDecoration: "none",
+                      fontSize: 14,
+                      letterSpacing: 1.8,
+                      fontWeight: 500,
+                      textTransform: "uppercase",
+                      fontFamily: "var(--font-montserrat)",
+                      color: "rgba(248,250,252,0.85)",
+                      pb: 0.5,
+                      "&::after": {
+                        content: '""',
+                        position: "absolute",
+                        left: 0,
+                        bottom: 0,
+                        width: "100%",
+                        height: 2,
+                        borderRadius: 999,
+                        backgroundColor: GOLD,
+                        transform: "scaleX(0)",
+                        transformOrigin: "left",
+                        transition: "transform 190ms ease-out",
+                      },
+                      "&:hover": {
+                        color: theme.palette.common.white,
+                      },
+                      "&:hover::after": {
+                        transform: "scaleX(1)",
+                      },
+                    })}
+                  >
+                    {item.label}
+                  </Typography>
+                );
+              }
+
+              // ABOUT with click-open dropdown
+              return (
+                <ClickAwayListener
+                  key={item.href}
+                  onClickAway={() => setAboutOpen(false)}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography
+                      component="span"
+                      onClick={() => setAboutOpen((prev) => !prev)}
+                      sx={(theme) => ({
+                        position: "relative",
+                        textDecoration: "none",
+                        fontSize: 14,
+                        letterSpacing: 1.8,
+                        fontWeight: 500,
+                        textTransform: "uppercase",
+                        fontFamily: "var(--font-montserrat)",
+                        color: "rgba(248,250,252,0.85)",
+                        pb: 0.5,
+                        cursor: "pointer",
+                        "&::after": {
+                          content: '""',
+                          position: "absolute",
+                          left: 0,
+                          bottom: 0,
+                          width: "100%",
+                          height: 2,
+                          borderRadius: 999,
+                          backgroundColor: GOLD,
+                          transform: "scaleX(0)",
+                          transformOrigin: "left",
+                          transition: "transform 190ms ease-out",
+                        },
+                        "&:hover": {
+                          color: theme.palette.common.white,
+                        },
+                        "&:hover::after": {
+                        transform: "scaleX(1)",
+                      },
+                      })}
+                    >
+                      {item.label}
+                    </Typography>
+
+                    {aboutOpen && (
+                      <Box
+                        sx={{
+                          position: "absolute",
+                          top: "calc(100% + 10px)",
+                          left: "50%",
+                          transform: "translateX(-50%)",
+                          zIndex: 10,
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "flex-start",
+                          gap: 1.25,
+                          px: 2.5,
+                          py: 2,
+                          borderRadius: 4,
+                          minWidth: 180,
+                          background:
+                            "linear-gradient(120deg, rgba(15,23,42,0.98), rgba(15,23,42,0.9))",
+                          border: "1px solid rgba(148,163,184,0.6)",
+                          boxShadow: "0 18px 45px rgba(0,0,0,0.65)",
+                          
+                        }}
+                      >
+                        <MuiLink
+                          component={Link}
+                          href="/about"
+                          underline="none"
+                          onClick={() => setAboutOpen(false)}
+                          sx={{
+                            fontFamily: "var(--font-montserrat)",
+                            fontSize: 12,
+                            textTransform: "uppercase",
+                            letterSpacing: 1.4,
+                            color: "rgba(248,250,252,0.95)",
+                          }}
+                        >
+                          About Seena
+                        </MuiLink>
+
+                        <Divider
+                          sx={{
+                            alignSelf: "stretch",
+                            borderColor: "rgba(148,163,184,0.6)",
+                          }}
+                        />
+
+                        <MuiLink
+                          component={Link}
+                          href="/blog"
+                          underline="none"
+                          onClick={() => setAboutOpen(false)}
+                          sx={{
+                            fontFamily: "var(--font-montserrat)",
+                            fontSize: 12,
+                            textTransform: "uppercase",
+                            letterSpacing: 1.4,
+                            color: "rgba(248,250,252,0.95)",
+                          }}
+                        >
+                          Blog
+                        </MuiLink>
+                      </Box>
+                    )}
+                  </Box>
+                </ClickAwayListener>
+              );
+            })}
           </Stack>
 
           {/* Right: CTA (desktop only) */}
@@ -264,7 +383,7 @@ const Header: React.FC = () => {
               flexDirection: "column",
             }}
           >
-            {/* Gradient + blur background */}
+            {/* Background */}
             <Box
               sx={{
                 position: "absolute",
@@ -351,6 +470,24 @@ const Header: React.FC = () => {
                   )}
                 </React.Fragment>
               ))}
+
+              {/* Extra Blog link for mobile */}
+              <Typography
+                component="span"
+                onClick={handleMobileNavClick("/blog")}
+                sx={{
+                  mt: 1,
+                  fontFamily: "var(--font-montserrat)",
+                  textTransform: "uppercase",
+                  letterSpacing: 2,
+                  fontSize: 18,
+                  fontWeight: 500,
+                  color: "rgba(248,250,252,0.92)",
+                  cursor: "pointer",
+                }}
+              >
+                Blog
+              </Typography>
             </Stack>
 
             {/* Bottom social icons */}
