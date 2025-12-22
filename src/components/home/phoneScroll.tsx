@@ -66,7 +66,7 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     />
     <Typography
       sx={{
-        fontSize: {xs:28, md: 20},
+        fontSize: { xs: 28, md: 20 },
         fontWeight: 600,
         color: "#D8A24B",
       }}
@@ -86,6 +86,9 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     </Typography>
   </Stack>
 );
+
+// animated wrapper for the card
+const MotionBackgroundBox = motion.create(Box);
 
 const PhoneScroll: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
@@ -174,16 +177,18 @@ const PhoneScroll: React.FC = () => {
             fontSize: { xs: 32, md: 64 },
             fontWeight: 600,
             mb: { xs: 4, md: 6 },
-            px: {xs: 2, md: 4},
+            px: { xs: 2, md: 4 },
             pt: 2,
             lineHeight: 1.1,
           }}
         >
-          So your <span style={{ color: "#D8A24B" }}>health</span> doesn&apos;t feel like <span style={{ color: "#D8A24B" }}>another thing</span> to manage
+          So your <span style={{ color: "#D8A24B" }}>health</span> doesn&apos;t
+          feel like <span style={{ color: "#D8A24B" }}>another thing</span> to
+          manage
         </Typography>
 
-        {/* Card with mesh gradient */}
-        <Box
+        {/* Card with animated mesh gradient */}
+        <MotionBackgroundBox
           sx={{
             position: "relative",
             width: "100%",
@@ -192,13 +197,34 @@ const PhoneScroll: React.FC = () => {
             borderRadius: 6,
             overflow: "hidden",
             minHeight: { xs: 420, md: 580 },
-            backgroundSize: "cover",
-            backgroundPosition: "center center",
-            backgroundRepeat: "repeat",
-            backgroundImage:
-              'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%2311233d%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m1716.928 545.21-616 409 353 762 838-859%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m1829.24 4.365-101 448 575 510 429-349%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m396.575-424.497-269 258 1073 937 211-909%22 fill=%22%2311233d%22%2F%3E%3Cpath d=%22m1596.251 654.479-659 893 702 90 432-752%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m1205.719 384.838-1194 1088 190 61 1105-347%22 fill=%22%2311233d%22%2F%3E%3Cpath d=%22m1084 830-39 162 1169 1292 318-1361%22 fill=%22%230f2027%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+            backgroundColor: "#020617", // dark base under the mesh
           }}
         >
+          {/* animated mesh layer */}
+          <motion.div
+            style={{
+              position: "absolute",
+              inset: "-20%",
+              backgroundImage:
+                'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%224000%22 height=%222000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%2309172B%22 d=%22M-2000-1000h8000v4000h-8000z%22%2F%3E%3Cpath d=%22m-119.743-404.772-527 242 1720 2068 492-1110%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22m344.665-298.479-820 972 1794 1652 730-2175%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22m3864.689 1610.976-1805 855 283 984 1864-247%22 fill=%22%23256D85%22%2F%3E%3Cpath d=%22m-228.947-1426.92-1617 1864 2246 644 73-765%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m3984.701 800.995-1313 911 889 1989 2051-786%22 fill=%22%23256D85%22%2F%3E%3Cpath d=%22m2208.599 1082.575-354 2438 2373 276 156-1836%22 fill=%22%2309172B%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-400%22 y=%22-400%22 width=%224800%22 height=%222800%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22400%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              filter: "blur(0px)",
+              pointerEvents: "none",
+            }}
+            animate={{
+              scale: [1, 2, 1],
+              x: ["-4%", "4%", "-4%"],
+              y: ["-3%", "3%", "-3%"],
+            }}
+            transition={{
+              duration: 10,
+              ease: "easeInOut",
+              repeat: Infinity,
+            }}
+          />
+
+          {/* CONTENT LAYER (unchanged) */}
           <Box
             sx={{
               position: "relative",
@@ -341,7 +367,7 @@ const PhoneScroll: React.FC = () => {
               </Typography>
             </Stack>
           </Box>
-        </Box>
+        </MotionBackgroundBox>
       </Box>
     </Box>
   );
