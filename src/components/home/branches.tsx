@@ -41,7 +41,7 @@ const BranchCard: React.FC<BranchCardProps> = ({
         borderRadius: 4,
         overflow: "hidden",
         minHeight: isTall
-          ? { xs: 320, md: 380 }
+          ? { xs: 320, md: 440 }
           : { xs: 320, md: 340 },
         color: "#FFFFFF",
         display: "flex",
@@ -314,6 +314,7 @@ const Branches: React.FC = () => {
             title="Seena Summit Club"
             description="Exclusive invite-only events that bring together dynamic business leaders, innovators, and influencers in the wellness space"
             image={dinnerImg}
+            isTall
             href="/dinner-club"
           />
         </MotionBox>
