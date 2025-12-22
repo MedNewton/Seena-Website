@@ -191,7 +191,6 @@ const MoveHealGrow: React.FC = () => {
             width: "100%",
             height: "auto",
             display: "block",
-            borderRadius: 32,
           }}
           priority={false}
         />

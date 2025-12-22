@@ -212,7 +212,7 @@ const Hero: React.FC = () => {
 
           <Stack
             direction="row"
-            spacing={{ xs: 1.5, md: 32 }}
+            spacing={{ xs: 1.5, md: 24 }}
             pt={4}
             alignItems="baseline"
             justifyContent="center"
@@ -227,9 +227,9 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 36 },
+                fontSize: { xs: 36, md: 24 },
                 lineHeight: 1,
-                fontWeight: 400,
+                fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
               }}
             >
@@ -245,9 +245,9 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 36 },
+                fontSize: { xs: 36, md: 24 },
                 lineHeight: 1,
-                fontWeight: 400,
+                fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
               }}
             >
@@ -264,9 +264,9 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 36 },
+                fontSize: { xs: 36, md: 24 },
                 lineHeight: 1,
-                fontWeight: 400,
+                fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
               }}
             >
@@ -279,7 +279,7 @@ const Hero: React.FC = () => {
             direction="row"
             width="100%"
             spacing={{ xs: 2.5, md: 20 }}
-            px={32}
+            px={46}
             alignItems="center"
             justifyContent="space-between"
             sx={{
