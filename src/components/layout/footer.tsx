@@ -123,7 +123,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         {/* Content wrapper (above the big word) */}
         <Box
           sx={{
-            px: { xs: 3, md: 4 },
+            px: { xs: 0, md: 4 },
             mb: { xs: 16, md: 20 },
             position: "relative",
             zIndex: 1,
@@ -135,6 +135,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             sx={{
               position: "relative",
               mt: { xs: 6, md: 8 },
+              px: { xs: 3, md: 0 },
             }}
           >
             <Box

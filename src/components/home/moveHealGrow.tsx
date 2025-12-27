@@ -22,12 +22,11 @@ const MoveHealGrow: React.FC = () => {
       component="section"
       sx={{
         width: "100%",
-        maxWidth: 1280,
+        maxWidth: { xs: "100%", md: 1280 },
         mx: "auto",
-        pb: { xs: 6, md: 0 },
-        px: { xs: 2, md: 0 },
+        pb: { xs: 2, md: 0 },
+        px: { xs: 0, md: 0 },
         textAlign: "center",
-        backgroundColor: "transparent",
       }}
     >
       {/* Small label above image */}
@@ -50,6 +49,7 @@ const MoveHealGrow: React.FC = () => {
           fontSize: { xs: 24, md: 48 },
           fontWeight: 500,
           mb: { xs: 1.5, md: 6 },
+          px: { xs: 3, md: 0 },
           color: "#FFFFFF",
         }}
       >
@@ -64,6 +64,7 @@ const MoveHealGrow: React.FC = () => {
         alignItems="center"
         sx={{
           transform: { xs: "none", md: "translateY(-2vh)" },
+          px: { xs: 3, md: 0 },
         }}
       >
         <Typography
@@ -182,6 +183,7 @@ const MoveHealGrow: React.FC = () => {
           mx: "auto",
           mb: { xs: 4, md: 5 },
           mt: { xs: 4, md: 5 },
+          px: { xs: 2, md: 0 },
         }}
       >
         <Image
