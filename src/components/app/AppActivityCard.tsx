@@ -32,7 +32,7 @@ const AppActivityCard: FC<AppActivityCardProps> = ({
         flexShrink: 0,
         // Bigger cards
         width: { xs: 220, md: 260, lg: 280 },
-        height: { xs: 140, md: 170, lg: 190 },
+        height: { xs: 200, md: 260, lg: 260 },
         backgroundColor: "#020617",
       }}
     >
