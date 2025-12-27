@@ -126,10 +126,7 @@ const DinnerClubPage: FC = () => {
         sx={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 1280,
           mx: "auto",
-          pt: { xs: 10, md: 14 },
-          px: { xs: 2, md: 3 },
           gap: { xs: 4, md: 6 },
         }}
       >
@@ -138,16 +135,25 @@ const DinnerClubPage: FC = () => {
           image={heroImg}
         />
 
-        <DinnerClubFeaturedEvent />
+        <Stack sx={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1280,
+          mx: "auto",
+          px: { xs: 2, md: 3 },
+          gap: { xs: 4, md: 6 },
+        }}>
+          <DinnerClubFeaturedEvent />
 
-        <DinnerClubFiltersBar />
+          <DinnerClubFiltersBar />
 
-        {DINNER_CLUB_SECTIONS.map((section) => (
-          <DinnerClubSectionSlider
-            key={section.id}
-            config={section}
-          />
-        ))}
+          {DINNER_CLUB_SECTIONS.map((section) => (
+            <DinnerClubSectionSlider
+              key={section.id}
+              config={section}
+            />
+          ))}
+        </Stack>
       </Stack>
       <Footer transparentFooter={true} />
     </Box>
