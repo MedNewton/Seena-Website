@@ -125,10 +125,7 @@ const SeenaLivePage: FC = () => {
         sx={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 1280,
           mx: "auto",
-          pt: { xs: 10, md: 14 },
-          px: { xs: 2, md: 3 },
           gap: { xs: 4, md: 6 },
         }}
       >
@@ -137,14 +134,23 @@ const SeenaLivePage: FC = () => {
           image={heroImg}
         />
 
-        <SeenaLiveFiltersBar />
+        <Stack sx={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1280,
+          mx: "auto",
+          px: { xs: 2, md: 3 },
+          gap: { xs: 4, md: 6 },
+        }}>
+          <SeenaLiveFiltersBar />
 
-        {EXPERIENCES_SECTIONS.map((section) => (
-          <SeenaLiveSectionSlider
-            key={section.id}
-            config={section}
-          />
-        ))}
+          {EXPERIENCES_SECTIONS.map((section) => (
+            <SeenaLiveSectionSlider
+              key={section.id}
+              config={section}
+            />
+          ))}
+        </Stack>
       </Stack>
       <Footer transparentFooter={true} />
     </Box>
