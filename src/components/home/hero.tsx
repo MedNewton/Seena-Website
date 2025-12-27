@@ -288,90 +288,116 @@ const Hero: React.FC = () => {
           >
             {/* DIGITAL – primary */}
             <MotionButton
-              onClick={() => router.push("/#app")}
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.55,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.9,
-              }}
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => router.push("/#app")}
               sx={{
-                borderRadius: 999,
-                minWidth: { xs: 190, md: 230 },
-                px: { xs: 4, md: 5.2 },
-                py: { xs: 1.6, md: 1.8 },
-                fontSize: { xs: 13.5, md: 18 },
-                letterSpacing: 2,
+                position: "relative",
+                overflow: "hidden",
+                alignSelf: "flex-start",
+                mt: 1,
+                borderRadius: 2,
+                minWidth: { xs: 160, md: 200 },
+                px: 0,
+                py: 1.6,
+                fontSize: { xs: 14, md: 18 },
+                fontWeight: 600,
+                letterSpacing: 1.4,
                 textTransform: "uppercase",
-                fontWeight: 700,
                 fontFamily: "var(--font-montserrat)",
-                background: "rgba(255, 255, 255, 0.2)",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                color: "#FFFFFF",
-                boxShadow: "0 22px 55px rgba(0,0,0,0.45)",
-                border: "solid 4px #996B41",
-                transition: "all 0.25s ease",
-                "&:hover": {
-                  color: "#111827",
+                color: "rgba(249,250,251,0.96)",
+                borderWidth: 1.5,
+                borderStyle: "solid",
+                borderColor: GOLD,
+                backgroundColor: "transparent",
+                boxShadow: "none",
+                zIndex: 0,
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  inset: 0,
                   backgroundColor: "#996B41",
                   backgroundImage:
                     "url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%235A3520%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m136-197-437 426 65 700L867 105%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22m278-71-82 1083 1354 368 17-1255%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22M1919 304 807 1000l881 357 285-883%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22m7 227-502 869 528 430 754-746%22 fill=%22%23895333%22%2F%3E%3Cpath d=%22m787 822-480 538 1055 741 76-583%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22M1214 806 970 1955l447 305 1050-411%22 fill=%22%23A06637%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E')",
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   backgroundRepeat: "no-repeat",
-                  boxShadow: "0 26px 70px rgba(0,0,0,0.55)",
+                  color: "#111827",
+                  borderRadius: 2,
+                  transform: "translateY(100%)",
+                  transformOrigin: "bottom center",
+                  transition:
+                    "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out",
+                  opacity: 0.95,
+                  zIndex: -1,
+                },
+                "&:hover::before": {
+                  transform: "translateY(0%)",
+                  opacity: 1,
+                },
+                "&:hover": {
+                  borderColor: "transparent",
+                  color: "#0B101B",
                 },
               }}
             >
-              Digital
+              DIGITAL
             </MotionButton>
 
             {/* PHYSICAL – secondary outline */}
             <MotionButton
-              onClick={() => router.push("/#experiences")}
-              initial={{ opacity: 0, y: 22 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.55,
-                ease: [0.22, 1, 0.36, 1],
-                delay: 0.9,
-              }}
-              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.97 }}
+              onClick={() => router.push("/#experiences")}
               sx={{
-                borderRadius: 999,
-                minWidth: { xs: 190, md: 230 },
-                px: { xs: 4, md: 5.2 },
-                py: { xs: 1.6, md: 1.8 },
-                fontSize: { xs: 13.5, md: 18 },
-                letterSpacing: 2,
+                position: "relative",
+                overflow: "hidden",
+                alignSelf: "flex-start",
+                mt: 1,
+                borderRadius: 2,
+                minWidth: { xs: 160, md: 200 },
+                px: 0,
+                py: 1.6,
+                fontSize: { xs: 14, md: 18 },
+                fontWeight: 600,
+                letterSpacing: 1.4,
                 textTransform: "uppercase",
-                fontWeight: 700,
                 fontFamily: "var(--font-montserrat)",
-                background: "rgba(255, 255, 255, 0.2)",
-                backdropFilter: "blur(5px)",
-                WebkitBackdropFilter: "blur(5px)",
-                color: "#FFFFFF",
-                boxShadow: "0 22px 55px rgba(0,0,0,0.45)",
-                border: "solid 4px #996B41",
-                transition: "all 0.25s ease",
-                "&:hover": {
-                  color: "#111827",
+                color: "rgba(249,250,251,0.96)",
+                borderWidth: 1.5,
+                borderStyle: "solid",
+                borderColor: GOLD,
+                backgroundColor: "transparent",
+                boxShadow: "none",
+                zIndex: 0,
+                "&::before": {
+                  content: '""',
+                  position: "absolute",
+                  inset: 0,
                   backgroundColor: "#996B41",
                   backgroundImage:
                     "url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%235A3520%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m136-197-437 426 65 700L867 105%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22m278-71-82 1083 1354 368 17-1255%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22M1919 304 807 1000l881 357 285-883%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22m7 227-502 869 528 430 754-746%22 fill=%22%23895333%22%2F%3E%3Cpath d=%22m787 822-480 538 1055 741 76-583%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22M1214 806 970 1955l447 305 1050-411%22 fill=%22%23A06637%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E')",
                   backgroundSize: "cover",
                   backgroundPosition: "center center",
                   backgroundRepeat: "no-repeat",
-                  boxShadow: "0 26px 70px rgba(0,0,0,0.55)",
+                  color: "#111827",
+                  borderRadius: 2,
+                  transform: "translateY(100%)",
+                  transformOrigin: "bottom center",
+                  transition:
+                    "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out",
+                  opacity: 0.95,
+                  zIndex: -1,
+                },
+                "&:hover::before": {
+                  transform: "translateY(0%)",
+                  opacity: 1,
+                },
+                "&:hover": {
+                  borderColor: "transparent",
+                  color: "#0B101B",
                 },
               }}
             >
-              Physical
+              PHYSICAL
             </MotionButton>
           </Stack>
         </Stack>

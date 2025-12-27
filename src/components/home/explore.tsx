@@ -38,7 +38,7 @@ const CARDS: ExploreCardConfig[] = [
 
 const MotionBox = motion.create(Box);
 const MotionTypography = motion.create(Typography);
-const MotionButton = motion.create(Button);
+const MotionButton = motion.create(Button); 
 
 const Explore: React.FC = () => {
   const router = useRouter();
