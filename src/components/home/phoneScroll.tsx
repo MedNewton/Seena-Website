@@ -53,6 +53,7 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
     sx={{
       textAlign: "center",
       color: "#FFFFFF",
+      width: "100%",
     }}
   >
     <Box
@@ -78,7 +79,7 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
         fontSize: 16,
         fontWeight: 300,
         lineHeight: 1.6,
-        maxWidth: 300,
+        maxWidth: 360,
         color: "rgba(249,250,251,0.9)",
       }}
     >
@@ -243,8 +244,8 @@ const PhoneScroll: React.FC = () => {
               },
               alignItems: "center",
               justifyContent: "center",
-              gap: { xs: 4, md: 6 },
-              px: { xs: 4, md: 8 },
+              gap: { xs: 4, md: 0 },
+              px: { xs: 4, md: 0 },
               pt: { xs: 5, md: 6 },
               pb: { xs: 5, md: 8 },
             }}
@@ -256,13 +257,13 @@ const PhoneScroll: React.FC = () => {
               justifyContent="center"
               sx={{ display: { xs: "none", md: "flex" } }}
             >
-              <motion.div style={{ opacity: f1Opacity, y: f1Y }}>
+              <motion.div style={{ opacity: f1Opacity, y: f1Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[0]?.title ?? ""}
                   description={FEATURES[0]?.description ?? ""}
                 />
               </motion.div>
-              <motion.div style={{ opacity: f2Opacity, y: f2Y }}>
+              <motion.div style={{ opacity: f2Opacity, y: f2Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[1]?.title ?? ""}
                   description={FEATURES[1]?.description ?? ""}
@@ -307,13 +308,13 @@ const PhoneScroll: React.FC = () => {
               justifyContent="center"
               sx={{ display: { xs: "none", md: "flex" } }}
             >
-              <motion.div style={{ opacity: f3Opacity, y: f3Y }}>
+              <motion.div style={{ opacity: f3Opacity, y: f3Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[2]?.title ?? ""}
                   description={FEATURES[2]?.description ?? ""}
                 />
               </motion.div>
-              <motion.div style={{ opacity: f4Opacity, y: f4Y }}>
+              <motion.div style={{ opacity: f4Opacity, y: f4Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[3]?.title ?? ""}
                   description={FEATURES[3]?.description ?? ""}
