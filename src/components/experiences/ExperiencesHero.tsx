@@ -15,7 +15,6 @@ const ExperiencesHero: FC<ExperiencesHeroProps> = ({ title, image }) => {
       sx={{
         position: "relative",
         width: "100%",
-        borderRadius: 6,
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
