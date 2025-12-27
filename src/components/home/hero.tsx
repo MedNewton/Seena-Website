@@ -127,7 +127,7 @@ const Hero: React.FC = () => {
           {/* Headline row */}
           <Stack
             direction="row"
-            spacing={{ xs: 1.5, md: 0 }}
+            spacing={{ xs: 4, md: 0 }}
             alignItems="baseline"
             justifyContent="center"
           >
@@ -145,7 +145,7 @@ const Hero: React.FC = () => {
                 lineHeight: 1,
                 fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
-                minWidth: { xs: 140, md: 460 },
+                minWidth: { xs: "unset", md: 460 },
               }}
             >
               Find
@@ -203,7 +203,7 @@ const Hero: React.FC = () => {
                 lineHeight: 1,
                 fontWeight: 500,
                 fontFamily: "var(--font-bricolage)",
-                minWidth: { xs: 140, md: 460 },
+                minWidth: { xs: "unset", md: 460 },
               }}
             >
               within
@@ -212,10 +212,14 @@ const Hero: React.FC = () => {
 
           <Stack
             direction="row"
-            spacing={{ xs: 1.5, md: 24 }}
-            pt={4}
+            spacing={{ xs: 8, md: 24 }}
+            pt={{ xs: 0, md: 4 }}
             alignItems="baseline"
             justifyContent="center"
+            sx={{
+              transform: { xs: "translateX(-2%)", md: "translateX(0)" },
+            }}
+            width="100%"
           >
             {/* Left word */}
             <MotionTypography
@@ -227,7 +231,7 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 24 },
+                fontSize: { xs: 20, md: 24 },
                 lineHeight: 1,
                 fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
@@ -245,7 +249,7 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 24 },
+                fontSize: { xs: 20, md: 24 },
                 lineHeight: 1,
                 fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
@@ -264,7 +268,7 @@ const Hero: React.FC = () => {
                 delay: 0.45,
               }}
               sx={{
-                fontSize: { xs: 36, md: 24 },
+                fontSize: { xs: 20, md: 24 },
                 lineHeight: 1,
                 fontWeight: 300,
                 fontFamily: "var(--font-bricolage)",
@@ -276,14 +280,14 @@ const Hero: React.FC = () => {
 
           {/* CTA row – larger + more visible */}
           <Stack
-            direction="row"
+            direction={{ xs: "column", md: "row" }}
             width="100%"
-            spacing={{ xs: 2.5, md: 20 }}
-            px={46}
-            alignItems="center"
-            justifyContent="space-between"
+            spacing={{ xs: 2, md: 20 }}
+            px={{ xs: 2, md: 46 }}
+            alignItems={{ xs: "center", md: "center" }}
+            justifyContent={{ xs: "center", md: "space-between" }}
             sx={{
-              transform: "translateY(10rem)",
+              transform: { xs: "translateY(3rem)", md: "translateY(10rem)" },
             }}
           >
             {/* DIGITAL – primary */}
@@ -293,7 +297,7 @@ const Hero: React.FC = () => {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                alignSelf: "flex-start",
+                alignSelf: { xs: "center", md: "flex-start" },
                 mt: 1,
                 borderRadius: 2,
                 minWidth: { xs: 160, md: 200 },
@@ -350,7 +354,7 @@ const Hero: React.FC = () => {
               sx={{
                 position: "relative",
                 overflow: "hidden",
-                alignSelf: "flex-start",
+                alignSelf: { xs: "center", md: "flex-start" },
                 mt: 1,
                 borderRadius: 2,
                 minWidth: { xs: 160, md: 200 },
