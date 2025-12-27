@@ -214,7 +214,7 @@ const MarqueeRow: React.FC<MarqueeRowProps> = ({ items, direction }) => {
               : ["-50%", "0%"], // left → right
         }}
         transition={{
-          duration: 72,
+          duration: 160,
           ease: "linear",
           repeat: Infinity,
         }}
