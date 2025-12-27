@@ -569,7 +569,7 @@ const ModernOverdriveSection: React.FC = () => {
                     direction="row"
                     spacing={2}
                     justifyContent="center"
-                    alignItems="center"
+                    alignItems="start"
                   >
                     {leftPillar && (
                       <PillarCard pillar={leftPillar} delay={leftDelay} />
@@ -587,20 +587,23 @@ const ModernOverdriveSection: React.FC = () => {
                             delay: connectorDelay,
                           }}
                           sx={{
-                            height: 3,
                             width: 40,
+                            height: { xs: 64, md: 3 },
                             borderRadius: 999,
-                            backgroundImage: GOLD_GRADIENT,
                             flexShrink: 0,
+                            alignSelf: "start",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
                           }}
-                        />
-                        <PillarCard
-                          pillar={rightPillar}
-                          delay={rightDelay}
-                        />
+                        >
+                          <Box sx={{ height: 3, width: 40, borderRadius: 999, backgroundImage: GOLD_GRADIENT, alignSelf: "center" }} />
+                        </MotionBox>
+                        <PillarCard pillar={rightPillar} delay={rightDelay} />
                       </>
                     )}
                   </Stack>
+
                 );
               }
             )}
