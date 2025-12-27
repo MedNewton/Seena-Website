@@ -126,17 +126,21 @@ const ExperiencesPage: FC = () => {
         sx={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 1280,
           mx: "auto",
-          pt: { xs: 10, md: 14 },
-          px: { xs: 2, md: 3 },
-          gap: { xs: 4, md: 6 },
         }}
       >
         <AppHero
           title="Digital Guidance"
           image={heroImg}
         />
+        <Stack sx={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: 1280,
+          mx: "auto",
+          px: { xs: 2, md: 3 },
+          gap: { xs: 4, md: 6 },
+        }}>
         <AppBreathingExerciseSection />
         <AppFiltersBar />
 
@@ -146,6 +150,7 @@ const ExperiencesPage: FC = () => {
             config={section}
           />
         ))}
+        </Stack>
       </Stack>
       <Footer transparentFooter={true} />
     </Box>
