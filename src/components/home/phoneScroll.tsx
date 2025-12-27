@@ -1,17 +1,13 @@
 // src/components/home/phoneScroll.tsx
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  useMotionValueEvent,
-} from "motion/react";
+import { motion, useScroll, useTransform } from "motion/react";
 
 import phoneImage from "@/assets/images/phone1.webp";
+import MobilePhoneScroll from "@/components/home/mobilePhoneScroll";
 
 type FeatureConfig = {
   title: string;
@@ -88,20 +84,19 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
   </Stack>
 );
 
-// animated wrapper for the card
 const MotionBackgroundBox = motion.create(Box);
 
-const PhoneScroll: React.FC = () => {
+/**
+ * Desktop-only implementation: sticky section + scroll-linked feature reveal
+ */
+const DesktopPhoneScroll: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement | null>(null);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end 1.1"],
   });
 
-  // DESKTOP feature animations (unchanged)
   const f1Opacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
   const f1Y = useTransform(scrollYProgress, [0.05, 0.2], [40, 0]);
 
@@ -114,31 +109,6 @@ const PhoneScroll: React.FC = () => {
   const f4Opacity = useTransform(scrollYProgress, [0.65, 0.8], [0, 1]);
   const f4Y = useTransform(scrollYProgress, [0.65, 0.8], [40, 0]);
 
-  // MOBILE: active feature index (0–3), changing more slowly as user scrolls
-  const [activeFeatureIndex, setActiveFeatureIndex] = useState<number>(0);
-
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (!isMobile) return;
-
-    // Chunk scroll into slower ranges so fast scroll doesn't flick through features
-    let nextIndex = 0;
-
-    if (latest < 0.22) {
-      nextIndex = 0;
-    } else if (latest < 0.48) {
-      nextIndex = 1;
-    } else if (latest < 0.74) {
-      nextIndex = 2;
-    } else {
-      nextIndex = 3;
-    }
-
-    setActiveFeatureIndex((prev) => (prev === nextIndex ? prev : nextIndex));
-  });
-
-  const activeFeature: FeatureConfig =
-    FEATURES[activeFeatureIndex] ?? { title: "", description: "" };
-
   return (
     <Box
       id="app"
@@ -146,9 +116,8 @@ const PhoneScroll: React.FC = () => {
       component="section"
       sx={{
         width: "100%",
-        // a bit taller on mobile to give each step more breathing room
-        minHeight: { xs: "260vh", md: "260vh" },
-        pt: { xs: 8, md: 4 },
+        minHeight: "260vh",
+        pt: 4,
         scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",
@@ -164,8 +133,8 @@ const PhoneScroll: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
-          pb: { xs: 2, md: 4 },
-          px: { xs: 2, md: 0 },
+          pb: 4,
+          px: 0,
           maxWidth: 1440,
           mx: "auto",
         }}
@@ -175,10 +144,10 @@ const PhoneScroll: React.FC = () => {
           sx={{
             textAlign: "center",
             color: "#FFFFFF",
-            fontSize: { xs: 32, md: 64 },
+            fontSize: 64,
             fontWeight: 600,
-            mb: { xs: 4, md: 6 },
-            px: { xs: 2, md: 4 },
+            mb: 6,
+            px: 4,
             pt: 2,
             lineHeight: 1.1,
           }}
@@ -197,8 +166,8 @@ const PhoneScroll: React.FC = () => {
             mx: "auto",
             borderRadius: 6,
             overflow: "hidden",
-            minHeight: { xs: 420, md: 580 },
-            backgroundColor: "#020617", // dark base under the mesh
+            minHeight: 580,
+            backgroundColor: "#020617",
           }}
         >
           {/* animated mesh layer */}
@@ -225,37 +194,27 @@ const PhoneScroll: React.FC = () => {
             }}
           />
 
-          {/* CONTENT LAYER (unchanged) */}
+          {/* CONTENT LAYER */}
           <Box
             sx={{
               position: "relative",
               zIndex: 1,
               height: "100%",
-              display: {
-                xs: "flex",
-                md: "grid",
-              },
-              flexDirection: {
-                xs: "column",
-                md: "unset",
-              },
-              gridTemplateColumns: {
-                md: "1fr auto 1fr",
-              },
+              display: "grid",
+              gridTemplateColumns: "1fr auto 1fr",
               alignItems: "center",
               justifyContent: "center",
-              gap: { xs: 4, md: 0 },
-              px: { xs: 4, md: 0 },
-              pt: { xs: 5, md: 6 },
-              pb: { xs: 5, md: 8 },
+              gap: 0,
+              px: 0,
+              pt: 6,
+              pb: 8,
             }}
           >
-            {/* LEFT COLUMN – desktop only */}
+            {/* LEFT COLUMN */}
             <Stack
-              spacing={{ xs: 4, md: 6 }}
+              spacing={6}
               alignItems="center"
               justifyContent="center"
-              sx={{ display: { xs: "none", md: "flex" } }}
             >
               <motion.div style={{ opacity: f1Opacity, y: f1Y, width: "100%" }}>
                 <FeatureItem
@@ -277,15 +236,10 @@ const PhoneScroll: React.FC = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                order: { xs: 1, md: "unset" },
-                // make phone slightly smaller on mobile
                 "& img": {
-                  maxHeight: { xs: 360, md: 480 },
+                  maxHeight: 480,
                   width: "auto",
-                  transform: {
-                    xs: "scale(1.05)",
-                    md: "scale(1.25)",
-                  },
+                  transform: "scale(1.25)",
                   transformOrigin: "center center",
                 },
               }}
@@ -301,12 +255,11 @@ const PhoneScroll: React.FC = () => {
               />
             </Box>
 
-            {/* RIGHT COLUMN – desktop only */}
+            {/* RIGHT COLUMN */}
             <Stack
-              spacing={{ xs: 4, md: 6 }}
+              spacing={6}
               alignItems="center"
               justifyContent="center"
-              sx={{ display: { xs: "none", md: "flex" } }}
             >
               <motion.div style={{ opacity: f3Opacity, y: f3Y, width: "100%" }}>
                 <FeatureItem
@@ -321,57 +274,25 @@ const PhoneScroll: React.FC = () => {
                 />
               </motion.div>
             </Stack>
-
-            {/* MOBILE FEATURE – below phone, one at a time, more emphasis on text */}
-            <Stack
-              spacing={1.75}
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                display: { xs: "flex", md: "none" },
-                order: 2,
-                mt: 2,
-                textAlign: "center",
-                color: "#FFFFFF",
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: 28,
-                  fontWeight: 600,
-                  color: "#D8A24B",
-                }}
-              >
-                {activeFeature.title}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: 16.5,
-                  fontWeight: 300,
-                  lineHeight: 1.7,
-                  maxWidth: 340,
-                  color: "rgba(249,250,251,0.9)",
-                }}
-              >
-                {activeFeature.description}
-              </Typography>
-              <Typography
-                sx={{
-                  mt: 1,
-                  fontSize: 11,
-                  letterSpacing: 1.4,
-                  textTransform: "uppercase",
-                  color: "rgba(249,250,251,0.6)",
-                }}
-              >
-                {activeFeatureIndex + 1} / {FEATURES.length}
-              </Typography>
-            </Stack>
           </Box>
         </MotionBackgroundBox>
       </Box>
     </Box>
   );
+};
+
+/**
+ * Wrapper: picks desktop vs mobile implementation
+ */
+const PhoneScroll: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  if (isMobile) {
+    return <MobilePhoneScroll />;
+  }
+
+  return <DesktopPhoneScroll />;
 };
 
 export default PhoneScroll;
