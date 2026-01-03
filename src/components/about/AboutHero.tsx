@@ -26,15 +26,12 @@ const AboutHero: FC<AboutHeroProps> = ({ title }) => {
       sx={{
         position: "relative",
         width: "100%",
-        maxWidth: 1440,
         mx: "auto",
-        mt: { xs: 4, md: 2 },
-        borderRadius: 6,
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: { xs: 220, md: 300, lg: 340 },
+        minHeight: { xs: 320, md: 460, lg: 460 },
       }}
     >
       {/* Animated mesh gradient background */}

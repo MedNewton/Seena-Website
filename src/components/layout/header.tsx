@@ -108,9 +108,9 @@ const Header: React.FC = () => {
           zIndex: (theme) => theme.zIndex.appBar + 1,
           width: {
             xs: "100%",
-            md: "min(900px, 80% - 32px)",
+            md: "min(1300px, 90% - 32px)",
           },
-          px: { xs: 0, md: 0 },
+          px: { xs: 0, md: 0 }
         }}
       >
         <MotionBox
