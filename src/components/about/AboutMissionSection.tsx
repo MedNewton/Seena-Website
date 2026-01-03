@@ -125,7 +125,7 @@ const AboutMissionSection: FC = () => {
                       lineHeight: 1.8,
                       color: "rgba(248,250,252,0.9)",
                       display: "flex",
-                      alignItems: "flex-start",
+                      alignItems: "center",
                       gap: 1.5,
                     }}
                   >
@@ -239,7 +239,7 @@ const AboutMissionSection: FC = () => {
                       lineHeight: 1.8,
                       color: "rgba(248,250,252,0.9)",
                       display: "flex",
-                      alignItems: "flex-start",
+                      alignItems: "center",
                       gap: 1.5,
                     }}
                   >
