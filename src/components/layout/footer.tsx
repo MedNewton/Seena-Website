@@ -10,6 +10,10 @@ import {
 } from "@mui/material";
 import NextLink from "next/link";
 import { motion } from "framer-motion";
+import {
+  MeshGradient,
+} from "@mesh-gradient/react";
+import { type MeshGradientOptions } from "@mesh-gradient/core"
 import MoveHealGrow from "@/components/home/moveHealGrow";
 import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
 
@@ -50,6 +54,15 @@ const MotionTypography = motion.create(Typography);
 const MotionColumn = motion.create(Box);
 const MotionBox = motion.create(Box);
 
+// Mesh gradient config with your palette
+const meshOptions: MeshGradientOptions = {
+  colors: ["#dbc081", "#D77A1E", "#D77A1E", "#2b1a07"],
+  seed: 5,
+  animationSpeed: 0.9,
+  frequency: 0.00013
+  // let the library handle motion; defaults are fine for a subtle animated mesh
+};
+
 const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
   return (
     <Box
@@ -84,38 +97,26 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
           },
           ...(transparentFooter
             ? {
-                border: "0.8px solid rgba(255, 255, 255, 0.10)",
-                background: "rgba(255, 255, 255, 0.05)",
-                backgroundImage: "none",
-              }
+              border: "0.8px solid rgba(255, 255, 255, 0.10)",
+              background: "rgba(255, 255, 255, 0.05)",
+              backgroundImage: "none",
+            }
             : {
-                // base dark tone under the animated mesh
-                backgroundColor: "#1F1306",
-              }),
+              backgroundColor: "#1F1306",
+            }),
         }}
       >
-        {/* Animated mesh gradient background (only when not transparent) */}
+        {/* Mesh gradient background via @mesh-gradient/react */}
         {!transparentFooter && (
-          <motion.div
+          <MeshGradient
+            options={meshOptions}
             style={{
               position: "absolute",
               inset: "-20%",
-              backgroundImage:
-                'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%221000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%23D77A1E%22 d=%22M-500-500h2000v2000H-500z%22%2F%3E%3Cpath d=%22m67.896-418.794-727 330 67 474 785-119%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22M480-183 206 105l520 527 291-693%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22m329.94 1003.18-785 28 427 989 543-236%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1158.299-460.12-435 760 143 129 699-791%22 fill=%22%231f1306%22%2F%3E%3Cpath d=%22m1009.836 770.776-518 107 69 767 851-678%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22m1473.463 695.254-811 819 589 60 301-132%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-91%22 y=%22-91%22 width=%221182%22 height=%221182%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%2291%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
-              backgroundSize: "cover",
-              backgroundPosition: "center",
+              width: "140%",
+              height: "140%",
               pointerEvents: "none",
               zIndex: 0,
-            }}
-            animate={{
-              scale: [1, 1.2, 1],
-              x: ["-4%", "4%", "-4%"],
-              y: ["-3%", "3%", "-3%"],
-            }}
-            transition={{
-              duration: 10,
-              ease: "easeInOut",
-              repeat: Infinity,
             }}
           />
         )}

@@ -8,6 +8,10 @@ import { motion, useScroll, useTransform } from "motion/react";
 
 import phoneImage from "@/assets/images/phone1.webp";
 import MobilePhoneScroll from "@/components/home/mobilePhoneScroll";
+import {
+  MeshGradient,
+} from "@mesh-gradient/react";
+import { type MeshGradientOptions } from "@mesh-gradient/core"
 
 type FeatureConfig = {
   title: string;
@@ -109,6 +113,15 @@ const DesktopPhoneScroll: React.FC = () => {
   const f4Opacity = useTransform(scrollYProgress, [0.65, 0.8], [0, 1]);
   const f4Y = useTransform(scrollYProgress, [0.65, 0.8], [40, 0]);
 
+  const meshOptions: MeshGradientOptions = {
+    colors: ["#09172B", "#0F2027", "#256D85", "#09172B"],
+    seed: 5,
+    animationSpeed: 0.9,
+    frequency: 0.00013
+    // let the library handle motion; defaults are fine for a subtle animated mesh
+  };
+
+
   return (
     <Box
       id="app"
@@ -170,27 +183,15 @@ const DesktopPhoneScroll: React.FC = () => {
             backgroundColor: "#020617",
           }}
         >
-          {/* animated mesh layer */}
-          <motion.div
+          <MeshGradient
+            options={meshOptions}
             style={{
               position: "absolute",
               inset: "-20%",
-              backgroundImage:
-                'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%224000%22 height=%222000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%2309172B%22 d=%22M-2000-1000h8000v4000h-8000z%22%2F%3E%3Cpath d=%22m-119.743-404.772-527 242 1720 2068 492-1110%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22m344.665-298.479-820 972 1794 1652 730-2175%22 fill=%22%230F2027%22%2F%3E%3Cpath d=%22m3864.689 1610.976-1805 855 283 984 1864-247%22 fill=%22%23256D85%22%2F%3E%3Cpath d=%22m-228.947-1426.92-1617 1864 2246 644 73-765%22 fill=%22%23256d85%22%2F%3E%3Cpath d=%22m3984.701 800.995-1313 911 889 1989 2051-786%22 fill=%22%23256D85%22%2F%3E%3Cpath d=%22m2208.599 1082.575-354 2438 2373 276 156-1836%22 fill=%22%2309172B%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-400%22 y=%22-400%22 width=%224800%22 height=%222800%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22400%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              filter: "blur(0px)",
+              width: "140%",
+              height: "140%",
               pointerEvents: "none",
-            }}
-            animate={{
-              scale: [1, 1.8, 1],
-              x: ["-4%", "4%", "-4%"],
-              y: ["-3%", "3%", "-3%"],
-            }}
-            transition={{
-              duration: 10,
-              ease: "easeInOut",
-              repeat: Infinity,
+              zIndex: 0,
             }}
           />
 
