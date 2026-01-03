@@ -169,7 +169,7 @@ const Header: React.FC = () => {
           {/* Center: Nav links (desktop only) */}
           <Stack
             direction="row"
-            spacing={3}
+            spacing={5}
             sx={{
               alignItems: "center",
               flex: 1,
