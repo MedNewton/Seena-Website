@@ -30,9 +30,9 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "APP", href: "#app" },
-  { label: "EXPERIENCES", href: "#experiences" },
-  { label: "CIRCLES", href: "#circles" },
+  { label: "APP", href: "https://www.seenawellness.com/#app" },
+  { label: "EXPERIENCES", href: "https://www.seenawellness.com/#experiences" },
+  { label: "CIRCLES", href: "https://www.seenawellness.com/#circles" },
   { label: "SCREENING", href: "/screening" },
   { label: "ABOUT", href: "/about" },
 ];
