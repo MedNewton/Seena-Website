@@ -11,7 +11,7 @@ import MobilePhoneScroll from "@/components/home/mobilePhoneScroll";
 import {
   MeshGradient,
 } from "@mesh-gradient/react";
-import { type MeshGradientOptions } from "@mesh-gradient/core"
+import { type MeshGradientOptions } from "@mesh-gradient/core" 
 
 type FeatureConfig = {
   title: string;
