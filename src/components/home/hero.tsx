@@ -5,7 +5,6 @@ import React, { useEffect, useState } from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
-import NewButton from "@/components/ui/newButton";
 import { useRouter } from "next/navigation";
 
 import bg from "@/assets/images/bg1.webp";
@@ -127,155 +126,156 @@ const Hero: React.FC = () => {
           {/* Headline row */}
           <Stack
             direction="row"
-            spacing={{ xs: 4, md: 0 }}
             alignItems="baseline"
             justifyContent="center"
+            sx={{
+              width: "100%",
+              maxWidth: 1200,
+              gap: { xs: 2, md: 4 },
+            }}
           >
             {/* Left word */}
-            <MotionTypography
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0.3,
-              }}
-              sx={{
-                fontSize: { xs: 36, md: 110 },
-                lineHeight: 1,
-                fontWeight: 500,
-                fontFamily: "var(--font-bricolage)",
-                minWidth: { xs: "unset", md: 460 },
-              }}
-            >
-              Find
-            </MotionTypography>
-
-            {/* Animated middle word */}
             <Box
               sx={{
-                position: "relative",
-                minWidth: { xs: 140, md: 460 },
+                flex: 1,
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              <MotionTypography
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: 0.3,
+                }}
+                sx={{
+                  fontSize: { xs: 36, md: 110 },
+                  lineHeight: 1,
+                  fontWeight: 500,
+                  fontFamily: "var(--font-bricolage)",
+                  textAlign: "right",
+                }}
+              >
+                Find
+              </MotionTypography>
+            </Box>
+
+            {/* Animated middle word – fixed-width container so width doesn't change */}
+            <Box
+              sx={{
+                flexShrink: 0,
                 display: "flex",
                 justifyContent: "center",
               }}
             >
-              <AnimatePresence mode="wait">
-                {isMiddleActive && (
-                  <motion.span
-                    key={currentWord}
-                    variants={wordVariants}
-                    initial="enter"
-                    animate="center"
-                    exit="exit"
-                    style={{ display: "inline-block" }}
-                  >
-                    <Typography
-                      component="span"
-                      sx={{
-                        fontSize: { xs: 40, md: 110 },
-                        lineHeight: 1,
-                        fontWeight: 500,
-                        fontStyle: "italic",
-                        whiteSpace: "nowrap",
-                        fontFamily: "var(--font-bricolage)",
-                        className: "animated-gradient-text",
-                      }}
+              <Box
+                sx={{
+                  width: { xs: 160, md: 460 },
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <AnimatePresence mode="wait">
+                  {isMiddleActive && (
+                    <motion.span
+                      key={currentWord}
+                      variants={wordVariants}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      style={{ display: "inline-block" }}
                     >
-                      {capitalizedWord}
-                    </Typography>
-                  </motion.span>
-                )}
-              </AnimatePresence>
+                      <Typography
+                        component="span"
+                        sx={{
+                          fontSize: { xs: 40, md: 110 },
+                          lineHeight: 1,
+                          fontWeight: 500,
+                          fontStyle: "italic",
+                          whiteSpace: "nowrap",
+                          fontFamily: "var(--font-bricolage)",
+                          textAlign: "center",
+                          className: "animated-gradient-text",
+                        }}
+                      >
+                        {capitalizedWord}
+                      </Typography>
+                    </motion.span>
+                  )}
+                </AnimatePresence>
+              </Box>
             </Box>
 
             {/* Right word */}
-            <MotionTypography
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0.4,
-              }}
+            <Box
               sx={{
-                fontSize: { xs: 36, md: 110 },
-                lineHeight: 1,
-                fontWeight: 500,
-                fontFamily: "var(--font-bricolage)",
-                minWidth: { xs: "unset", md: 460 },
+                flex: 1,
+                display: "flex",
+                justifyContent: "flex-start",
               }}
             >
-              within
-            </MotionTypography>
+              <MotionTypography
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.6,
+                  ease: "easeOut",
+                  delay: 0.4,
+                }}
+                sx={{
+                  fontSize: { xs: 36, md: 110 },
+                  lineHeight: 1,
+                  fontWeight: 500,
+                  fontFamily: "var(--font-bricolage)",
+                  textAlign: "left",
+                }}
+              >
+                within
+              </MotionTypography>
+            </Box>
           </Stack>
 
+          {/* Mind / Body / Soul row – unified spacing, centered */}
           <Stack
             direction="row"
-            spacing={{ xs: 8, md: 24 }}
-            pt={{ xs: 0, md: 4 }}
-            alignItems="baseline"
-            justifyContent="center"
-            sx={{
-              transform: { xs: "translateX(-2%)", md: "translateX(0)" },
-            }}
             width="100%"
+            maxWidth={600}
+            spacing={{ xs: 4, md: 8 }}
+            pt={{ xs: 0, md: 4 }}
+            alignItems="center"
+            justifyContent="center"
           >
-            {/* Left word */}
-            <MotionTypography
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0.45,
-              }}
-              sx={{
-                fontSize: { xs: 20, md: 24 },
-                lineHeight: 1,
-                fontWeight: 300,
-                fontFamily: "var(--font-bricolage)",
-              }}
-            >
-              Mind
-            </MotionTypography>
-
-            <MotionTypography
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0.45,
-              }}
-              sx={{
-                fontSize: { xs: 20, md: 24 },
-                lineHeight: 1,
-                fontWeight: 300,
-                fontFamily: "var(--font-bricolage)",
-              }}
-            >
-              Body
-            </MotionTypography>
-
-            {/* Right word */}
-            <MotionTypography
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{
-                duration: 0.6,
-                ease: "easeOut",
-                delay: 0.45,
-              }}
-              sx={{
-                fontSize: { xs: 20, md: 24 },
-                lineHeight: 1,
-                fontWeight: 300,
-                fontFamily: "var(--font-bricolage)",
-              }}
-            >
-              Soul
-            </MotionTypography>
+            {["Mind", "Body", "Soul"].map((word, index) => (
+              <Box
+                key={word}
+                sx={{
+                  flex: 1,
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <MotionTypography
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.6,
+                    ease: "easeOut",
+                    delay: 0.45 + index * 0.02,
+                  }}
+                  sx={{
+                    fontSize: { xs: 20, md: 24 },
+                    lineHeight: 1,
+                    fontWeight: 300,
+                    fontFamily: "var(--font-bricolage)",
+                    textAlign: "center",
+                  }}
+                >
+                  {word}
+                </MotionTypography>
+              </Box>
+            ))}
           </Stack>
 
           {/* CTA row – larger + more visible */}
