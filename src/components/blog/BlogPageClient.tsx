@@ -233,7 +233,7 @@ const BlogPageClient: FC<BlogPageClientProps> = ({ posts }) => {
   return (
     <Box
       sx={{
-        maxWidth: 1280,
+        maxWidth: 1440,
         mx: "auto",
         pt: 8,
         px: { xs: 2, md: 3 },

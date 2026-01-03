@@ -417,7 +417,7 @@ const ScreeningPage: FC = () => {
         <Stack sx={{
           position: "relative",
           zIndex: 1,
-          maxWidth: 1280,
+          maxWidth: 1440,
           mx: "auto",
           px: { xs: 2, md: 3 },
           gap: { xs: 4, md: 6 },
