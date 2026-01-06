@@ -212,11 +212,11 @@ const Branches: React.FC = () => {
       id="experiences"
       sx={{
         width: "100%",
-        pt: { xs: 2, md: 12 },
+        pt: { xs: 2, md: 22, lg: 10, xl: 0 },
         pb: { xs: 8, md: 2 },
-        scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",
+        scrollMarginTop: "-20vh",
       }}
     >
       {/* Heading */}

@@ -1,17 +1,15 @@
 // src/components/home/phoneScroll.tsx
 "use client";
 
-import React, { useRef } from "react";
+import React, { useMemo, useRef } from "react";
 import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 
 import phoneImage from "@/assets/images/Seena.webp";
 import MobilePhoneScroll from "@/components/home/mobilePhoneScroll";
-import {
-  MeshGradient,
-} from "@mesh-gradient/react";
-import { type MeshGradientOptions } from "@mesh-gradient/core" 
+import { MeshGradient } from "@mesh-gradient/react";
+import { type MeshGradientOptions } from "@mesh-gradient/core";
 
 type FeatureConfig = {
   title: string;
@@ -91,36 +89,46 @@ const FeatureItem: React.FC<FeatureProps> = ({ title, description }) => (
 const MotionBackgroundBox = motion.create(Box);
 
 /**
- * Desktop-only implementation: sticky section + scroll-linked feature reveal
+ * Desktop-only: sticky viewport + scroll-driven, smooth & reversible reveals.
+ * Fixes big gap by:
+ *  - reducing scroll budget (STEP_PX)
+ *  - making the last reveal end ~1.0 (no dead scroll tail)
  */
 const DesktopPhoneScroll: React.FC = () => {
+  const muiTheme = useTheme();
   const sectionRef = useRef<HTMLDivElement | null>(null);
+
+  // Smaller = less total space after the card, still smooth.
+  const STEP_PX = 440; // was 240
+  const EXTRA_SCROLL_PX = useMemo(
+    () => Math.round(STEP_PX * FEATURES.length),
+    [STEP_PX]
+  );
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start start", "end 1.1"],
+    offset: ["start start", "end center"],
   });
 
-  const f1Opacity = useTransform(scrollYProgress, [0.05, 0.2], [0, 1]);
-  const f1Y = useTransform(scrollYProgress, [0.05, 0.2], [40, 0]);
+  // Re-map reveals to use nearly the full 0..1 range (removes the dead tail).
+  const f1Opacity = useTransform(scrollYProgress, [0.02, 0.22], [0, 1]);
+  const f1Y = useTransform(scrollYProgress, [0.02, 0.22], [40, 0]);
 
-  const f2Opacity = useTransform(scrollYProgress, [0.25, 0.4], [0, 1]);
-  const f2Y = useTransform(scrollYProgress, [0.25, 0.4], [40, 0]);
+  const f2Opacity = useTransform(scrollYProgress, [0.26, 0.46], [0, 1]);
+  const f2Y = useTransform(scrollYProgress, [0.26, 0.46], [40, 0]);
 
-  const f3Opacity = useTransform(scrollYProgress, [0.45, 0.6], [0, 1]);
-  const f3Y = useTransform(scrollYProgress, [0.45, 0.6], [40, 0]);
+  const f3Opacity = useTransform(scrollYProgress, [0.50, 0.70], [0, 1]);
+  const f3Y = useTransform(scrollYProgress, [0.50, 0.70], [40, 0]);
 
-  const f4Opacity = useTransform(scrollYProgress, [0.65, 0.8], [0, 1]);
-  const f4Y = useTransform(scrollYProgress, [0.65, 0.8], [40, 0]);
+  const f4Opacity = useTransform(scrollYProgress, [0.74, 0.98], [0, 1]);
+  const f4Y = useTransform(scrollYProgress, [0.74, 0.98], [40, 0]);
 
   const meshOptions: MeshGradientOptions = {
     colors: ["#09172B", "#0F2027", "#256D85", "#09172B"],
     seed: 5,
     animationSpeed: 0.9,
-    frequency: 0.00013
-    // let the library handle motion; defaults are fine for a subtle animated mesh
+    frequency: 0.00013,
   };
-
 
   return (
     <Box
@@ -129,14 +137,14 @@ const DesktopPhoneScroll: React.FC = () => {
       component="section"
       sx={{
         width: "100%",
-        minHeight: "260vh",
-        pt: 4,
-        scrollMarginTop: "120px",
         maxWidth: 1440,
         mx: "auto",
+        pt: 4,
+        scrollMarginTop: "120px",
+        height: `calc(100vh + ${EXTRA_SCROLL_PX}px)`,
+        backgroundColor: 'transparent',
       }}
     >
-      {/* Sticky viewport area */}
       <Box
         sx={{
           position: "sticky",
@@ -146,13 +154,12 @@ const DesktopPhoneScroll: React.FC = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "flex-start",
-          pb: 4,
           px: 0,
           maxWidth: 1440,
           mx: "auto",
+          backgroundColor: 'transparent',
         }}
       >
-        {/* Title */}
         <Typography
           sx={{
             textAlign: "center",
@@ -170,7 +177,6 @@ const DesktopPhoneScroll: React.FC = () => {
           manage
         </Typography>
 
-        {/* Card with animated mesh gradient */}
         <MotionBackgroundBox
           sx={{
             position: "relative",
@@ -195,7 +201,6 @@ const DesktopPhoneScroll: React.FC = () => {
             }}
           />
 
-          {/* CONTENT LAYER */}
           <Box
             sx={{
               position: "relative",
@@ -211,12 +216,7 @@ const DesktopPhoneScroll: React.FC = () => {
               pb: 8,
             }}
           >
-            {/* LEFT COLUMN */}
-            <Stack
-              spacing={6}
-              alignItems="center"
-              justifyContent="center"
-            >
+            <Stack spacing={6} alignItems="center" justifyContent="center">
               <motion.div style={{ opacity: f1Opacity, y: f1Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[0]?.title ?? ""}
@@ -231,7 +231,6 @@ const DesktopPhoneScroll: React.FC = () => {
               </motion.div>
             </Stack>
 
-            {/* PHONE */}
             <Box
               sx={{
                 display: "flex",
@@ -248,20 +247,12 @@ const DesktopPhoneScroll: React.FC = () => {
               <Image
                 src={phoneImage}
                 alt="Seena app on phone"
-                style={{
-                  width: "auto",
-                  height: "auto",
-                }}
+                style={{ width: "auto", height: "auto" }}
                 priority
               />
             </Box>
 
-            {/* RIGHT COLUMN */}
-            <Stack
-              spacing={6}
-              alignItems="center"
-              justifyContent="center"
-            >
+            <Stack spacing={6} alignItems="center" justifyContent="center">
               <motion.div style={{ opacity: f3Opacity, y: f3Y, width: "100%" }}>
                 <FeatureItem
                   title={FEATURES[2]?.title ?? ""}
@@ -282,16 +273,11 @@ const DesktopPhoneScroll: React.FC = () => {
   );
 };
 
-/**
- * Wrapper: picks desktop vs mobile implementation
- */
 const PhoneScroll: React.FC = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  if (isMobile) {
-    return <MobilePhoneScroll />;
-  }
+  if (isMobile) return <MobilePhoneScroll />;
 
   return <DesktopPhoneScroll />;
 };
