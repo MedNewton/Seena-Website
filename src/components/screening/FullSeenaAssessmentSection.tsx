@@ -60,7 +60,8 @@ const FullSeenaAssessmentSection: FC = () => {
               fontSize: { xs: 32, md: 46 },
               fontWeight: 500,
               lineHeight: 1.1,
-              color: "#1F1306",
+              color: "#ffffff",
+              textAlign: "left"
             }}
           >
             Full Seena Assessment
@@ -71,8 +72,9 @@ const FullSeenaAssessmentSection: FC = () => {
               fontFamily: "var(--font-inter, system-ui)",
               fontSize: { xs: 14, md: 15 },
               lineHeight: 1.8,
-              color: theme.palette.text.secondary,
+              color: "#ffffff",
               maxWidth: 560,
+              textAlign: "left"
             }}
           >
             Get a comprehensive understanding of your wellness across all
@@ -106,7 +108,8 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
-                    color: "#1F1306",
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   Comprehensive Coverage
@@ -114,7 +117,8 @@ const FullSeenaAssessmentSection: FC = () => {
                 <Typography
                   sx={{
                     fontSize: 14,
-                    color: theme.palette.text.secondary,
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   8 wellness dimensions with 120+ evidence-based questions
@@ -145,7 +149,8 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
-                    color: "#1F1306",
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   30–45 Minutes
@@ -153,7 +158,8 @@ const FullSeenaAssessmentSection: FC = () => {
                 <Typography
                   sx={{
                     fontSize: 14,
-                    color: theme.palette.text.secondary,
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   Take at your own pace with the ability to save and resume
@@ -184,7 +190,8 @@ const FullSeenaAssessmentSection: FC = () => {
                   sx={{
                     fontSize: 16,
                     fontWeight: 600,
-                    color: "#1F1306",
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   Personalized Insights
@@ -192,7 +199,8 @@ const FullSeenaAssessmentSection: FC = () => {
                 <Typography
                   sx={{
                     fontSize: 14,
-                    color: theme.palette.text.secondary,
+                    color: "#ffffff",
+                    textAlign: "left"
                   }}
                 >
                   Receive detailed results with tailored recommendations
@@ -202,7 +210,13 @@ const FullSeenaAssessmentSection: FC = () => {
           </Stack>
 
           {/* CTA Button */}
-          <Box sx={{ mt: { xs: 1, md: 2 } }}>
+          <Box sx={{ 
+            mt: { xs: 1, md: 2 },
+            width: "100%",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: {xs: "center", md: "start"}
+            }}>
             <Button
               sx={{
                 borderRadius: 9999,
@@ -212,9 +226,8 @@ const FullSeenaAssessmentSection: FC = () => {
                 fontWeight: 600,
                 letterSpacing: 1.4,
                 textTransform: "uppercase",
-                backgroundColor: "#000000",
-                color: "#FFFFFF",
-                boxShadow: "0 10px 30px rgba(15,23,42,0.35)",
+                backgroundColor: "#ffffff",
+                color: "#000000",
                 "&:hover": {
                   backgroundColor: "#000000",
                   opacity: 0.9,

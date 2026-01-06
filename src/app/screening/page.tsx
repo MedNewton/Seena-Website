@@ -6,7 +6,6 @@ import { Box, Stack } from "@mui/material";
 
 import ScreeningBackgroundLayer from "@/components/screening/ScreeningBackgroundLayer";
 import ScreeningHero from "@/components/screening/ScreeningHero";
-import FullSeenaAssessmentSection from "@/components/screening/FullSeenaAssessmentSection";
 import ScreeningFiltersBar from "@/components/screening/ScreeningFiltersBar";
 import ScreeningSectionSlider, {
   type ScreeningSectionConfig,
@@ -422,7 +421,6 @@ const ScreeningPage: FC = () => {
           px: { xs: 2, md: 3 },
           gap: { xs: 4, md: 6 },
         }}>
-          <FullSeenaAssessmentSection />
 
           <ScreeningFiltersBar />
 
