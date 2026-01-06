@@ -57,7 +57,7 @@ const DinnerClubSectionSlider: FC<DinnerClubSectionSliderProps> = ({
             fontFamily: "var(--font-bricolage)",
             fontSize: { xs: 16, md: 18 },
             fontWeight: 400,
-            color: "#E5E7EB",
+            color: "#000000",
           }}
         >
           {title}
@@ -68,7 +68,7 @@ const DinnerClubSectionSlider: FC<DinnerClubSectionSliderProps> = ({
             fontSize: 11,
             textTransform: "uppercase",
             letterSpacing: 0.8,
-            color: "rgba(156,163,175,0.9)",
+            color: "rgba(0,0,0,0.7)",
           }}
         >
           View all &gt;

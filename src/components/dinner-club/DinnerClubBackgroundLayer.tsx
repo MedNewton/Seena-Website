@@ -27,32 +27,9 @@ const AppBackgroundLayer: FC = () => {
         pointerEvents: "none",
         overflow: "hidden",
         height: "100vh",
+        backgroundColor: "#FFFFFF"
       }}
     >
-      {/* Animated mesh gradient */}
-      <MeshGradient
-                  options={meshOptions}
-                  style={{
-                    position: "absolute",
-                    inset: "-20%",
-                    width: "140%",
-                    height: "140%",
-                    pointerEvents: "none",
-                    zIndex: 0,
-                  }}
-                />
-
-      {/* Slight darkening so UI stays readable on top */}
-      <Box
-        sx={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(circle at top, rgba(15,23,42,0.15) 0%, rgba(15,23,42,0.55) 55%, rgba(15,23,42,0.8) 100%)",
-          mixBlendMode: "soft-light",
-          opacity: 0.6,
-        }}
-      />
     </Box>
   );
 };

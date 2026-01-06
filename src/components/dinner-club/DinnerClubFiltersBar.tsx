@@ -39,7 +39,7 @@ const DinnerClubFiltersBar: FC = () => {
             startAdornment: (
               <InputAdornment position="start">
                 <SearchIcon
-                  sx={{ fontSize: 20, color: "rgba(248,250,252,0.9)" }}
+                  sx={{ fontSize: 20, color: "rgba(0,0,0,0.9)" }}
                 />
               </InputAdornment>
             ),
@@ -50,9 +50,8 @@ const DinnerClubFiltersBar: FC = () => {
               borderRadius: 999,
               fontSize: 14,
               paddingRight: 1.5,
-              backgroundColor: "rgba(15,23,42,0.45)",
-              border: "1px solid rgba(148,163,184,0.6)",
-              color: "#E5E7EB",
+              border: "1px solid rgba(0,0,0, 0.8)",
+              color: "#000000",
               backdropFilter: "blur(18px)",
               WebkitBackdropFilter: "blur(18px)",
               "& fieldset": { border: "none" },
@@ -75,9 +74,8 @@ const DinnerClubFiltersBar: FC = () => {
             fontSize: 12,
             textTransform: "uppercase",
             letterSpacing: 0.9,
-            color: "#E5E7EB",
-            borderColor: "rgba(148,163,184,0.7)",
-            backgroundColor: "rgba(15,23,42,0.4)",
+            color: "#000000",
+            borderColor: "rgba(0,0,0,0.8)",
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
             flexShrink: 0,
@@ -98,6 +96,12 @@ const DinnerClubFiltersBar: FC = () => {
           sx={{
             display: { xs: "none", sm: "flex" },
             flexShrink: 0,
+            borderRadius: 999,
+            alignItems: "center",
+            justifyContent: "center",
+            border: "1px solid black",
+            px: 2.8,
+            py: 1,
           }}
         >
           <Typography
@@ -105,7 +109,8 @@ const DinnerClubFiltersBar: FC = () => {
               fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: 0.7,
-              color: "rgba(209,213,219,0.85)",
+              color: "rgba(0,0,0,0.8)",
+              pt: 0.5
             }}
           >
             Sort
@@ -114,16 +119,12 @@ const DinnerClubFiltersBar: FC = () => {
             size="small"
             sx={{
               borderRadius: 999,
-              border: "1px solid rgba(148,163,184,0.7)",
-              backgroundColor: "rgba(15,23,42,0.4)",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
               "&:hover": {
                 backgroundColor: "rgba(15,23,42,0.65)",
               },
             }}
           >
-            <TuneOutlinedIcon sx={{ fontSize: 18, color: "#E5E7EB" }} />
+            <TuneOutlinedIcon sx={{ fontSize: 18, color: "#000000" }} />
           </IconButton>
         </Stack>
       </Stack>
@@ -140,17 +141,14 @@ const DinnerClubFiltersBar: FC = () => {
               fontSize: 12,
               textTransform: "uppercase",
               letterSpacing: 0.7,
-              color: "rgba(226,232,240,0.98)",
-              backgroundColor: "rgba(15,23,42,0.35)",
-              border: "1px solid rgba(148,163,184,0.7)",
-              backdropFilter: "blur(16px)",
-              WebkitBackdropFilter: "blur(16px)",
+              color: "#000000",
+              border: "1px solid rgba(0,0,0,0.8)",
+              backgroundColor: "#FFFFFF",
               "& .MuiChip-label": {
                 px: 1.8,
                 py: 0.7,
               },
               "&:hover": {
-                backgroundColor: "rgba(56,189,248,0.35)",
                 borderColor: "rgba(191,219,254,1)",
               },
             }}

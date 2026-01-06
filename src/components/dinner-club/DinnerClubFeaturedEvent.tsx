@@ -48,7 +48,7 @@ const DinnerClubFeaturedEvent: FC = () => {
           sx={{
             fontSize: { xs: 22, md: 30 },
             fontWeight: 600,
-            fontFamily: "var(--font-bricolage, system-ui)",
+            color: "#000000",
           }}
         >
           Featured Upcoming Event
@@ -74,7 +74,7 @@ const DinnerClubFeaturedEvent: FC = () => {
           },
           borderRadius: 5,
           overflow: "hidden",
-          boxShadow: "0 24px 70px rgba(15,23,42,0.35)",
+          boxShadow: "0 1px 8px 1px rgba(15,23,42,0.35)",
           backgroundColor: "transparent",
         }}
       >

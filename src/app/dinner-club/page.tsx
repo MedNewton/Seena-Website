@@ -155,7 +155,7 @@ const DinnerClubPage: FC = () => {
           ))}
         </Stack>
       </Stack>
-      <Footer transparentFooter={true} />
+      <Footer />
     </Box>
   );
 };
