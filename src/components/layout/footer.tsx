@@ -66,6 +66,7 @@ const meshOptions: MeshGradientOptions = {
 const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
   return (
     <Box
+    id="#early-access"
       component="footer"
       sx={{
         mt: { xs: 8, md: 12 },
@@ -123,6 +124,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
 
         {/* Content wrapper (above the big word) */}
         <Box
+
           sx={{
             px: { xs: 0, md: 4 },
             mb: { xs: 16, md: 20 },

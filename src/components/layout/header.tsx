@@ -345,7 +345,7 @@ const Header: React.FC = () => {
 
           {/* Right: CTA (desktop only) */}
           <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <NewButton label="Join Us" onClick={() => router.push("/#join")} />
+            <NewButton label="Join Us" onClick={() => router.push("/#early-access")} />
           </Box>
 
           {/* Mobile: Burger button */}
