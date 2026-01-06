@@ -9,7 +9,7 @@ import { motion } from "motion/react";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
-import phoneImage from "@/assets/images/phone1.webp";
+import phoneImage from "@/assets/images/Seena.webp";
 
 import {
   MeshGradient,
@@ -229,7 +229,7 @@ const MobilePhoneScroll: React.FC = () => {
               "& img": {
                 maxHeight: 360,
                 width: "auto",
-                transform: "scale(1.12)", // slightly larger
+                transform: "scale(1.11)", // slightly larger
                 transformOrigin: "center center",
               },
             }}

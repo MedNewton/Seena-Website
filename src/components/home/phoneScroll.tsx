@@ -6,7 +6,7 @@ import { Box, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 
-import phoneImage from "@/assets/images/phone1.webp";
+import phoneImage from "@/assets/images/Seena.webp";
 import MobilePhoneScroll from "@/components/home/mobilePhoneScroll";
 import {
   MeshGradient,
@@ -240,7 +240,7 @@ const DesktopPhoneScroll: React.FC = () => {
                 "& img": {
                   maxHeight: 480,
                   width: "auto",
-                  transform: "scale(1.25)",
+                  transform: "scale(1.15)",
                   transformOrigin: "center center",
                 },
               }}
