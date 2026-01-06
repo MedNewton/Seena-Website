@@ -27,7 +27,6 @@ const AboutStorySection: FC = () => {
       sx={{
         pt: { xs: 8, md: 4 },
         pb: { xs: 8, md: 2 },
-        bgcolor: (theme) => theme.palette.background.default,
       }}
     >
       <Container
@@ -56,7 +55,7 @@ const AboutStorySection: FC = () => {
                 fontFamily: "var(--font-bricolage)",
                 fontSize: { xs: 30, md: 36 },
                 fontWeight: 500,
-                color: "rgba(248,250,252,0.96)",
+                color: "#000000",
               }}
             >
               The Gap We Saw
@@ -84,7 +83,7 @@ const AboutStorySection: FC = () => {
                     fontFamily: "var(--font-inter)",
                     fontSize: { xs: 15.5, md: 17 },
                     lineHeight: 1.85,
-                    color: "rgba(248,250,252,0.9)",
+                    color: "#000000",
                   }}
                 >
                   {text}
@@ -110,7 +109,7 @@ const AboutStorySection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                   fontWeight: 500,
                 }}
               >
@@ -141,7 +140,7 @@ const AboutStorySection: FC = () => {
                       fontFamily: "var(--font-inter)",
                       fontSize: { xs: 15.5, md: 17 },
                       lineHeight: 1.8,
-                      color: "rgba(248,250,252,0.9)",
+                      color: "#000000",
                       display: "flex",
                       alignItems: "flex-start",
                       gap: 1.5,
@@ -154,7 +153,7 @@ const AboutStorySection: FC = () => {
                         width: 6,
                         height: 6,
                         borderRadius: "50%",
-                        bgcolor: "rgba(248,250,252,0.9)",
+                        bgcolor: "#000000",
                         flexShrink: 0,
                       }}
                     />
@@ -184,7 +183,7 @@ const AboutStorySection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                   fontWeight: 500,
                 }}
               >

@@ -9,6 +9,7 @@ import AboutStorySection from "@/components/about/AboutStorySection";
 import AboutMissionSection from "@/components/about/AboutMissionSection";
 import AboutValuesSection from "@/components/about/AboutValuesSection";
 import AboutClosingSection from "@/components/about/AboutClosingSection";
+import AboutBackgroundLayer from "@/components/about/AboutBackgroundLayer";
 
 
 const ExperiencesPage: FC = () => {
@@ -18,10 +19,11 @@ const ExperiencesPage: FC = () => {
         position: "relative",
         width: "100%",
         minHeight: "100vh",
-        bgcolor: (theme) => theme.palette.background.default,
+        bgcolor: "#FFFFFF",
         pb: { xs: 10, md: 0 },
       }}
     >
+      <AboutBackgroundLayer />
       {/* Main content */}
       <Stack
         sx={{

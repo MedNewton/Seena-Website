@@ -13,7 +13,6 @@ const AboutMissionSection: FC = () => {
       component="section"
       sx={{
         py: { xs: 8, md: 2 },
-        bgcolor: (theme) => theme.palette.background.default,
       }}
     >
       <Container
@@ -42,7 +41,7 @@ const AboutMissionSection: FC = () => {
                 fontFamily: "var(--font-bricolage)",
                 fontSize: { xs: 30, md: 36 },
                 fontWeight: 500,
-                color: "rgba(248,250,252,0.96)",
+                color: "#000000",
               }}
             >
               What We&apos;re Building
@@ -65,7 +64,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                 }}
               >
                 The health and wellness space is louder than ever. Some solutions
@@ -90,7 +89,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                   fontWeight: 500,
                 }}
               >
@@ -123,7 +122,7 @@ const AboutMissionSection: FC = () => {
                       fontFamily: "var(--font-inter)",
                       fontSize: { xs: 15.5, md: 17 },
                       lineHeight: 1.8,
-                      color: "rgba(248,250,252,0.9)",
+                      color: "#000000",
                       display: "flex",
                       alignItems: "center",
                       gap: 1.5,
@@ -136,7 +135,7 @@ const AboutMissionSection: FC = () => {
                         width: 6,
                         height: 6,
                         borderRadius: "50%",
-                        bgcolor: "rgba(248,250,252,0.9)",
+                        bgcolor: "#000000",
                         flexShrink: 0,
                       }}
                     />
@@ -160,7 +159,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                 }}
               >
                 Stress today is not just internal. It is shaped by food options,
@@ -184,7 +183,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                 }}
               >
                 That is why Seena is not only an app. It is a community.
@@ -205,7 +204,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                 }}
               >
                 We support our users on screen and beyond the screen through:
@@ -237,7 +236,7 @@ const AboutMissionSection: FC = () => {
                       fontFamily: "var(--font-inter)",
                       fontSize: { xs: 15.5, md: 17 },
                       lineHeight: 1.8,
-                      color: "rgba(248,250,252,0.9)",
+                      color: "#000000",
                       display: "flex",
                       alignItems: "center",
                       gap: 1.5,
@@ -250,7 +249,7 @@ const AboutMissionSection: FC = () => {
                         width: 6,
                         height: 6,
                         borderRadius: "50%",
-                        bgcolor: "rgba(248,250,252,0.9)",
+                        bgcolor: "#000000",
                         flexShrink: 0,
                       }}
                     />
@@ -274,7 +273,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                   fontWeight: 500,
                 }}
               >
@@ -296,7 +295,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                 }}
               >
                 People feel steady in their body, clear in their mind, and
@@ -319,7 +318,7 @@ const AboutMissionSection: FC = () => {
                   fontFamily: "var(--font-inter)",
                   fontSize: { xs: 15.5, md: 17 },
                   lineHeight: 1.85,
-                  color: "rgba(248,250,252,0.9)",
+                  color: "#000000",
                   fontWeight: 500,
                 }}
               >

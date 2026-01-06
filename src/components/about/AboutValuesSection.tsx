@@ -57,7 +57,6 @@ const AboutValuesSection: FC = () => {
       component="section"
       sx={{
         py: { xs: 8, md: 2 },
-        bgcolor: (theme) => theme.palette.background.default,
       }}
     >
       <Container
@@ -86,7 +85,7 @@ const AboutValuesSection: FC = () => {
                 fontFamily: "var(--font-bricolage)",
                 fontSize: { xs: 28, md: 34 },
                 fontWeight: 500,
-                color: "rgba(248,250,252,0.96)",
+                color: "#000000",
               }}
             >
               Our Values

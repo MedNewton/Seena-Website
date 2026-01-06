@@ -12,7 +12,6 @@ const AboutClosingSection: FC = () => {
       component="section"
       sx={{
         py: { xs: 8, md: 4 },
-        bgcolor: (theme) => theme.palette.background.default,
       }}
     >
       <Container
@@ -35,7 +34,7 @@ const AboutClosingSection: FC = () => {
                 fontFamily: "var(--font-inter)",
                 fontSize: { xs: 14.5, md: 16 },
                 lineHeight: 1.8,
-                color: "rgba(248,250,252,0.9)",
+                color: "#000000",
               }}
             >
               Seena is not just restoring wellness — it&apos;s restoring the
@@ -56,7 +55,7 @@ const AboutClosingSection: FC = () => {
                 fontFamily: "var(--font-inter)",
                 fontSize: { xs: 14.5, md: 16 },
                 lineHeight: 1.8,
-                color: "rgba(248,250,252,0.9)",
+                color: "#000000",
               }}
             >
               From overdrive to alignment. From burnout to balance.
@@ -76,7 +75,7 @@ const AboutClosingSection: FC = () => {
                 fontFamily: "var(--font-inter)",
                 fontSize: { xs: 14.5, md: 16 },
                 lineHeight: 1.8,
-                color: "rgba(248,250,252,0.9)",
+                color: "#000000",
               }}
             >
               This is your rise. From the inside out.
