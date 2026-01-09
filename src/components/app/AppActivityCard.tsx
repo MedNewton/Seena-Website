@@ -45,25 +45,24 @@ const AppActivityCard: FC<AppActivityCardProps> = ({
         style={{ objectFit: "cover" }}
       />
 
-      {/* Dark gradient overlay */}
-
-
       {/* Bottom text */}
       <Box
         sx={{
           position: "absolute",
-          left: 12,
-          right: 12,
-          bottom: 10,
+          left: 0,
+          right: 0,
+          bottom: 0,
           display: "flex",
           flexDirection: "column",
           gap: 0.5,
+          background: "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+          padding: 2
         }}
       >
         <Typography
           sx={{
-            fontSize: 11,
-            fontWeight: 400,
+            fontSize: 16,
+            fontWeight: 600,
             letterSpacing: 0.3,
             textTransform: "uppercase",
             color: "rgba(249,250,251,0.85)",
