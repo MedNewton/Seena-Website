@@ -1,31 +1,15 @@
-// src/app/page.tsx
-"use client";
+// app/about/page.tsx
+import type { Metadata } from "next";
+import HomePageClient from "./homeClient";
+import { buildPageMetadata } from "@/utils/metadata";
 
-import { Stack } from "@mui/material";
-import Hero from "@/components/home/hero";
-import ModernOverdriveSection from "@/components/home/ModernOverdriveSection";
-import Explore from "@/components/home/explore";
-import PhoneScroll from "@/components/home/phoneScroll";
-import Branches from "@/components/home/branches";
-import Circles from "@/components/home/circles";
-import Footer from "@/components/layout/footer";
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata("home", {
+    title: "Seena | Reset Your Body, Mind, and Soul",
+    description: "",
+  });
+}
 
-const Home: React.FC = () => {
-  return (
-    <Stack width="100%">
-      <Hero />
-      <Stack gap={2} sx={{
-        px: { xs: 0, md: 3 },
-      }}>
-        <ModernOverdriveSection />
-        <Explore />
-        <PhoneScroll />
-        <Branches />
-        <Circles />
-      </Stack>
-      <Footer />
-    </Stack>
-  );
-};
-
-export default Home;
+export default function DinnerClubPage() {
+  return <HomePageClient />;
+}

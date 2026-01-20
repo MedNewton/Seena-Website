@@ -1,5 +1,5 @@
 // src/app/blog/page.tsx
-
+import type { Metadata } from "next";
 import type { ReactElement } from "react";
 import { Box } from "@mui/material";
 
@@ -10,6 +10,15 @@ import BlogBackgroundLayer from "@/components/blog/BlogBackgroundLayer";
 import BlogPageClient, {
   type BlogPost,
 } from "@/components/blog/BlogPageClient";
+import { buildPageMetadata } from "@/utils/metadata";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return buildPageMetadata("blog", {
+    title: "Seena | Blog",
+    description: "",
+  });
+}
+
 
 export default async function BlogPage(): Promise<ReactElement> {
   const rawPosts = await getPosts();

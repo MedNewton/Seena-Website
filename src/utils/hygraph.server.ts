@@ -28,18 +28,25 @@ async function hygraphFetch<T>(
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
     body: JSON.stringify({ query, variables }),
-    // Next.js caching
     next: { revalidate: options?.revalidateSeconds ?? 60 },
   });
 
-  if (!res.ok) {
-    throw new Error(`Hygraph error: ${res.status} ${res.statusText}`);
+  // Always parse the response body first
+  const json = (await res.json()) as { data?: T; errors?: unknown };
+
+  // Log any GraphQL errors
+  if (json.errors) {
+    console.error("Hygraph GraphQL errors:", JSON.stringify(json.errors, null, 2));
   }
 
-  const json = (await res.json()) as { data?: T; errors?: unknown };
+  if (!res.ok) {
+    throw new Error(`Hygraph error: ${res.status} - ${JSON.stringify(json.errors)}`);
+  }
+
   if (!json.data) {
     throw new Error("Hygraph response missing data");
   }
+
   return json.data;
 }
 
