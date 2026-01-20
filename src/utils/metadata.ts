@@ -83,11 +83,11 @@ export async function buildPageMetadata(
   const meta = await getPageMetadata(slug);
 
   return {
-    title: meta?.title || defaults.title,
-    description: meta?.description || defaults.description,
+    title: meta?.title ?? defaults.title,
+    description: meta?.description ?? defaults.description,
     openGraph: {
-      title: meta?.ogTitle || meta?.title || defaults.title,
-      description: meta?.ogDescription || meta?.description || defaults.description,
+      title: meta?.ogTitle ?? meta?.title ?? defaults.title,
+      description: meta?.ogDescription ?? meta?.description ?? defaults.description,
       images: meta?.ogImage ? [{ url: meta.ogImage }] : undefined,
     },
   };
