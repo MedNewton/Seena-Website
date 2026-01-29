@@ -22,7 +22,6 @@ const ExperiencesActivityCard: FC<ExperiencesActivityCardProps> = ({
 
   return (
     <MotionBox
-      whileHover={{ y: -4, scale: 1.02 }}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",

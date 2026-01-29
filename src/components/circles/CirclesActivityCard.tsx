@@ -22,7 +22,6 @@ const CirclesActivityCard: FC<CirclesActivityCardProps> = ({
 
   return (
     <MotionBox
-      whileHover={{ y: -4, scale: 1.02 }}
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",
@@ -32,7 +31,7 @@ const CirclesActivityCard: FC<CirclesActivityCardProps> = ({
         flexShrink: 0,
         // Responsive card sizes - smaller on mobile
         width: { xs: 160, sm: 200, md: 260, lg: 280 },
-        height: { xs: 140, sm: 180, md: 260, lg: 260 },
+        height: "var(--circles-card-height, 260px)",
         backgroundColor: "#020617",
       }}
     >

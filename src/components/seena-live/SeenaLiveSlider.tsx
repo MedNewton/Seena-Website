@@ -1,7 +1,7 @@
 "use client";
 
 import type { FC } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Box, Stack, Typography, IconButton } from "@mui/material";
 import { motion } from "framer-motion";
 import ChevronLeftRoundedIcon from "@mui/icons-material/ChevronLeftRounded";
@@ -32,6 +32,37 @@ const SeenaLiveSectionSlider: FC<SeenaLiveSectionSliderProps> = ({
 }) => {
   const { title, activities } = config;
   const scrollRef = useRef<HTMLDivElement | null>(null);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  useEffect(() => {
+    const node = scrollRef.current;
+    if (!node) return;
+
+    const updateEdges = () => {
+      const maxScrollLeft = node.scrollWidth - node.clientWidth;
+      const threshold = 4;
+
+      if (maxScrollLeft <= threshold) {
+        setIsAtStart(true);
+        setIsAtEnd(true);
+        return;
+      }
+
+      setIsAtStart(node.scrollLeft <= threshold);
+      setIsAtEnd(node.scrollLeft >= maxScrollLeft - threshold);
+    };
+
+    updateEdges();
+
+    node.addEventListener("scroll", updateEdges, { passive: true });
+    window.addEventListener("resize", updateEdges);
+
+    return () => {
+      node.removeEventListener("scroll", updateEdges);
+      window.removeEventListener("resize", updateEdges);
+    };
+  }, []);
 
   const handleScroll = (direction: "left" | "right") => () => {
     const node = scrollRef.current;
@@ -84,45 +115,101 @@ const SeenaLiveSectionSlider: FC<SeenaLiveSectionSliderProps> = ({
           duration: 0.5,
           ease: [0.22, 1, 0.36, 1],
         }}
-        sx={{
+        sx={(theme) => ({
           position: "relative",
           width: "100%",
-        }}
+          "--section-card-height": {
+            xs: "140px",
+            sm: "180px",
+            md: "260px",
+            lg: "260px",
+          },
+          "--section-track-padding-y": theme.spacing(1),
+        })}
       >
-        {/* Scrollable track */}
-        <Box
-          ref={scrollRef}
-          sx={{
-            width: "100%",
-            overflowX: "auto",
-            overflowY: "visible",
-            py: 1,
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
-            msOverflowStyle: "none",
-            scrollbarWidth: "none",
-            scrollBehavior: "smooth",
-            WebkitOverflowScrolling: "touch",
-          }}
-        >
-          <Stack
-            direction="row"
-            spacing={{ xs: 1.5, md: 2 }}
+        <Box sx={{ position: "relative" }}>
+          {/* Scrollable track */}
+          <Box
+            ref={scrollRef}
             sx={{
-              width: "max-content",
-              minWidth: "100%",
-              px: 0.5,
+              width: "100%",
+              overflowX: "auto",
+              overflowY: "visible",
+              py: 1,
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+              msOverflowStyle: "none",
+              scrollbarWidth: "none",
+              scrollBehavior: "smooth",
+              WebkitOverflowScrolling: "touch",
             }}
           >
-            {activities.map((activity, index) => (
-              <ExperiencesActivityCard
-                key={activity.id}
-                activity={activity}
-                isHighlighted={index === 0}
-              />
-            ))}
-          </Stack>
+            <Stack
+              direction="row"
+              spacing={{ xs: 1.5, md: 2 }}
+              sx={{
+                width: "max-content",
+                minWidth: "100%",
+                px: 0.5,
+              }}
+            >
+              {activities.map((activity, index) => (
+                <ExperiencesActivityCard
+                  key={activity.id}
+                  activity={activity}
+                  isHighlighted={index === 0}
+                />
+              ))}
+            </Stack>
+          </Box>
+
+          {/* Edge blur overlays (same height as cards) */}
+          <Box
+            aria-hidden
+            sx={{
+              position: "absolute",
+              left: 0,
+              right: 0,
+              top: "var(--section-track-padding-y)",
+              height: "var(--section-card-height)",
+              pointerEvents: "none",
+              zIndex: 1,
+            }}
+          >
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                height: "100%",
+                width: { xs: 36, md: 56 },
+                opacity: isAtStart ? 0 : 1,
+                transition: "opacity 200ms ease",
+                backgroundColor: "rgba(2,6,23,0.85)",
+                maskImage:
+                  "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              }}
+            />
+            <Box
+              sx={{
+                position: "absolute",
+                top: 0,
+                right: 0,
+                height: "100%",
+                width: { xs: 36, md: 56 },
+                opacity: isAtEnd ? 0 : 1,
+                transition: "opacity 200ms ease",
+                backgroundColor: "rgba(2,6,23,0.85)",
+                maskImage:
+                  "linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+                WebkitMaskImage:
+                  "linear-gradient(270deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)",
+              }}
+            />
+          </Box>
         </Box>
 
         {/* Left arrow */}
@@ -134,6 +221,7 @@ const SeenaLiveSectionSlider: FC<SeenaLiveSectionSliderProps> = ({
             top: "50%",
             left: { xs: 4, md: 8 },
             transform: "translateY(-50%)",
+            zIndex: 2,
             width: 44,
             height: 44,
             borderRadius: "999px",
@@ -161,6 +249,7 @@ const SeenaLiveSectionSlider: FC<SeenaLiveSectionSliderProps> = ({
             top: "50%",
             right: { xs: 4, md: 8 },
             transform: "translateY(-50%)",
+            zIndex: 2,
             width: 44,
             height: 44,
             borderRadius: "999px",

@@ -23,7 +23,6 @@ const ScreeningActivityCard: FC<ScreeningActivityCardProps> = ({
 
   return (
     <MotionBox
-      whileHover={{ y: -4, scale: 1.01 }}
       transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",
