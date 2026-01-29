@@ -127,11 +127,11 @@ const Hero: React.FC = () => {
           <Stack
             direction="row"
             alignItems="baseline"
-            justifyContent="center"
+            justifyContent="space-between"
             sx={{
               width: "100%",
               maxWidth: 1200,
-              gap: { xs: 2, md: 4 },
+              gap: { xs: 1.5, md: 4 },
             }}
           >
             {/* Left word */}
@@ -172,7 +172,7 @@ const Hero: React.FC = () => {
             >
               <Box
                 sx={{
-                  width: { xs: 160, md: 460 },
+                  width: { xs: 120, md: 460 },
                   display: "flex",
                   justifyContent: "center",
                 }}
@@ -287,7 +287,7 @@ const Hero: React.FC = () => {
             alignItems={{ xs: "center", md: "center" }}
             justifyContent={{ xs: "center", md: "space-between" }}
             sx={{
-              transform: { xs: "translateY(3rem)", md: "translateY(10rem)" },
+              transform: { xs: "translateY(5rem)", md: "translateY(10rem)" },
             }}
           >
             {/* DIGITAL – primary */}

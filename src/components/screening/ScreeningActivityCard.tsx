@@ -27,19 +27,19 @@ const ScreeningActivityCard: FC<ScreeningActivityCardProps> = ({
       transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",
-        borderRadius: 3,
+        borderRadius: 2,
         overflow: "hidden",
         cursor: "pointer",
         flexShrink: 0,
-        width: { xs: 260, md: 280 },
-        minHeight: 220,
+        width: { xs: 200, sm: 240, md: 280 },
+        minHeight: { xs: 180, sm: 200, md: 220 },
         backgroundColor: "#FFFFFF",
         border: "1px solid #E5E7EB",
         display: "flex",
         flexDirection: "column",
-        px: 2.5,
-        pt: 2.25,
-        pb: 2.1,
+        px: { xs: 1.5, md: 2.5 },
+        pt: { xs: 1.5, md: 2.25 },
+        pb: { xs: 1.5, md: 2.1 },
       }}
     >
       {/* Title + description */}

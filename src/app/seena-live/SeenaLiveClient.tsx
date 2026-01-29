@@ -105,6 +105,7 @@ const SeenaLivePageClient: FC = () => {
         minHeight: "100vh",
         bgcolor: (theme) => theme.palette.background.default,
         pb: { xs: 10, md: 0 },
+        overflowX: "hidden",
       }}
     >
       {/* Background glow layer – absolutely positioned behind content */}

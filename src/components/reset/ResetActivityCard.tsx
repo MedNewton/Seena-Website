@@ -26,13 +26,13 @@ const ResetActivityCard: FC<ResetActivityCardProps> = ({
       transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
       sx={{
         position: "relative",
-        borderRadius: 3,
+        borderRadius: 2,
         overflow: "hidden",
         cursor: "pointer",
         flexShrink: 0,
-        // Bigger cards
-        width: { xs: 220, md: 260, lg: 280 },
-        height: { xs: 200, md: 260, lg: 260 },
+        // Responsive card sizes - smaller on mobile
+        width: { xs: 160, sm: 200, md: 260, lg: 280 },
+        height: { xs: 140, sm: 180, md: 260, lg: 260 },
         backgroundColor: "#020617",
       }}
     >
@@ -64,11 +64,16 @@ const ResetActivityCard: FC<ResetActivityCardProps> = ({
       >
         <Typography
           sx={{
-            fontSize: 16,
+            fontSize: { xs: 12, sm: 14, md: 16 },
             fontWeight: 600,
             letterSpacing: 0.3,
             textTransform: "uppercase",
             color: "rgba(249,250,251,0.85)",
+            lineHeight: 1.3,
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
           }}
         >
           {title}

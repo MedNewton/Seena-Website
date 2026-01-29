@@ -19,8 +19,9 @@ const DinnerClubHero: FC<DinnerClubHeroProps> = ({ title, image }) => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        // higher hero
-        minHeight: { xs: 240, md: 320, lg: 460 },
+        // higher hero with top padding for fixed header on mobile
+        minHeight: { xs: 280, md: 320, lg: 460 },
+        pt: { xs: 8, md: 0 },
       }}
     >
       <Image

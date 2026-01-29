@@ -98,16 +98,20 @@ const ResetSectionSlider: FC<ResetSectionSliderProps> = ({
             overflowY: "hidden",
             py: 1,
             "&::-webkit-scrollbar": {
-              height: 0,
+              display: "none",
             },
+            msOverflowStyle: "none",
+            scrollbarWidth: "none",
             scrollBehavior: "smooth",
+            WebkitOverflowScrolling: "touch",
           }}
         >
           <Stack
             direction="row"
-            spacing={2}
+            spacing={{ xs: 1.5, md: 2 }}
             sx={{
-              minWidth: "100%",
+              width: "max-content",
+              px: 0.5,
             }}
           >
             {activities.map((activity, index) => (

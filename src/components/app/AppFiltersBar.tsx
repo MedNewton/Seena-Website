@@ -19,51 +19,47 @@ const TAGS = ["Stress", "Mindfulness", "Sleep", "Physical", "Community"];
 
 const AppFiltersBar: FC = () => {
   return (
-    <Stack spacing={2.5}>
-      {/* Search + controls row */}
+    <Stack spacing={2}>
+      {/* Search row - full width on mobile */}
+      <TextField
+        fullWidth
+        variant="outlined"
+        placeholder="Search by activity"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <SearchIcon
+                sx={{ fontSize: 20, color: "rgba(248,250,252,0.9)" }}
+              />
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          "& .MuiOutlinedInput-root": {
+            borderRadius: 999,
+            fontSize: 14,
+            paddingRight: 1.5,
+            backgroundColor: "rgba(15,23,42,0.45)",
+            border: "1px solid rgba(148,163,184,0.6)",
+            color: "#E5E7EB",
+            backdropFilter: "blur(18px)",
+            WebkitBackdropFilter: "blur(18px)",
+            boxShadow: "0 18px 45px rgba(15,23,42,0.75)",
+            "& fieldset": { border: "none" },
+          },
+          "& .MuiInputBase-input": {
+            paddingY: 1.4,
+          },
+        }}
+      />
+
+      {/* Controls row - Location + Sort */}
       <Stack
         direction="row"
-        spacing={2}
+        spacing={1.5}
         alignItems="center"
-        sx={{
-          width: "100%",
-          flexWrap: { xs: "wrap", md: "nowrap" },
-        }}
+        sx={{ width: "100%" }}
       >
-        {/* Search */}
-        <TextField
-          fullWidth
-          variant="outlined"
-          placeholder="Search by activity"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <SearchIcon
-                  sx={{ fontSize: 20, color: "rgba(248,250,252,0.9)" }}
-                />
-              </InputAdornment>
-            ),
-          }}
-          sx={{
-            maxWidth: "100%",
-            "& .MuiOutlinedInput-root": {
-              borderRadius: 999,
-              fontSize: 14,
-              paddingRight: 1.5,
-              backgroundColor: "rgba(15,23,42,0.45)",
-              border: "1px solid rgba(148,163,184,0.6)",
-              color: "#E5E7EB",
-              backdropFilter: "blur(18px)",
-              WebkitBackdropFilter: "blur(18px)",
-              boxShadow: "0 18px 45px rgba(15,23,42,0.75)",
-              "& fieldset": { border: "none" },
-            },
-            "& .MuiInputBase-input": {
-              paddingY: 1.4,
-            },
-          }}
-        />
-
         {/* Location */}
         <Button
           variant="outlined"
@@ -71,7 +67,7 @@ const AppFiltersBar: FC = () => {
           sx={{
             borderRadius: 999,
             whiteSpace: "nowrap",
-            px: 2.8,
+            px: { xs: 2, md: 2.8 },
             py: 1.1,
             fontSize: 12,
             textTransform: "uppercase",
@@ -82,7 +78,6 @@ const AppFiltersBar: FC = () => {
             backdropFilter: "blur(18px)",
             WebkitBackdropFilter: "blur(18px)",
             boxShadow: "0 14px 32px rgba(15,23,42,0.7)",
-            flexShrink: 0,
             "&:hover": {
               borderColor: "rgba(191,219,254,0.95)",
               backgroundColor: "rgba(15,23,42,0.6)",
@@ -97,10 +92,6 @@ const AppFiltersBar: FC = () => {
           direction="row"
           spacing={0.75}
           alignItems="center"
-          sx={{
-            display: { xs: "none", sm: "flex" },
-            flexShrink: 0,
-          }}
         >
           <Typography
             sx={{
@@ -108,6 +99,7 @@ const AppFiltersBar: FC = () => {
               textTransform: "uppercase",
               letterSpacing: 0.7,
               color: "rgba(209,213,219,0.85)",
+              display: { xs: "none", sm: "block" },
             }}
           >
             Sort
@@ -131,8 +123,17 @@ const AppFiltersBar: FC = () => {
         </Stack>
       </Stack>
 
-      {/* Tags row */}
-      <Stack direction="row" spacing={1} flexWrap="wrap">
+      {/* Tags row - horizontal scroll on mobile */}
+      <Box
+        sx={{
+          width: "100%",
+          overflowX: "auto",
+          "&::-webkit-scrollbar": { display: "none" },
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
+        }}
+      >
+        <Stack direction="row" spacing={1} sx={{ pb: 0.5 }}>
         {TAGS.map((tag) => (
           <Chip
             key={tag}
@@ -160,7 +161,8 @@ const AppFiltersBar: FC = () => {
             }}
           />
         ))}
-      </Stack>
+        </Stack>
+      </Box>
     </Stack>
   );
 };

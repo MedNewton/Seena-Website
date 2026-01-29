@@ -132,7 +132,7 @@ const Header: React.FC = () => {
             py: 1,
             overflow: "visible", // allow dropdown to render outside
             background: {
-              xs: "unset",
+              xs: "linear-gradient(120deg, rgba(15,23,42,0.85), rgba(15,23,42,0.65))",
               md: "linear-gradient(120deg, rgba(15,23,42,0.88), rgba(15,23,42,0.7))",
             },
             backdropFilter: "blur(22px)",
@@ -389,7 +389,7 @@ const Header: React.FC = () => {
                 position: "absolute",
                 inset: 0,
                 background:
-                  "linear-gradient(135deg, rgba(15,23,42,0.96), rgba(15,23,42,0.94))",
+                  "linear-gradient(135deg, rgba(15,23,42,0.85), rgba(15,23,42,0.75))",
                 backdropFilter: "blur(24px)",
                 WebkitBackdropFilter: "blur(24px)",
               }}

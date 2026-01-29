@@ -395,6 +395,7 @@ const ScreeningPageClient: FC = () => {
         minHeight: "100vh",
         bgcolor: (theme) => theme.palette.background.default,
         pb: { xs: 10, md: 0 },
+        overflowX: "hidden",
       }}
     >
       <ScreeningBackgroundLayer />

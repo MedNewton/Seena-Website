@@ -27,7 +27,7 @@ const TAGS = [
 
 const ScreeningFiltersBar: FC = () => {
   return (
-    <Stack spacing={2.5}>
+    <Stack spacing={2}>
       {/* Search row */}
       <TextField
         fullWidth
@@ -56,14 +56,14 @@ const ScreeningFiltersBar: FC = () => {
             },
           },
           "& .MuiInputBase-input": {
-            paddingY: 1.8,
-            fontSize: 15,
+            paddingY: { xs: 1.4, md: 1.8 },
+            fontSize: { xs: 13, md: 15 },
             color: "#111827",
           },
           "& .MuiInputBase-input::placeholder": {
             textTransform: "uppercase",
             letterSpacing: 1.6,
-            fontSize: 13,
+            fontSize: { xs: 11, md: 13 },
             color: "#9CA3AF",
             opacity: 1,
           },
@@ -73,47 +73,47 @@ const ScreeningFiltersBar: FC = () => {
       {/* Tags + Sort row */}
       <Stack
         direction="row"
-        alignItems="start"
+        alignItems="center"
         spacing={1.5}
-        sx={{
-          width: "100%",
-          flexWrap: "wrap",
-        }}
+        sx={{ width: "100%" }}
       >
-        {/* Tags */}
+        {/* Tags - horizontal scroll on mobile */}
         <Box
           sx={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 1,
             flex: 1,
-            pr: 2,
+            overflowX: "auto",
+            "&::-webkit-scrollbar": { display: "none" },
+            msOverflowStyle: "none",
+            scrollbarWidth: "none",
           }}
         >
-          {TAGS.map((tag) => (
-            <Chip
-              key={tag}
-              label={tag}
-              clickable
-              sx={{
-                borderRadius: 999,
-                backgroundColor: "#FFFFFF",
-                border: "1px solid #E5E7EB",
-                boxShadow: "0 1px 3px rgba(15,23,42,0.04)",
-                color: "#111827",
-                "& .MuiChip-label": {
-                  px: 2.4,
-                  py: 1,
-                  fontSize: 13,
-                  fontWeight: 500,
-                },
-                "&:hover": {
-                  borderColor: "#0F172A",
-                  backgroundColor: "#F9FAFB",
-                },
-              }}
-            />
-          ))}
+          <Stack direction="row" spacing={1} sx={{ pb: 0.5 }}>
+            {TAGS.map((tag) => (
+              <Chip
+                key={tag}
+                label={tag}
+                clickable
+                sx={{
+                  borderRadius: 999,
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #E5E7EB",
+                  boxShadow: "0 1px 3px rgba(15,23,42,0.04)",
+                  color: "#111827",
+                  flexShrink: 0,
+                  "& .MuiChip-label": {
+                    px: { xs: 1.5, md: 2.4 },
+                    py: { xs: 0.5, md: 1 },
+                    fontSize: { xs: 11, md: 13 },
+                    fontWeight: 500,
+                  },
+                  "&:hover": {
+                    borderColor: "#0F172A",
+                    backgroundColor: "#F9FAFB",
+                  },
+                }}
+              />
+            ))}
+          </Stack>
         </Box>
 
         {/* Sort */}
@@ -121,15 +121,13 @@ const ScreeningFiltersBar: FC = () => {
           direction="row"
           spacing={0.75}
           alignItems="center"
-          sx={{
-            ml: "auto",
-            flexShrink: 0,
-          }}
+          sx={{ flexShrink: 0 }}
         >
           <Typography
             sx={{
               fontSize: 14,
               color: "#111827",
+              display: { xs: "none", sm: "block" },
             }}
           >
             Sort
