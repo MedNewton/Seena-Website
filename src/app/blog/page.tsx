@@ -31,6 +31,7 @@ export default async function BlogPage(): Promise<ReactElement> {
         width: "100%",
         minHeight: "100vh",
         bgcolor: "#F9FAFB",
+        overflowX: "hidden",
       }}
     >
       <BlogBackgroundLayer />

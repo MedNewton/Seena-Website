@@ -41,8 +41,9 @@ const SeenaLiveActivityCard: FC<SeenaLiveActivityCardProps> = ({
         src={image}
         alt={title}
         fill
-        sizes="(max-width: 768px) 220px, 280px"
+        sizes="(max-width: 600px) 160px, (max-width: 960px) 200px, 280px"
         style={{ objectFit: "cover" }}
+        priority={false}
       />
 
       {/* Dark gradient overlay */}

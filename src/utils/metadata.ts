@@ -15,6 +15,7 @@ interface PageMetadataResponse {
     ogImage?: {
       url: string;
     };
+    focusKeywords?: string[];
   } | null;
 }
 
@@ -24,6 +25,7 @@ export interface PageMetadata {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  focusKeywords?: string[];
 }
 
 interface MetadataDefaults {
@@ -45,6 +47,7 @@ const PAGE_METADATA_QUERY = `
       ogImage {
         url
       }
+      focusKeywords
     }
   }
 `;
@@ -69,6 +72,7 @@ export async function getPageMetadata(slug: string): Promise<PageMetadata | null
       ogTitle: data.seenaMetadata.ogTitle,
       ogDescription: data.seenaMetadata.ogDescription,
       ogImage: data.seenaMetadata.ogImage?.url,
+      focusKeywords: data.seenaMetadata.focusKeywords,
     };
   } catch (error) {
     console.error(`Failed to fetch metadata for "${slug}":`, error);
@@ -85,6 +89,7 @@ export async function buildPageMetadata(
   return {
     title: meta?.title ?? defaults.title,
     description: meta?.description ?? defaults.description,
+    keywords: meta?.focusKeywords?.length ? meta.focusKeywords : undefined,
     openGraph: {
       title: meta?.ogTitle ?? meta?.title ?? defaults.title,
       description: meta?.ogDescription ?? meta?.description ?? defaults.description,

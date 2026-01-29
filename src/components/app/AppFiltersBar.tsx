@@ -124,16 +124,18 @@ const AppFiltersBar: FC = () => {
       </Stack>
 
       {/* Tags row - horizontal scroll on mobile */}
+      {/* Tags row - horizontal scroll on mobile */}
       <Box
         sx={{
           width: "100%",
           overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
           "&::-webkit-scrollbar": { display: "none" },
           msOverflowStyle: "none",
           scrollbarWidth: "none",
         }}
       >
-        <Stack direction="row" spacing={1} sx={{ pb: 0.5 }}>
+        <Stack direction="row" spacing={1} sx={{ pb: 0.5, width: "max-content" }}>
         {TAGS.map((tag) => (
           <Chip
             key={tag}
@@ -150,6 +152,7 @@ const AppFiltersBar: FC = () => {
               backdropFilter: "blur(16px)",
               WebkitBackdropFilter: "blur(16px)",
               boxShadow: "0 12px 30px rgba(15,23,42,0.7)",
+              flexShrink: 0,
               "& .MuiChip-label": {
                 px: 1.8,
                 py: 0.7,

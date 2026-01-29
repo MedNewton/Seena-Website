@@ -82,12 +82,13 @@ const ScreeningFiltersBar: FC = () => {
           sx={{
             flex: 1,
             overflowX: "auto",
+            WebkitOverflowScrolling: "touch",
             "&::-webkit-scrollbar": { display: "none" },
             msOverflowStyle: "none",
             scrollbarWidth: "none",
           }}
         >
-          <Stack direction="row" spacing={1} sx={{ pb: 0.5 }}>
+          <Stack direction="row" spacing={1} sx={{ pb: 0.5, width: "max-content" }}>
             {TAGS.map((tag) => (
               <Chip
                 key={tag}

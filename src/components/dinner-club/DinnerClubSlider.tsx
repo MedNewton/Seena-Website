@@ -95,7 +95,7 @@ const DinnerClubSectionSlider: FC<DinnerClubSectionSliderProps> = ({
           sx={{
             width: "100%",
             overflowX: "auto",
-            overflowY: "hidden",
+            overflowY: "visible",
             py: 1,
             "&::-webkit-scrollbar": {
               display: "none",
@@ -111,6 +111,7 @@ const DinnerClubSectionSlider: FC<DinnerClubSectionSliderProps> = ({
             spacing={{ xs: 1.5, md: 2 }}
             sx={{
               width: "max-content",
+              minWidth: "100%",
               px: 0.5,
             }}
           >

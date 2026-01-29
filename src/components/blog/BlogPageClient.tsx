@@ -233,6 +233,7 @@ const BlogPageClient: FC<BlogPageClientProps> = ({ posts }) => {
   return (
     <Box
       sx={{
+        width: "100%",
         maxWidth: 1440,
         mx: "auto",
         pt: 8,
@@ -240,6 +241,7 @@ const BlogPageClient: FC<BlogPageClientProps> = ({ posts }) => {
         pb: 8,
         position: "relative",
         zIndex: 1,
+        boxSizing: "border-box",
       }}
     >
       {/* Top search / filters row */}
@@ -313,37 +315,49 @@ const BlogPageClient: FC<BlogPageClientProps> = ({ posts }) => {
         </Stack>
 
         {/* Category pills (filter by category) */}
-        <Stack direction="row" spacing={1} flexWrap="wrap">
-          {CATEGORY_ORDER_LABELS.map((label) => {
-            const isActive = activeCategory === label;
+        <Box
+          sx={{
+            width: "100%",
+            overflowX: "auto",
+            WebkitOverflowScrolling: "touch",
+            "&::-webkit-scrollbar": { display: "none" },
+            msOverflowStyle: "none",
+            scrollbarWidth: "none",
+          }}
+        >
+          <Stack direction="row" spacing={1} sx={{ width: "max-content", pb: 0.5 }}>
+            {CATEGORY_ORDER_LABELS.map((label) => {
+              const isActive = activeCategory === label;
 
-            return (
-              <Chip
-                key={label}
-                label={label}
-                clickable
-                onClick={() =>
-                  setActiveCategory((prev) =>
-                    prev === label ? null : label
-                  )
-                }
-                sx={{
-                  borderRadius: 999,
-                  fontSize: 11,
-                  textTransform: "uppercase",
-                  letterSpacing: 0.8,
-                  bgcolor: isActive ? "#111827" : "#FFFFFF",
-                  border: "1px solid #E5E7EB",
-                  "& .MuiChip-label": {
-                    px: 1.8,
-                    py: 0.6,
-                    color: isActive ? "#FFFFFF" : "#111827",
-                  },
-                }}
-              />
-            );
-          })}
-        </Stack>
+              return (
+                <Chip
+                  key={label}
+                  label={label}
+                  clickable
+                  onClick={() =>
+                    setActiveCategory((prev) =>
+                      prev === label ? null : label
+                    )
+                  }
+                  sx={{
+                    borderRadius: 999,
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: 0.8,
+                    bgcolor: isActive ? "#111827" : "#FFFFFF",
+                    border: "1px solid #E5E7EB",
+                    flexShrink: 0,
+                    "& .MuiChip-label": {
+                      px: 1.8,
+                      py: 0.6,
+                      color: isActive ? "#FFFFFF" : "#111827",
+                    },
+                  }}
+                />
+              );
+            })}
+          </Stack>
+        </Box>
       </Stack>
 
       {/* Hero row (two main cards, 50/50) */}

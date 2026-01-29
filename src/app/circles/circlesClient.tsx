@@ -189,6 +189,7 @@ const CirclesPageClient: FC = () => {
         sx={{
           position: "relative",
           zIndex: 1,
+          width: "100%",
           mx: "auto",
           gap: { xs: 4, md: 6 },
         }}
@@ -201,10 +202,12 @@ const CirclesPageClient: FC = () => {
         <Stack sx={{
           position: "relative",
           zIndex: 1,
+          width: "100%",
           maxWidth: 1440,
           mx: "auto",
           px: { xs: 2, md: 3 },
           gap: { xs: 4, md: 6 },
+          boxSizing: "border-box",
         }}>
           <CirclesFiltersBar />
 

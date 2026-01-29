@@ -35,7 +35,7 @@ const BlogSmallCard: FC<{ post: BlogPostCard }> = ({ post }) => {
       component={NextLink}
       href={`/blog/${post.slug}`}
       sx={{
-        width: 260,
+        width: { xs: 220, sm: 240, md: 260 },
         borderRadius: 3,
         overflow: "hidden",
         bgcolor: "#FFFFFF",
@@ -48,7 +48,7 @@ const BlogSmallCard: FC<{ post: BlogPostCard }> = ({ post }) => {
         sx={{
           position: "relative",
           width: "100%",
-          height: 170,
+          height: { xs: 140, sm: 155, md: 170 },
         }}
       >
         {coverUrl && (
@@ -56,8 +56,9 @@ const BlogSmallCard: FC<{ post: BlogPostCard }> = ({ post }) => {
             src={coverUrl}
             alt={post.title}
             fill
-            sizes="260px"
+            sizes="(max-width: 600px) 220px, (max-width: 960px) 240px, 260px"
             style={{ objectFit: "cover" }}
+            priority={false}
           />
         )}
       </Box>
@@ -200,14 +201,18 @@ const BlogCategoryRowSlider: FC<BlogCategoryRowSliderProps> = ({
           position: "relative",
           width: "100%",
           overflowX: "auto",
-          overflowY: "hidden",
+          overflowY: "visible",
           pb: 1,
+          WebkitOverflowScrolling: "touch",
+          scrollBehavior: "smooth",
           "&::-webkit-scrollbar": {
-            height: 0,
+            display: "none",
           },
+          msOverflowStyle: "none",
+          scrollbarWidth: "none",
         }}
       >
-        <Stack direction="row" spacing={2}>
+        <Stack direction="row" spacing={{ xs: 1.5, md: 2 }} sx={{ width: "max-content", minWidth: "100%" }}>
           {posts.map((post) => (
             <BlogSmallCard key={post.id} post={post} />
           ))}

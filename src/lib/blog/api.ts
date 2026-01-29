@@ -3,6 +3,7 @@ import { hygraphFetch } from "@/utils/hygraph.server";
 import {
   POSTS_LIST,
   POST_BY_SLUG,
+  POST_SLUGS,
   type PostListItem,
   type PostFull,
 } from "./queries";
@@ -27,4 +28,12 @@ export async function getPostBySlug(
   }>(POST_BY_SLUG, { slug }, options);
 
   return data.post;
+}
+
+export async function getPostSlugs(): Promise<string[]> {
+  const data = await hygraphFetch<{
+    posts: { slug: string }[];
+  }>(POST_SLUGS, undefined, { revalidateSeconds: 3600 });
+
+  return data.posts.map((p) => p.slug);
 }
