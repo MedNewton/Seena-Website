@@ -29,9 +29,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
-  const title = post.metaTitle || post.title;
-  const description = post.metaDescription || post.excerpt || "";
-  const ogImageUrl = post.ogImage?.url || post.coverImage?.url;
+  const title = post.metaTitle ?? post.title;
+  const description = post.metaDescription ?? post.excerpt ?? "";
+  const ogImageUrl = post.ogImage?.url ?? post.coverImage?.url;
 
   return {
     title: `${title} | Seena Blog`,
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title,
       description,
       type: "article",
-      publishedTime: post.publishedAtDate || undefined,
+      publishedTime: post.publishedAtDate ?? undefined,
       images: ogImageUrl ? [{ url: ogImageUrl }] : undefined,
     },
     twitter: {
