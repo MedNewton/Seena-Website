@@ -269,7 +269,7 @@ const PillarCard: React.FC<PillarCardProps> = ({ pillar, delay }) => {
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        px: { xs: 1.5, md: 2 },
+        px: { xs: 0, md: 2 },
       }}
     >
       {/* Golden gradient circle */}
