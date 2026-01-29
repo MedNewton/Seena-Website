@@ -138,7 +138,7 @@ async function hygraphFetchWithRetry<T>(
   requestCache.set(cacheKey, fetchPromise);
 
   // Clean up cache after promise resolves
-  fetchPromise.finally(() => {
+  void fetchPromise.finally(() => {
     // Keep in cache for a short time to handle parallel requests
     setTimeout(() => requestCache.delete(cacheKey), 5000);
   });
