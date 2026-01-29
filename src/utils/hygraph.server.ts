@@ -18,6 +18,8 @@ const token = HYGRAPH_CONTENT_API_TOKEN;
 
 // In-memory cache for build-time deduplication
 const requestCache = new Map<string, Promise<unknown>>();
+// In-memory response cache to avoid repeated reads during build
+const responseCache = new Map<string, { value: unknown; expiresAt: number }>();
 
 // Helper to create cache key
 function getCacheKey(query: string, variables?: Record<string, unknown>): string {
@@ -37,6 +39,18 @@ async function hygraphFetchWithRetry<T>(
   delay = 1000
 ): Promise<T> {
   const cacheKey = getCacheKey(query, variables);
+  const ttlMs = (options?.revalidateSeconds ?? 3600) * 1000;
+  const shouldCacheResponse = ttlMs > 0;
+
+  if (shouldCacheResponse) {
+    const cachedResponse = responseCache.get(cacheKey);
+    if (cachedResponse) {
+      if (cachedResponse.expiresAt > Date.now()) {
+        return cachedResponse.value as T;
+      }
+      responseCache.delete(cacheKey);
+    }
+  }
 
   // Check if we already have a pending request for this query
   const cachedPromise = requestCache.get(cacheKey);
@@ -96,6 +110,13 @@ async function hygraphFetchWithRetry<T>(
 
         if (!json.data) {
           throw new Error("Hygraph response missing data");
+        }
+
+        if (shouldCacheResponse) {
+          responseCache.set(cacheKey, {
+            value: json.data,
+            expiresAt: Date.now() + ttlMs,
+          });
         }
 
         return json.data;
