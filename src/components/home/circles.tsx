@@ -158,7 +158,6 @@ const Circles: React.FC<CirclesProps> = ({
             variants={itemVariants}
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.02 }}
-            onClick={() => router.push("/circles")}
             sx={{
               mt: { xs: 2, md: 3 },
               position: "relative",

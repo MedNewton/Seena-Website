@@ -233,7 +233,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                       <MuiLink
                         key={link.label}
                         component={NextLink}
-                        href={link.href}
+                        href="#"
                         underline="none"
                         sx={{
                           fontSize: 14,
@@ -275,7 +275,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                       <MuiLink
                         key={link.label}
                         component={NextLink}
-                        href={link.href}
+                        href="#"
                         underline="none"
                         sx={{
                           fontSize: 14,

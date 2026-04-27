@@ -167,9 +167,6 @@ const Explore: React.FC = () => {
 
               <MotionButton
                 whileTap={{ scale: 0.97 }}
-                onClick={() => {
-                  router.push(card.href);
-                }}
                 sx={{
                   position: "relative",
                   overflow: "hidden",

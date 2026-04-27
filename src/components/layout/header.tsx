@@ -33,7 +33,7 @@ const navItems: NavItem[] = [
   { label: "APP", href: "https://www.seenawellness.com/#app" },
   { label: "EXPERIENCES", href: "https://www.seenawellness.com/#experiences" },
   { label: "CIRCLES", href: "https://www.seenawellness.com/#circles" },
-  { label: "SCREENING", href: "/screening" },
+  /*{ label: "SCREENING", href: "/screening" },*/
   { label: "ABOUT", href: "/about" },
 ];
 

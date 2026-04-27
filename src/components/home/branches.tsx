@@ -144,9 +144,6 @@ const BranchCard: React.FC<BranchCardProps> = ({
           <MotionButton
             whileTap={{ scale: 0.97 }}
             whileHover={{ scale: 1.01 }}
-            onClick={() => {
-              router.push(href);
-            }}
             sx={{
               position: "relative",
               overflow: "hidden",

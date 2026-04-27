@@ -293,7 +293,6 @@ const Hero: React.FC = () => {
             {/* DIGITAL – primary */}
             <MotionButton
               whileTap={{ scale: 0.97 }}
-              onClick={() => router.push("/#app")}
               sx={{
                 position: "relative",
                 overflow: "hidden",
@@ -350,7 +349,6 @@ const Hero: React.FC = () => {
             {/* PHYSICAL – secondary outline */}
             <MotionButton
               whileTap={{ scale: 0.97 }}
-              onClick={() => router.push("/#experiences")}
               sx={{
                 position: "relative",
                 overflow: "hidden",
