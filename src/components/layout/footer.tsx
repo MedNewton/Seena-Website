@@ -411,7 +411,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                 key={copy}
                 component="span"
                 sx={{
-                  fontSize: { xs: "18vw", md: "min(16vw, 235px)" },
+                  fontSize: { xs: "26vw", md: "min(16vw, 235px)" },
                   fontWeight: 900,
                   letterSpacing: { xs: 4, md: 6 },
                   lineHeight: 0.9,

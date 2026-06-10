@@ -469,7 +469,10 @@ const FaqSection: React.FC = () => {
             delay: 0.15,
           }}
           sx={{
-            display: "flex",
+            // Mobile: 2 + 2 grid, last pill spans the full row
+            display: { xs: "grid", md: "flex" },
+            gridTemplateColumns: { xs: "repeat(2, 1fr)" },
+            width: { xs: "100%", md: "auto" },
             flexWrap: "wrap",
             justifyContent: "center",
             gap: 1.5,
@@ -477,12 +480,14 @@ const FaqSection: React.FC = () => {
         >
           {FAQ_TABS.map((tab, index) => {
             const isActive = index === activeTab;
+            const isLast = index === FAQ_TABS.length - 1;
 
             return (
               <ButtonBase
                 key={tab.label}
                 onClick={() => handleTabChange(index)}
                 sx={{
+                  gridColumn: { xs: isLast ? "span 2" : "auto" },
                   borderRadius: 9999,
                   px: { xs: 2.5, md: 3.25 },
                   py: { xs: 1.25, md: 1.5 },

@@ -410,8 +410,8 @@ const ModernOverdriveSection: React.FC = () => {
       sx={{
         width: "100%",
         bgcolor: (theme) => theme.palette.background.default,
-        pt: { xs: 10, md: 10 },
-        pb: { xs: 10, md: 10 },
+        pt: { xs: 8, md: 10 },
+        pb: { xs: 4, md: 10 },
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
