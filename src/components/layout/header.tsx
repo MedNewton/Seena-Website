@@ -588,6 +588,13 @@ const Header: React.FC = () => {
               ))}
 
               {/* Extra Blog link for mobile */}
+              <Divider
+                sx={{
+                  width: 80,
+                  borderColor: GOLD,
+                  opacity: 0.75,
+                }}
+              />
               <Typography
                 component="span"
                 onClick={handleMobileNavClick("/blog")}
