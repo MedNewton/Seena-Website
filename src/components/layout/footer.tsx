@@ -50,7 +50,6 @@ const socialLinks: SimpleLink[] = [
 ];
 
 const MotionCard = motion.create(Box);
-const MotionTypography = motion.create(Typography);
 const MotionColumn = motion.create(Box);
 const MotionBox = motion.create(Box);
 
@@ -134,6 +133,17 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         >
           <MoveHealGrow />
 
+          {/* Divider above nav section */}
+          <Box
+            sx={{
+              mt: { xs: 6, md: 8 },
+              mx: { xs: 3, md: 0 },
+              height: "1px",
+              background:
+                "linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.45) 18%, rgba(255,255,255,0.45) 82%, rgba(255,255,255,0) 100%)",
+            }}
+          />
+
           <Box
             sx={{
               position: "relative",
@@ -173,10 +183,9 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     textAlign: { xs: "center", md: "left" },
                   }}
                 >
-                  Where mental clarity
+                  From Survival Mode
                   <br />
-                  meets physical strength
-                  <br />
+                  to Prime
                 </Typography>
 
                 <Typography
@@ -185,12 +194,13 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                     fontSize: { xs: 14, md: 16 },
                     fontWeight: 300,
                     fontFamily: "var(--font-inter)",
-                    maxWidth: { xs: "100%", md: 360 },
+                    maxWidth: { xs: "100%", md: 500 },
                     textAlign: { xs: "center", md: "left" },
                     px: { xs: 4, md: 0 },
                   }}
                 >
-                  Find your momentum, regain control, and move from surviving to thriving.
+                  Move from reaction to intention, and from depletion to a
+                  more sustainable way of performing.
                 </Typography>
               </MotionBox>
 
@@ -370,8 +380,8 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
           </Box>
         </Box>
 
-        {/* Big word – absolute, edge to edge, single line, always centered */}
-        <MotionTypography
+        {/* Big word – infinite marquee along the bottom edge */}
+        <MotionBox
           aria-hidden="true"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -385,31 +395,40 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
             left: 0,
             right: 0,
             bottom: 0,
-            width: "100%",
-            fontSize: {
-              xs: "10.5vw",
-              sm: "11.5vw",
-              md: "11.5vw",
-              lg: "11.5vw",
-              xl: "11.5vw",
-            },
-            fontWeight: 900,
-            letterSpacing: { xs: 4, md: 6 },
-            lineHeight: 0.9,
-            textTransform: "uppercase",
-            textAlign: "center",
-            whiteSpace: "nowrap",
             overflow: "hidden",
             pointerEvents: "none",
             zIndex: 0,
-            background: "linear-gradient(90deg, #5B9EC9 0%, #FFFFFF 100%)",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
           }}
         >
-          ACTIVE SPIRITS
-        </MotionTypography>
+          <motion.div
+            style={{ display: "inline-flex", whiteSpace: "nowrap" }}
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 45, ease: "linear", repeat: Infinity }}
+          >
+            {/* two identical halves -> seamless -50% loop, never cut */}
+            {[0, 1].map((copy) => (
+              <Typography
+                key={copy}
+                component="span"
+                sx={{
+                  fontSize: { xs: "18vw", md: "min(16vw, 235px)" },
+                  fontWeight: 900,
+                  letterSpacing: { xs: 4, md: 6 },
+                  lineHeight: 0.9,
+                  whiteSpace: "pre",
+                  textTransform: "uppercase",
+                  background:
+                    "linear-gradient(90deg, #5B9EC9 0%, #FFFFFF 100%)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                }}
+              >
+                {"THE NEW STANDARD  ●  THE NEW STANDARD  ●  "}
+              </Typography>
+            ))}
+          </motion.div>
+        </MotionBox>
       </MotionCard>
     </Box>
   );

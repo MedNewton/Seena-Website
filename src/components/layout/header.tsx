@@ -10,13 +10,13 @@ import {
   Link as MuiLink,
   IconButton,
   Divider,
-  ClickAwayListener,
 } from "@mui/material";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 
 import { FaXTwitter, FaInstagram, FaTiktok } from "react-icons/fa6";
 
@@ -30,10 +30,10 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "APP", href: "https://www.seenawellness.com/#app" },
-  { label: "EXPERIENCES", href: "https://www.seenawellness.com/#experiences" },
-  { label: "CIRCLES", href: "https://www.seenawellness.com/#circles" },
-  /*{ label: "SCREENING", href: "/screening" },*/
+  { label: "PULSE", href: "/reset" },
+  { label: "CIRCLES", href: "/circles" },
+  { label: "SUMMITS", href: "/experiences" },
+  { label: "LIVE", href: "/seena-live" },
   { label: "ABOUT", href: "/about" },
 ];
 
@@ -121,7 +121,7 @@ const Header: React.FC = () => {
             ease: "easeOut",
             delay: 0.2,
           }}
-          sx={(theme) => ({
+          sx={{
             position: "relative",
             display: "flex",
             alignItems: "center",
@@ -131,21 +131,28 @@ const Header: React.FC = () => {
             pr: 1,
             py: 1,
             overflow: "visible", // allow dropdown to render outside
+            // iOS-style liquid glass: translucent, heavily blurred + saturated,
+            // with a specular highlight along the top edge
             background: {
-              xs: "linear-gradient(120deg, rgba(15,23,42,0.85), rgba(15,23,42,0.65))",
-              md: "linear-gradient(120deg, rgba(15,23,42,0.88), rgba(15,23,42,0.7))",
+              xs: "linear-gradient(120deg, rgba(30,32,38,0.45), rgba(20,22,28,0.35))",
+              md: "linear-gradient(120deg, rgba(30,32,38,0.4), rgba(20,22,28,0.28))",
             },
-            backdropFilter: "blur(22px)",
-            WebkitBackdropFilter: "blur(22px)",
-            border: { xs: "none", md: "1px solid rgba(148,163,184,0.35)" },
-            boxShadow: "0 22px 55px rgba(0,0,0,0.55)",
+            backdropFilter: "blur(28px) saturate(180%)",
+            WebkitBackdropFilter: "blur(28px) saturate(180%)",
+            border: { xs: "none", md: "1px solid rgba(255,255,255,0.16)" },
+            boxShadow: {
+              xs: "0 22px 55px rgba(0,0,0,0.45)",
+              md: "inset 0 1px 0 0 rgba(255,255,255,0.22), inset 0 -1px 0 0 rgba(255,255,255,0.05), 0 22px 55px rgba(0,0,0,0.45)",
+            },
             transition:
               "background 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out",
             "&:hover": {
-              boxShadow: "0 24px 65px rgba(0,0,0,0.65)",
+              boxShadow: {
+                md: "inset 0 1px 0 0 rgba(255,255,255,0.28), inset 0 -1px 0 0 rgba(255,255,255,0.06), 0 24px 65px rgba(0,0,0,0.55)",
+              },
               transform: { md: "translateY(-1px)" },
             },
-          })}
+          }}
         >
           {/* Left: Logo / Brand */}
           <Box sx={{ position: "relative", width: 80, height: 40 }}>
@@ -223,13 +230,12 @@ const Header: React.FC = () => {
                 );
               }
 
-              // ABOUT with click-open dropdown
+              // ABOUT with hover-open dropdown
               return (
-                <ClickAwayListener
-                  key={item.href}
-                  onClickAway={() => setAboutOpen(false)}
-                >
                   <Box
+                    key={item.href}
+                    onMouseEnter={() => setAboutOpen(true)}
+                    onMouseLeave={() => setAboutOpen(false)}
                     sx={{
                       position: "relative",
                       display: "flex",
@@ -238,7 +244,6 @@ const Header: React.FC = () => {
                   >
                     <Typography
                       component="span"
-                      onClick={() => setAboutOpen((prev) => !prev)}
                       sx={(theme) => ({
                         position: "relative",
                         textDecoration: "none",
@@ -250,6 +255,9 @@ const Header: React.FC = () => {
                         color: "rgba(248,250,252,0.85)",
                         pb: 0.5,
                         cursor: "pointer",
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 0.5,
                         "&::after": {
                           content: '""',
                           position: "absolute",
@@ -272,81 +280,189 @@ const Header: React.FC = () => {
                       })}
                     >
                       {item.label}
+                      <KeyboardArrowDownRoundedIcon
+                        sx={{
+                          fontSize: 18,
+                          color: "#FFFFFF",
+                          transform: aboutOpen
+                            ? "rotate(180deg)"
+                            : "rotate(0deg)",
+                          transition: "transform 200ms ease-out",
+                        }}
+                      />
                     </Typography>
 
-                    {aboutOpen && (
-                      <Box
-                        sx={{
-                          position: "absolute",
-                          top: "calc(100% + 10px)",
-                          left: "50%",
-                          transform: "translateX(-50%)",
-                          zIndex: 10,
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "flex-start",
-                          gap: 1.25,
-                          px: 2.5,
-                          py: 2,
-                          borderRadius: 4,
-                          minWidth: 180,
-                          background:
-                            "linear-gradient(120deg, rgba(15,23,42,0.98), rgba(15,23,42,0.9))",
-                          border: "1px solid rgba(148,163,184,0.6)",
-                          boxShadow: "0 18px 45px rgba(0,0,0,0.65)",
-                          
-                        }}
-                      >
-                        <MuiLink
-                          component={Link}
-                          href="/about"
-                          underline="none"
-                          onClick={() => setAboutOpen(false)}
+                    {/* Invisible hover bridge spanning the gap below the header,
+                        so the menu stays open while the cursor travels to it */}
+                    <Box
+                      sx={{
+                        position: "absolute",
+                        top: "100%",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        pt: "28px",
+                        zIndex: 10,
+                        pointerEvents: aboutOpen ? "auto" : "none",
+                      }}
+                    >
+                    <AnimatePresence>
+                      {aboutOpen && (
+                        <MotionBox
+                          key="about-dropdown"
+                          initial={{ opacity: 0, y: -6, scale: 0.96 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -6, scale: 0.96 }}
+                          transition={{
+                            duration: 0.18,
+                            ease: [0.22, 1, 0.36, 1],
+                          }}
                           sx={{
-                            fontFamily: "var(--font-montserrat)",
-                            fontSize: 12,
-                            textTransform: "uppercase",
-                            letterSpacing: 1.4,
-                            color: "rgba(248,250,252,0.95)",
+                            position: "relative",
+                            transformOrigin: "top center",
+                            display: "flex",
+                            flexDirection: "column",
+                            alignItems: "flex-start",
+                            gap: 0.75,
+                            px: 1.5,
+                            py: 1.5,
+                            borderRadius: 4,
+                            minWidth: 180,
+                            // same liquid glass treatment as the header bar
+                            background:
+                              "linear-gradient(120deg, rgba(30,32,38,0.5), rgba(20,22,28,0.38))",
+                            backdropFilter: "blur(28px) saturate(180%)",
+                            WebkitBackdropFilter: "blur(28px) saturate(180%)",
+                            border: "1px solid rgba(255,255,255,0.16)",
+                            boxShadow:
+                              "inset 0 1px 0 0 rgba(255,255,255,0.22), inset 0 -1px 0 0 rgba(255,255,255,0.05), 0 18px 45px rgba(0,0,0,0.5)",
                           }}
                         >
-                          About Seena
-                        </MuiLink>
+                          {/* Glass caret pointing at the About link */}
+                          <Box
+                            aria-hidden
+                            sx={{
+                              position: "absolute",
+                              top: -6.5,
+                              left: "50%",
+                              transform: "translateX(-50%) rotate(45deg)",
+                              width: 12,
+                              height: 12,
+                              background: "rgba(30,32,38,0.6)",
+                              backdropFilter: "blur(28px) saturate(180%)",
+                              WebkitBackdropFilter:
+                                "blur(28px) saturate(180%)",
+                              borderLeft:
+                                "1px solid rgba(255,255,255,0.16)",
+                              borderTop:
+                                "1px solid rgba(255,255,255,0.16)",
+                            }}
+                          />
 
-                        <Divider
-                          sx={{
-                            alignSelf: "stretch",
-                            borderColor: "rgba(148,163,184,0.6)",
-                          }}
-                        />
+                          <MuiLink
+                            component={Link}
+                            href="/about"
+                            underline="none"
+                            onClick={() => setAboutOpen(false)}
+                            sx={{
+                              fontFamily: "var(--font-montserrat)",
+                              fontSize: 12,
+                              textTransform: "uppercase",
+                              letterSpacing: 1.4,
+                              color: "rgba(248,250,252,0.95)",
+                              width: "100%",
+                              px: 1.25,
+                              py: 1,
+                              borderRadius: 2,
+                              transition:
+                                "background-color 180ms ease-out, transform 180ms ease-out",
+                              "&:hover": {
+                                backgroundColor: "rgba(255,255,255,0.08)",
+                                transform: "translateX(2px)",
+                              },
+                            }}
+                          >
+                            About Seena
+                          </MuiLink>
 
-                        <MuiLink
-                          component={Link}
-                          href="/blog"
-                          underline="none"
-                          onClick={() => setAboutOpen(false)}
-                          sx={{
-                            fontFamily: "var(--font-montserrat)",
-                            fontSize: 12,
-                            textTransform: "uppercase",
-                            letterSpacing: 1.4,
-                            color: "rgba(248,250,252,0.95)",
-                          }}
-                        >
-                          Blog
-                        </MuiLink>
-                      </Box>
-                    )}
+                          <Divider
+                            sx={{
+                              alignSelf: "stretch",
+                              borderColor: "rgba(255,255,255,0.16)",
+                            }}
+                          />
+
+                          <MuiLink
+                            component={Link}
+                            href="/blog"
+                            underline="none"
+                            onClick={() => setAboutOpen(false)}
+                            sx={{
+                              fontFamily: "var(--font-montserrat)",
+                              fontSize: 12,
+                              textTransform: "uppercase",
+                              letterSpacing: 1.4,
+                              color: "rgba(248,250,252,0.95)",
+                              width: "100%",
+                              px: 1.25,
+                              py: 1,
+                              borderRadius: 2,
+                              transition:
+                                "background-color 180ms ease-out, transform 180ms ease-out",
+                              "&:hover": {
+                                backgroundColor: "rgba(255,255,255,0.08)",
+                                transform: "translateX(2px)",
+                              },
+                            }}
+                          >
+                            Blog
+                          </MuiLink>
+                        </MotionBox>
+                      )}
+                    </AnimatePresence>
+                    </Box>
                   </Box>
-                </ClickAwayListener>
               );
             })}
           </Stack>
 
-          {/* Right: CTA (desktop only) */}
-          <Box sx={{ display: { xs: "none", md: "block" } }}>
-            <NewButton label="Join Us" onClick={() => router.push("/#early-access")} />
-          </Box>
+          {/* Right: CTAs (desktop only) */}
+          <Stack
+            direction="row"
+            spacing={1.5}
+            alignItems="center"
+            sx={{ display: { xs: "none", md: "flex" } }}
+          >
+            <Box
+              component="button"
+              type="button"
+              onClick={() => router.push("/login")}
+              sx={{
+                borderRadius: 9999,
+                px: 4,
+                height: 46,
+                fontSize: 16,
+                fontWeight: 600,
+                letterSpacing: "-0.01em",
+                lineHeight: 1,
+                fontFamily: "var(--font-montserrat)",
+                color: "rgba(249,250,251,0.96)",
+                backgroundColor: "transparent",
+                border: `1px solid ${GOLD}`,
+                cursor: "pointer",
+                transition: "background-color 250ms ease-out",
+                "&:hover": {
+                  backgroundColor: "rgba(216,162,75,0.08)",
+                },
+              }}
+            >
+              Login
+            </Box>
+
+            <NewButton
+              label="Get Access"
+              onClick={() => router.push("/#early-access")}
+            />
+          </Stack>
 
           {/* Mobile: Burger button */}
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

@@ -1,77 +1,42 @@
 // src/components/home/Hero.tsx
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Box, Stack, Typography, Button } from "@mui/material";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-import bg from "@/assets/images/bg1.webp";
+import bg from "@/assets/newImages/hero.webp";
+import NewButton from "@/components/ui/newButton";
 
-const GOLD = "#D8A24B";
+const GOLD = "rgb(216, 162, 75)";
 
-const WORDS = ["calm", "clarity", "control"] as const;
-type ChangingWord = (typeof WORDS)[number];
-
-const wordVariants = {
-  enter: {
-    opacity: 0,
-    y: 0,
-    filter: "blur(8px)",
-  },
-  center: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 1.2,
-      ease: "easeOut",
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: 0,
-    filter: "blur(10px)",
-    transition: {
-      duration: 0.6,
-      ease: "easeIn",
-    },
-  },
-} as const;
+const HEADER_OFFSET = 96;
 
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
+const MotionBox = motion(Box);
+
+const goldTextSx = {
+  color: GOLD,
+} as const;
 
 const Hero: React.FC = () => {
   const router = useRouter();
-  const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [isMiddleActive, setIsMiddleActive] = useState<boolean>(false);
 
-  useEffect(() => {
-    const INTRO_DELAY_MS = 1200;
-    let intervalId: number | null = null;
+  const scrollToSection = (targetId: string): void => {
+    const element = document.getElementById(targetId);
+    if (!element) return;
 
-    const timeoutId: number = window.setTimeout(() => {
-      setIsMiddleActive(true);
+    const rect = element.getBoundingClientRect();
+    const elementTop = rect.top + window.scrollY;
 
-      intervalId = window.setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % WORDS.length);
-      }, 4000);
-    }, INTRO_DELAY_MS);
-
-    return () => {
-      window.clearTimeout(timeoutId);
-      if (intervalId !== null) {
-        window.clearInterval(intervalId);
-      }
-    };
-  }, []);
-
-  const currentWord: ChangingWord = WORDS[currentIndex]!;
-  const capitalizedWord = `${currentWord.charAt(0).toUpperCase()}${currentWord.slice(
-    1
-  )}`;
+    window.scrollTo({
+      top: elementTop - HEADER_OFFSET,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <Stack
@@ -119,289 +84,111 @@ const Hero: React.FC = () => {
         }}
       >
         <Stack
-          spacing={{ xs: 4, md: 0 }}
+          spacing={{ xs: 3, md: 4 }}
           alignItems="center"
-          sx={{ color: "#ffffff", textAlign: "center" }}
+          sx={{ color: "#ffffff", textAlign: "center", maxWidth: 1100 }}
         >
-          {/* Headline row */}
-          <Stack
-            direction="row"
-            alignItems="baseline"
-            justifyContent="space-between"
+          {/* Headline */}
+          <MotionTypography
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              delay: 0.3,
+            }}
             sx={{
-              width: "100%",
-              maxWidth: 1200,
-              gap: { xs: 1.5, md: 4 },
+              fontSize: { xs: 38, md: 84 },
+              lineHeight: 1.1,
+              fontWeight: 500,
+              fontFamily: "var(--font-bricolage)",
             }}
           >
-            {/* Left word */}
-            <Box
-              sx={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <MotionTypography
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: 0.3,
-                }}
-                sx={{
-                  fontSize: { xs: 36, md: 110 },
-                  lineHeight: 1,
-                  fontWeight: 500,
-                  fontFamily: "var(--font-bricolage)",
-                  textAlign: "right",
-                }}
-              >
-                Find
-              </MotionTypography>
+            <Box component="span" sx={goldTextSx}>
+              Perform
+            </Box>{" "}
+            at your peak
+            <br />
+            without{" "}
+            <Box component="span" sx={goldTextSx}>
+              burning out
             </Box>
+          </MotionTypography>
 
-            {/* Animated middle word – fixed-width container so width doesn't change */}
-            <Box
-              sx={{
-                flexShrink: 0,
-                display: "flex",
-                justifyContent: "center",
-              }}
-            >
-              <Box
-                sx={{
-                  width: { xs: 120, md: 460 },
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <AnimatePresence mode="wait">
-                  {isMiddleActive && (
-                    <motion.span
-                      key={currentWord}
-                      variants={wordVariants}
-                      initial="enter"
-                      animate="center"
-                      exit="exit"
-                      style={{ display: "inline-block" }}
-                    >
-                      <Typography
-                        component="span"
-                        sx={{
-                          fontSize: { xs: 40, md: 110 },
-                          lineHeight: 1,
-                          fontWeight: 500,
-                          fontStyle: "italic",
-                          whiteSpace: "nowrap",
-                          fontFamily: "var(--font-bricolage)",
-                          textAlign: "center",
-                          className: "animated-gradient-text",
-                        }}
-                      >
-                        {capitalizedWord}
-                      </Typography>
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Box>
-            </Box>
-
-            {/* Right word */}
-            <Box
-              sx={{
-                flex: 1,
-                display: "flex",
-                justifyContent: "flex-start",
-              }}
-            >
-              <MotionTypography
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.6,
-                  ease: "easeOut",
-                  delay: 0.4,
-                }}
-                sx={{
-                  fontSize: { xs: 36, md: 110 },
-                  lineHeight: 1,
-                  fontWeight: 500,
-                  fontFamily: "var(--font-bricolage)",
-                  textAlign: "left",
-                }}
-              >
-                within
-              </MotionTypography>
-            </Box>
-          </Stack>
-
-          {/* Mind / Body / Soul row – unified spacing, centered */}
-          <Stack
-            direction="row"
-            width="100%"
-            maxWidth={600}
-            spacing={{ xs: 4, md: 8 }}
-            pt={{ xs: 0, md: 4 }}
-            alignItems="center"
-            justifyContent="center"
-          >
-            {["Mind", "Body", "Soul"].map((word, index) => (
-              <Box
-                key={word}
-                sx={{
-                  flex: 1,
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <MotionTypography
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.6,
-                    ease: "easeOut",
-                    delay: 0.45 + index * 0.02,
-                  }}
-                  sx={{
-                    fontSize: { xs: 20, md: 24 },
-                    lineHeight: 1,
-                    fontWeight: 300,
-                    fontFamily: "var(--font-bricolage)",
-                    textAlign: "center",
-                  }}
-                >
-                  {word}
-                </MotionTypography>
-              </Box>
-            ))}
-          </Stack>
-
-          {/* CTA row – larger + more visible */}
-          <Stack
-            direction={{ xs: "column", md: "row" }}
-            width="100%"
-            spacing={{ xs: 2, md: 20 }}
-            px={{ xs: 2, md: 46 }}
-            alignItems={{ xs: "center", md: "center" }}
-            justifyContent={{ xs: "center", md: "space-between" }}
+          {/* Subtitle */}
+          <MotionTypography
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              delay: 0.45,
+            }}
             sx={{
-              transform: { xs: "translateY(5rem)", md: "translateY(10rem)" },
+              fontSize: { xs: 16, md: 22 },
+              lineHeight: 1.5,
+              fontWeight: 300,
+              fontFamily: "var(--font-bricolage)",
+              color: "rgba(249,250,251,0.92)",
+              maxWidth: 720,
             }}
           >
-            {/* DIGITAL – primary */}
-            <MotionButton
-              whileTap={{ scale: 0.97 }}
-              sx={{
-                position: "relative",
-                overflow: "hidden",
-                alignSelf: { xs: "center", md: "flex-start" },
-                mt: 1,
-                borderRadius: 2,
-                minWidth: { xs: 160, md: 200 },
-                px: 0,
-                py: 1.6,
-                fontSize: { xs: 14, md: 18 },
-                fontWeight: 600,
-                letterSpacing: 1.4,
-                textTransform: "uppercase",
-                fontFamily: "var(--font-montserrat)",
-                color: "rgba(249,250,251,0.96)",
-                borderWidth: 1.5,
-                borderStyle: "solid",
-                borderColor: GOLD,
-                backgroundColor: "transparent",
-                boxShadow: "none",
-                zIndex: 0,
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  inset: 0,
-                  backgroundColor: "#996B41",
-                  backgroundImage:
-                    "url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%235A3520%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m136-197-437 426 65 700L867 105%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22m278-71-82 1083 1354 368 17-1255%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22M1919 304 807 1000l881 357 285-883%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22m7 227-502 869 528 430 754-746%22 fill=%22%23895333%22%2F%3E%3Cpath d=%22m787 822-480 538 1055 741 76-583%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22M1214 806 970 1955l447 305 1050-411%22 fill=%22%23A06637%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                  backgroundRepeat: "no-repeat",
-                  color: "#111827",
-                  borderRadius: 2,
-                  transform: "translateY(100%)",
-                  transformOrigin: "bottom center",
-                  transition:
-                    "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out",
-                  opacity: 0.95,
-                  zIndex: -1,
-                },
-                "&:hover::before": {
-                  transform: "translateY(0%)",
-                  opacity: 1,
-                },
-                "&:hover": {
-                  borderColor: "transparent",
-                  color: "#0B101B",
-                },
-              }}
-            >
-              DIGITAL
-            </MotionButton>
+            Built to understand where you&apos;re at, connect you with people
+            who push you, and drive you to take action
+          </MotionTypography>
 
-            {/* PHYSICAL – secondary outline */}
-            <MotionButton
-              whileTap={{ scale: 0.97 }}
-              sx={{
-                position: "relative",
-                overflow: "hidden",
-                alignSelf: { xs: "center", md: "flex-start" },
-                mt: 1,
-                borderRadius: 2,
-                minWidth: { xs: 160, md: 200 },
-                px: 0,
-                py: 1.6,
-                fontSize: { xs: 14, md: 18 },
-                fontWeight: 600,
-                letterSpacing: 1.4,
-                textTransform: "uppercase",
-                fontFamily: "var(--font-montserrat)",
-                color: "rgba(249,250,251,0.96)",
-                borderWidth: 1.5,
-                borderStyle: "solid",
-                borderColor: GOLD,
-                backgroundColor: "transparent",
-                boxShadow: "none",
-                zIndex: 0,
-                "&::before": {
-                  content: '""',
-                  position: "absolute",
-                  inset: 0,
-                  backgroundColor: "#996B41",
-                  backgroundImage:
-                    "url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%235A3520%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m136-197-437 426 65 700L867 105%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22m278-71-82 1083 1354 368 17-1255%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22M1919 304 807 1000l881 357 285-883%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22m7 227-502 869 528 430 754-746%22 fill=%22%23895333%22%2F%3E%3Cpath d=%22m787 822-480 538 1055 741 76-583%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22M1214 806 970 1955l447 305 1050-411%22 fill=%22%23A06637%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E')",
-                  backgroundSize: "cover",
-                  backgroundPosition: "center center",
-                  backgroundRepeat: "no-repeat",
-                  color: "#111827",
-                  borderRadius: 2,
-                  transform: "translateY(100%)",
-                  transformOrigin: "bottom center",
-                  transition:
-                    "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out",
-                  opacity: 0.95,
-                  zIndex: -1,
-                },
-                "&:hover::before": {
-                  transform: "translateY(0%)",
-                  opacity: 1,
-                },
-                "&:hover": {
-                  borderColor: "transparent",
-                  color: "#0B101B",
-                },
-              }}
+          {/* CTA row */}
+          <MotionBox
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 0.6,
+              ease: "easeOut",
+              delay: 0.6,
+            }}
+            sx={{ pt: { xs: 1, md: 2 } }}
+          >
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={{ xs: 2, sm: 3 }}
+              alignItems="center"
+              justifyContent="center"
             >
-              PHYSICAL
-            </MotionButton>
-          </Stack>
+              {/* Primary – same golden gradient as the header CTA */}
+              <NewButton
+                label="Join Early Access"
+                onClick={() => router.push("/#early-access")}
+              />
+
+              {/* Secondary – gradient border, transparent background */}
+              <MotionButton
+                whileTap={{ scale: 0.97 }}
+                onClick={() => scrollToSection("app")}
+                sx={{
+                  borderRadius: 9999,
+                  px: 5.5,
+                  py: 0,
+                  // match NewButton: 14px padding + 16px line + 1px border = 46px
+                  height: 46,
+                  fontSize: 16,
+                  fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1,
+                  textTransform: "none",
+                  fontFamily: "var(--font-montserrat)",
+                  color: "rgba(249,250,251,0.96)",
+                  backgroundColor: "transparent",
+                  boxShadow: "none",
+                  border: `1px solid ${GOLD}`,
+                  "&:hover": {
+                    backgroundColor: "rgba(216,162,75,0.08)",
+                  },
+                }}
+              >
+                See How It Works
+              </MotionButton>
+            </Stack>
+          </MotionBox>
         </Stack>
       </Box>
     </Stack>

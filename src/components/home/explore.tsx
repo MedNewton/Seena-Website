@@ -6,224 +6,264 @@ import { Box, Stack, Typography, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-import digitalGuidanceImg from "@/assets/images/digital.webp";
-import realExperiencesImg from "@/assets/images/physical.webp";
+import pulseImg from "@/assets/newImages/pulse_card.webp";
+import circlesImg from "@/assets/newImages/circles_card.webp";
+import summitImg from "@/assets/newImages/summit_card.webp";
+import liveImg from "@/assets/newImages/live_card.webp";
 
 type ExploreCardConfig = {
-  id: "digital" | "real";
+  id: string;
   title: string;
   subtitle: string;
+  cta: string;
   imageSrc: string;
   href: string;
 };
 
 const GOLD = "#D8A24B";
 
-const CARDS: ExploreCardConfig[] = [
-  {
-    id: "digital",
-    title: "Digital Guidance",
-    subtitle: "AI coach | breathwork & fitness | Inner balance",
-    imageSrc: digitalGuidanceImg.src,
-    href: "/app",
-  },
-  {
-    id: "real",
-    title: "Real Experiences",
-    subtitle: "Live events | Retreats | Community",
-    imageSrc: realExperiencesImg.src,
-    href: "/experiences",
-  },
+const CARD_ROWS: ExploreCardConfig[][] = [
+  [
+    {
+      id: "pulse",
+      title: "Seena Pulse",
+      subtitle:
+        "Local & international wellness retreats designed to rejuvenate you",
+      cta: "Learn More",
+      imageSrc: pulseImg.src,
+      href: "/reset",
+    },
+    {
+      id: "circles",
+      title: "Seena Circles",
+      subtitle:
+        "Enrich your wellness by connecting with other like-minded high performers.",
+      cta: "Join Now",
+      imageSrc: circlesImg.src,
+      href: "/circles",
+    },
+  ],
+  [
+    {
+      id: "summits",
+      title: "Seena Summits",
+      subtitle:
+        "Learn, grow and inspire through exclusive discussion events among health leaders and innovators.",
+      cta: "Register Now",
+      imageSrc: summitImg.src,
+      href: "/experiences",
+    },
+    {
+      id: "live",
+      title: "Seena Live",
+      subtitle: "Community fitness & wellness events in your city",
+      cta: "Learn More",
+      imageSrc: liveImg.src,
+      href: "/seena-live",
+    },
+  ],
 ];
 
 const MotionBox = motion.create(Box);
 const MotionTypography = motion.create(Typography);
-const MotionButton = motion.create(Button); 
 
-const Explore: React.FC = () => {
+type ExploreCardProps = {
+  card: ExploreCardConfig;
+  delay: number;
+};
+
+const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
   const router = useRouter();
 
   return (
     <MotionBox
-      initial={{ opacity: 0, y: 24 }}
+      className="explore-card"
+      initial={{ opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.35 }}
+      viewport={{ once: true, amount: 0.3 }}
       transition={{
         duration: 0.6,
         ease: "easeOut",
-        delay: 0.1,
+        delay,
       }}
+      onClick={() => router.push(card.href)}
       sx={{
-        width: "100%",
-        maxWidth: 1440,
-        px: { xs: 2, md: 0 },
-        mx: "auto",
-        // Desktop: one big combined card
-        // Mobile: let inner cards carry radius + shadow
-        borderRadius: { xs: 0, md: 6 },
-        overflow: { xs: "visible", md: "hidden" },
-        boxShadow: {
-          xs: "none",
-          md: "0px 30px 80px rgba(15, 23, 42, 0.45)",
-        },
+        position: "relative",
+        color: "#FFFFFF",
+        backgroundImage: `url(${card.imageSrc})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        borderRadius: 3,
+        overflow: "hidden",
+        cursor: "pointer",
+        minHeight: { xs: 300, md: 390 },
+        minWidth: 0,
+        display: "flex",
+        flexDirection: "column",
+        // grow/shrink on hover is driven by the parent row
+        flexGrow: 1,
+        flexBasis: 0,
+        transition: "flex-grow 600ms cubic-bezier(0.22, 1, 0.36, 1)",
+        boxShadow: "0px 18px 45px rgba(15, 23, 42, 0.40)",
       }}
     >
+      {/* Dark overlay for readability */}
       <Box
         sx={{
-          display: "grid",
-          gridTemplateColumns: { xs: "1fr", md: "1fr 1fr" },
-          minHeight: { xs: "auto", md: 520 },
-          rowGap: { xs: 3, md: 0 }, // space between mobile cards
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 55%, rgba(0,0,0,0.5) 100%)",
+          transition: "background 300ms ease-out",
+        }}
+      />
+
+      <Stack
+        spacing={1.5}
+        sx={{
+          position: "relative",
+          zIndex: 1,
+          flex: 1,
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          p: { xs: 3, md: 4 },
         }}
       >
-        {CARDS.map((card, index) => (
-          <MotionBox
-            key={card.id}
-            initial={{ opacity: 0, y: 26 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{
-              duration: 0.6,
-              ease: "easeOut",
-              delay: 0.2 + index * 0.15,
-            }}
+        <Box>
+          <Typography
             sx={{
-              position: "relative",
-              color: "#FFFFFF",
-              backgroundImage: `url(${card.imageSrc})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "flex-start",
-
-              // Mobile = independent cards
-              borderRadius: { xs: 4, md: 0 },
-              overflow: "hidden",
-              boxShadow: {
-                xs: "0px 18px 45px rgba(15, 23, 42, 0.40)",
-                md: "none",
-              },
-              minHeight: { xs: 260, md: "auto" },
+              fontFamily: "var(--font-bricolage)",
+              fontSize: { xs: 28, md: 38 },
+              lineHeight: 1.2,
+              fontWeight: 400,
             }}
           >
-            {/* Dark bottom gradient for readability */}
-            <Box
-              sx={{
-                position: "absolute",
-                inset: 0,
-                background:
-                  "linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.65) 80%)",
-              }}
-            />
+            {card.title}
+          </Typography>
 
-            <Stack
-              spacing={2}
-              sx={{
-                position: "relative",
-                zIndex: 1,
-                p: { xs: 3, md: 5 },
-                maxWidth: { xs: "92%", md: "80%" },
-              }}
-            >
-              <MotionTypography
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{
-                  duration: 0.5,
-                  ease: "easeOut",
-                  delay: 0.25 + index * 0.15,
-                }}
-                sx={{
-                  fontFamily: "var(--font-bricolage)",
-                  fontSize: { xs: 24, md: 34 },
-                  lineHeight: { xs: 1.2, md: 1.15 },
-                  fontWeight: 300,
-                }}
-              >
-                {card.title}
-              </MotionTypography>
+          <Typography
+            sx={{
+              mt: 1,
+              fontFamily: "var(--font-inter)",
+              fontSize: { xs: 14, md: 17 },
+              fontWeight: 300,
+              lineHeight: 1.55,
+              color: "rgba(249, 250, 251, 0.92)",
+              maxWidth: 460,
+            }}
+          >
+            {card.subtitle}
+          </Typography>
+        </Box>
 
-              <MotionTypography
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.45 }}
-                transition={{
-                  duration: 0.45,
-                  ease: "easeOut",
-                  delay: 0.32 + index * 0.15,
-                }}
-                sx={{
-                  fontFamily: "var(--font-inter)",
-                  fontSize: { xs: 13, md: 16 },
-                  fontWeight: 300,
-                  lineHeight: 1.6,
-                  color: "rgba(249, 250, 251, 0.9)",
-                }}
-              >
-                {card.subtitle}
-              </MotionTypography>
-
-              <MotionButton
-                whileTap={{ scale: 0.97 }}
-                sx={{
-                  position: "relative",
-                  overflow: "hidden",
-                  alignSelf: "flex-start",
-                  mt: 1,
-                  borderRadius: 2,
-                  minWidth: { xs: 140, md: 170 },
-                  px: 0,
-                  py: 1.2,
-                  fontSize: { xs: 13, md: 14 },
-                  fontWeight: 600,
-                  letterSpacing: 1.4,
-                  textTransform: "uppercase",
-                  fontFamily: "var(--font-montserrat)",
-                  color: "rgba(249,250,251,0.96)",
-                  borderWidth: 1.5,
-                  borderStyle: "solid",
-                  borderColor: GOLD,
-                  backgroundColor: "transparent",
-                  boxShadow: "none",
-                  zIndex: 0,
-                  "&::before": {
-                    content: '""',
-                    position: "absolute",
-                    inset: 0,
-                    backgroundColor: "#996B41",
-                    backgroundImage:
-                      "url('data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%222000%22 height=%221000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%235A3520%22 d=%22M-1000-500h4000v2000h-4000z%22%2F%3E%3Cpath d=%22m136-197-437 426 65 700L867 105%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22m278-71-82 1083 1354 368 17-1255%22 fill=%22%23E1C074%22%2F%3E%3Cpath d=%22M1919 304 807 1000l881 357 285-883%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22m7 227-502 869 528 430 754-746%22 fill=%22%23895333%22%2F%3E%3Cpath d=%22m787 822-480 538 1055 741 76-583%22 fill=%22%2370432A%22%2F%3E%3Cpath d=%22M1214 806 970 1955l447 305 1050-411%22 fill=%22%23A06637%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-200%22 y=%22-200%22 width=%222400%22 height=%221400%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22200%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center center",
-                    backgroundRepeat: "no-repeat",
-                    color: "#111827",
-                    borderRadius: 2,
-                    transform: "translateY(100%)",
-                    transformOrigin: "bottom center",
-                    transition:
-                      "transform 260ms cubic-bezier(0.22, 1, 0.36, 1), opacity 200ms ease-out",
-                    opacity: 0.95,
-                    zIndex: -1,
-                  },
-                  "&:hover::before": {
-                    transform: "translateY(0%)",
-                    opacity: 1,
-                  },
-                  "&:hover": {
-                    borderColor: "transparent",
-                    color: "#0B101B",
-                  },
-                }}
-              >
-                Explore
-              </MotionButton>
-            </Stack>
-          </MotionBox>
-        ))}
-      </Box>
+        <Button
+          onClick={(event) => {
+            event.stopPropagation();
+            router.push(card.href);
+          }}
+          sx={{
+            borderRadius: 9999,
+            px: 3.5,
+            py: 1.25,
+            fontSize: { xs: 12, md: 14 },
+            fontWeight: 500,
+            letterSpacing: 1.4,
+            textTransform: "uppercase",
+            fontFamily: "var(--font-montserrat)",
+            color: "rgba(249,250,251,0.96)",
+            border: "1px solid rgba(249,250,251,0.85)",
+            backgroundColor: "rgba(0,0,0,0.18)",
+            whiteSpace: "nowrap",
+            transition:
+              "background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out",
+            "&:hover": {
+              backgroundColor: "rgba(249,250,251,0.95)",
+              borderColor: "transparent",
+              color: "#0B101B",
+            },
+          }}
+        >
+          {card.cta}
+        </Button>
+      </Stack>
     </MotionBox>
+  );
+};
+
+const Explore: React.FC = () => {
+  return (
+    <Box
+      component="section"
+      sx={{
+        width: "100%",
+        pt: { xs: 8, md: 14 },
+      }}
+    >
+      {/* Heading */}
+      <MotionTypography
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{
+          duration: 0.6,
+          ease: "easeOut",
+          delay: 0.08,
+        }}
+        sx={{
+          textAlign: "center",
+          color: (theme) => theme.palette.text.primary,
+          fontFamily: "var(--font-bricolage)",
+          fontSize: { xs: 32, md: 64 },
+          lineHeight: 1.1,
+          fontWeight: 600,
+          maxWidth: "100%",
+          mx: "auto",
+          mb: { xs: 4, md: 6 },
+          px: { xs: 2, md: 0 },
+        }}
+      >
+        Shaping an <span style={{ color: GOLD }}>environment</span>
+        <br />
+        You don&apos;t have to <span style={{ color: GOLD }}>fight</span>{" "}
+        against.
+      </MotionTypography>
+
+      {/* Card rows – hovering a card expands it while its neighbor shrinks */}
+      <Stack
+        spacing={3}
+        sx={{
+          width: "100%",
+          maxWidth: 1440,
+          px: { xs: 2, md: 0 },
+          mx: "auto",
+        }}
+      >
+        {CARD_ROWS.map((row, rowIndex) => (
+          <Stack
+            key={rowIndex}
+            direction={{ xs: "column", md: "row" }}
+            spacing={3}
+            sx={{
+              width: "100%",
+              "&:hover .explore-card": {
+                flexGrow: { md: 0.9 },
+              },
+              "& .explore-card:hover": {
+                flexGrow: { md: 1.35 },
+              },
+            }}
+          >
+            {row.map((card, cardIndex) => (
+              <ExploreCard
+                key={card.id}
+                card={card}
+                delay={0.15 + (rowIndex * 2 + cardIndex) * 0.12}
+              />
+            ))}
+          </Stack>
+        ))}
+      </Stack>
+    </Box>
   );
 };
 

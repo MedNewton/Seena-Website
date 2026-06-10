@@ -29,63 +29,67 @@ const MoveHealGrow: React.FC = () => {
         textAlign: "center",
       }}
     >
-      {/* Small label above image */}
+      {/* Small label above title */}
       <Typography
         sx={{
-          mb: { xs: 1, md: 2 },
-          fontSize: { xs: 12, md: 13 },
-          letterSpacing: 2,
-          textTransform: "uppercase",
+          mb: { xs: 1.5, md: 2.5 },
+          fontSize: { xs: 14, md: 17 },
           fontWeight: 400,
           color: "#FFFFFF",
         }}
       >
-        Coming in January 2026
+        Help build a better way to perform and live
       </Typography>
 
       <Typography
         component="h2"
         sx={{
-          fontSize: { xs: 24, md: 48 },
+          fontSize: { xs: 28, md: 60 },
           fontWeight: 500,
-          mb: { xs: 1.5, md: 6 },
+          lineHeight: 1.15,
+          mb: { xs: 2, md: 3 },
           px: { xs: 3, md: 0 },
           color: "#FFFFFF",
+          maxWidth: 1100,
+          mx: "auto",
         }}
       >
-        Reset, Rise & Connect with Seena
+        Join the movement for high performance without self-destruction
       </Typography>
 
-      {/* Text + form, pulled up over the image */}
+      {/* Text + form */}
       <Stack
-      id="join"
+        id="join"
         direction="column"
         spacing={2.5}
         alignItems="center"
         sx={{
-          transform: { xs: "none", md: "translateY(-2vh)" },
           px: { xs: 3, md: 0 },
         }}
       >
         <Typography
           sx={{
-            maxWidth: 560,
+            maxWidth: 860,
             mx: "auto",
-            fontSize: { xs: 14, md: 16 },
-            lineHeight: 1.7,
+            fontSize: { xs: 15, md: 21 },
+            lineHeight: 1.6,
             fontWeight: 300,
-            color: "#FFFFFF",
+            color: "rgba(255,255,255,0.88)",
           }}
         >
-          Always on, rarely calm? This is for you. Get early access.
+          Get early access to Seena and be part of a new culture built for
+          high performers
+          <br />
+          who want to stay sharp, supported, and sustain their edge under
+          real life.
         </Typography>
 
-        {/* Waitlist form */}
+        {/* Waitlist form – email + button side by side */}
         <Box
           component="form"
           onSubmit={handleSubmit}
           sx={{
-            mt: 1.5,
+            mt: { xs: 2, md: 4 },
             width: "100%",
             display: "flex",
             flexDirection: "column",
@@ -93,74 +97,83 @@ const MoveHealGrow: React.FC = () => {
             gap: 1,
           }}
         >
-          <TextField
-            name="email"
-            type="email"
-            placeholder="YOUR EMAIL"
-            required
-            fullWidth
-            variant="outlined"
-            disabled={submitting || submitted}
-            sx={{
-              maxWidth: 420,
-              "& .MuiOutlinedInput-root": {
-                borderRadius: 999,
-                paddingY: 0.75,
-                color: "#FFFFFF",
-                backgroundColor: "transparent",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#FFFFFF",
-                  borderWidth: 2,
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#FFFFFF",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#FFFFFF",
-                },
-                "& input": {
-                  paddingY: 1.5,
-                  textAlign: "center",
-                },
-                "& input::placeholder": {
-                  textTransform: "uppercase",
-                  letterSpacing: 1.6,
-                  fontSize: 13,
-                  color: "#FFFFFF",
-                  opacity: 1,
-                },
-              },
-            }}
-          />
-
-          <Button
-            type="submit"
-            disabled={submitting}
-            sx={{
-              mt: 1,
-              width: "100%",
-              maxWidth: 420,
-              borderRadius: 999,
-              py: 1.2,
-              fontSize: 14,
-              fontWeight: 500,
-              textTransform: "uppercase",
-              letterSpacing: 1.4,
-              backgroundColor: "#FFFFFF",
-              color: "#000000",
-              boxShadow: "0 10px 30px rgba(15,23,42,0.35)",
-              "&:hover": {
-                backgroundColor: "#F9FAFB",
-                boxShadow: "0 10px 30px rgba(15,23,42,0.4)",
-              },
-            }}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={{ xs: 1.5, sm: 2.5 }}
+            alignItems="center"
+            justifyContent="center"
+            sx={{ width: "100%" }}
           >
-            {submitting
-              ? "Joining..."
-              : submitted
-              ? "Thanks for joining !"
-              : "Get early access"}
-          </Button>
+            <TextField
+              name="email"
+              type="email"
+              placeholder="YOUR EMAIL"
+              required
+              fullWidth
+              variant="outlined"
+              disabled={submitting || submitted}
+              sx={{
+                maxWidth: { xs: 420, sm: 350 },
+                "& .MuiOutlinedInput-root": {
+                  borderRadius: 999,
+                  color: "#FFFFFF",
+                  backgroundColor: "transparent",
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "rgba(255,255,255,0.85)",
+                    borderWidth: 1.5,
+                  },
+                  "&:hover .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#FFFFFF",
+                  },
+                  "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "#FFFFFF",
+                  },
+                  "& input": {
+                    paddingY: 1.75,
+                    paddingX: 3,
+                    textAlign: "left",
+                  },
+                  "& input::placeholder": {
+                    textTransform: "uppercase",
+                    letterSpacing: 1.6,
+                    fontSize: 13,
+                    color: "rgba(255,255,255,0.75)",
+                    opacity: 1,
+                  },
+                },
+              }}
+            />
+
+            <Button
+              type="submit"
+              disabled={submitting}
+              sx={{
+                width: { xs: "100%", sm: "auto" },
+                maxWidth: { xs: 420, sm: "none" },
+                flexShrink: 0,
+                borderRadius: 999,
+                px: 4.5,
+                py: 1.75,
+                fontSize: 15,
+                fontWeight: 500,
+                textTransform: "none",
+                whiteSpace: "nowrap",
+                backgroundColor: "#FFFFFF",
+                color: "#000000",
+                boxShadow: "0 10px 30px rgba(15,23,42,0.35)",
+                "&:hover": {
+                  backgroundColor: "#F9FAFB",
+                  boxShadow: "0 10px 30px rgba(15,23,42,0.4)",
+                },
+              }}
+            >
+              {submitting
+                ? "Joining..."
+                : submitted
+                ? "Thanks for joining !"
+                : "Get Early Access"}
+            </Button>
+          </Stack>
 
           {error && (
             <Typography

@@ -4,31 +4,37 @@
 import React from "react";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { LuUnlink, LuArrowDown } from "react-icons/lu";
 
 const GOLD = "#D8A24B";
 const GOLD_GRADIENT =
   "linear-gradient(135deg, #F5E0A3 0%, #D8A24B 40%, #F8E6B8 100%)";
 
-const pillars = [
+const problems = [
   {
-    title: "Assess",
-    description:
-      "Understand your state, energy, stress patterns, and where your system needs support.",
+    key: "disconnected",
+    title: "Disconnected",
+    description: "Different tools never move as one",
   },
   {
-    title: "Retrain",
-    description:
-      "Retrain your nervous system. Release patterns that drain you, and restore internal balance.",
+    key: "non-adaptive",
+    title: "Non-adaptive",
+    description: "Solutions ignore your state & capacity",
   },
   {
-    title: "Sustain",
-    description:
-      "Maintain habits that support steady energy, balanced stress, and a healthier mind & body.",
+    key: "hard-to-sustain",
+    title: "Hard to sustain",
+    description: "When life gets heavy, it falls apart",
   },
   {
-    title: "Evolve",
-    description:
-      "Move forward and perform at your highest level, driven by power, purpose and momentum.",
+    key: "too-reactive",
+    title: "Too reactive",
+    description: "We respond after the damage",
+  },
+  {
+    key: "done-alone",
+    title: "Done alone",
+    description: "Progress depends on willpower",
   },
 ] as const;
 
@@ -64,102 +70,38 @@ const goldWordVariants = {
 
 // --- Marquee config ---
 
-const MARQUEE_ROW_1_ITEMS: string[] = [
-  "Muscle aches",
-  "Chronic headaches",
-  "Sciatica pain",
-  "Painful periods",
-  "Thyroid dysfunction",
-  "IBS",
-  "High blood pressure",
-  "Weakened immunity",
-  "Acid reflux",
-  "Leaky gut symptoms",
-  "Eczema flare-ups",
-  "Sinus congestion",
-  "Slow muscle recovery",
-  "Chest tightness",
-
-  "Muscle aches",
-  "Chronic headaches",
-  "Sciatica pain",
-  "Painful periods",
-  "Thyroid dysfunction",
-  "IBS",
-  "High blood pressure",
-  "Weakened immunity",
-  "Acid reflux",
-  "Leaky gut symptoms",
-  "Eczema flare-ups",
-  "Sinus congestion",
-  "Slow muscle recovery",
-  "Chest tightness",
-
-  "Muscle aches",
-  "Chronic headaches",
-  "Sciatica pain",
-  "Painful periods",
-  "Thyroid dysfunction",
-  "IBS",
-  "High blood pressure",
-  "Weakened immunity",
-  "Acid reflux",
-  "Leaky gut symptoms",
-  "Eczema flare-ups",
-  "Sinus congestion",
-  "Slow muscle recovery",
-  "Chest tightness",
+const MARQUEE_ROW_1_WORDS: string[] = [
+  "Migraines",
+  "Tension headaches",
+  "TMJ/jaw pain",
+  "Back pain",
+  "Neck pain",
+  "Fibromyalgia",
+  "Joint pain",
+  "Muscle tension",
 ];
 
-const MARQUEE_ROW_2_ITEMS: string[] = [
-  "Restless sleep",
-  "Increased anxiety",
-  "Procrastination",
+const MARQUEE_ROW_2_WORDS: string[] = [
+  "Chronic Fatigue Syndrome",
+  "IBS",
+  "Bloating",
+  "Tinnitus",
+  "Insomnia",
   "Brain fog",
-  "Overthinking loops",
-  "Panic attacks",
-  "Poor focus",
-  "Emotional exhaustion",
-  "Persistent sadness",
-  "Scattered thoughts",
-  "Decision paralysis",
-
-  "Restless sleep",
-  "Increased anxiety",
-  "Procrastination",
-  "Brain fog",
-  "Overthinking loops",
-  "Panic attacks",
-  "Poor focus",
-  "Emotional exhaustion",
-  "Persistent sadness",
-  "Scattered thoughts",
-  "Decision paralysis",
-
-  "Restless sleep",
-  "Increased anxiety",
-  "Procrastination",
-  "Brain fog",
-  "Overthinking loops",
-  "Panic attacks",
-  "Poor focus",
-  "Emotional exhaustion",
-  "Persistent sadness",
-  "Scattered thoughts",
-  "Decision paralysis",
-
-  "Restless sleep",
-  "Increased anxiety",
-  "Procrastination",
-  "Brain fog",
-  "Overthinking loops",
-  "Panic attacks",
-  "Poor focus",
-  "Emotional exhaustion",
-  "Persistent sadness",
-  "Scattered thoughts",
-  "Decision paralysis",
+  "Anxiety",
+  "Depression",
 ];
+
+// repeat the word lists so the looping track is long enough to fill the row
+const MARQUEE_ROW_1_ITEMS: string[] = Array.from(
+  { length: 5 },
+  () => MARQUEE_ROW_1_WORDS
+).flat();
+
+const MARQUEE_ROW_2_ITEMS: string[] = Array.from(
+  { length: 5 },
+  () => MARQUEE_ROW_2_WORDS
+).flat();
 
 
 type MarqueeDirection = "left" | "right";
@@ -243,16 +185,168 @@ const MarqueeRow: React.FC<MarqueeRowProps> = ({ items, direction }) => {
   );
 };
 
-// --- Pillars ---
+// --- Problem cards ---
 
-type Pillar = (typeof pillars)[number];
+type Problem = (typeof problems)[number];
 
-type PillarCardProps = {
-  pillar: Pillar;
+const DisconnectedIcon: React.FC = () => (
+  <motion.div
+    animate={{ rotate: [0, -8, 8, 0] }}
+    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+    style={{
+      width: 48,
+      height: 48,
+      borderRadius: 12,
+      backgroundImage: GOLD_GRADIENT,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      color: "#1A1208",
+      fontSize: 20,
+    }}
+  >
+    <LuUnlink />
+  </motion.div>
+);
+
+const NonAdaptiveIcon: React.FC = () => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: "6px", height: 48 }}>
+    {[0, 1, 2].map((index) => (
+      <motion.div
+        key={index}
+        animate={{ scaleY: [1, 0.55, 1] }}
+        transition={{
+          duration: 1.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.25,
+        }}
+        style={{
+          width: 9,
+          height: 34,
+          borderRadius: 999,
+          backgroundColor: GOLD,
+        }}
+      />
+    ))}
+  </Box>
+);
+
+const HardToSustainIcon: React.FC = () => (
+  <Box
+    sx={{
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      height: 48,
+    }}
+  >
+    <Box
+      sx={{
+        width: 30,
+        height: 30,
+        borderRadius: "50%",
+        backgroundColor: GOLD,
+        opacity: 0.55,
+      }}
+    />
+    <Box
+      sx={{
+        width: 30,
+        height: 30,
+        borderRadius: "50%",
+        border: `1.5px dashed ${GOLD}`,
+        ml: "-10px",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: GOLD,
+        fontSize: 16,
+        overflow: "hidden",
+      }}
+    >
+      <motion.div
+        animate={{ y: [-2, 4, -2] }}
+        transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+        style={{ display: "flex" }}
+      >
+        <LuArrowDown />
+      </motion.div>
+    </Box>
+  </Box>
+);
+
+const TooReactiveIcon: React.FC = () => (
+  <Box
+    sx={{
+      position: "relative",
+      width: 48,
+      height: 48,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <motion.div
+      animate={{ rotate: 360 }}
+      transition={{ duration: 2.4, repeat: Infinity, ease: "linear" }}
+      style={{
+        position: "absolute",
+        inset: 6,
+        borderRadius: "50%",
+        border: "1.5px solid transparent",
+        borderTopColor: GOLD,
+        borderRightColor: GOLD,
+      }}
+    />
+    <Box
+      sx={{
+        width: 5,
+        height: 5,
+        borderRadius: "50%",
+        backgroundColor: GOLD,
+      }}
+    />
+  </Box>
+);
+
+const DoneAloneIcon: React.FC = () => (
+  <Box sx={{ display: "flex", alignItems: "center", gap: "7px", height: 48 }}>
+    {[0, 1, 2].map((index) => (
+      <motion.div
+        key={index}
+        animate={{ opacity: [0.35, 1, 0.35] }}
+        transition={{
+          duration: 1.8,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: index * 0.3,
+        }}
+        style={{
+          width: 9,
+          height: 9,
+          borderRadius: "50%",
+          backgroundColor: GOLD,
+        }}
+      />
+    ))}
+  </Box>
+);
+
+const problemIcons: Record<Problem["key"], React.ReactElement> = {
+  disconnected: <DisconnectedIcon />,
+  "non-adaptive": <NonAdaptiveIcon />,
+  "hard-to-sustain": <HardToSustainIcon />,
+  "too-reactive": <TooReactiveIcon />,
+  "done-alone": <DoneAloneIcon />,
+};
+
+type ProblemCardProps = {
+  problem: Problem;
   delay: number;
 };
 
-const PillarCard: React.FC<PillarCardProps> = ({ pillar, delay }) => {
+const ProblemCard: React.FC<ProblemCardProps> = ({ problem, delay }) => {
   return (
     <MotionBox
       initial={{ opacity: 0, y: 18 }}
@@ -264,46 +358,31 @@ const PillarCard: React.FC<PillarCardProps> = ({ pillar, delay }) => {
         delay,
       }}
       sx={{
-        flex: 1,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         textAlign: "center",
-        px: { xs: 0, md: 2 },
+        px: 2.5,
+        py: 3.5,
+        borderRadius: "16px",
+        backgroundColor: "rgba(255,255,255,0.03)",
+        border: "1px solid rgba(255,255,255,0.08)",
       }}
     >
-      {/* Golden gradient circle */}
-      <motion.div
-        style={{
-          width: 64,
-          height: 64,
-          borderRadius: "50%",
-          backgroundImage: GOLD_GRADIENT,
-          boxShadow: "0 0 0 1px rgba(248,250,252,0.45)",
-          transformStyle: "preserve-3d",
-        }}
-        initial={{ rotateY: 0 }}
-        animate={{ rotateY: 0 }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
+      {problemIcons[problem.key]}
 
       <Typography
         sx={{
           mt: 2.5,
           fontFamily: "var(--font-montserrat)",
-          fontWeight: 500,
+          fontWeight: 600,
           fontSize: 16,
-          letterSpacing: 0.5,
-          textTransform: "none",
+          letterSpacing: 0.2,
           color: (theme) => theme.palette.text.primary,
           mb: 1,
         }}
       >
-        {pillar.title}
+        {problem.title}
       </Typography>
 
       <Typography
@@ -311,11 +390,11 @@ const PillarCard: React.FC<PillarCardProps> = ({ pillar, delay }) => {
           fontFamily: "var(--font-inter)",
           fontWeight: 300,
           fontSize: 13,
-          lineHeight: 1.7,
+          lineHeight: 1.6,
           color: "rgba(255,255,255,0.72)",
         }}
       >
-        {pillar.description}
+        {problem.description}
       </Typography>
     </MotionBox>
   );
@@ -473,7 +552,45 @@ const ModernOverdriveSection: React.FC = () => {
             }}
           />
 
-          {/* 5. Solution title */}
+          {/* 5. High performers lines */}
+          <MotionTypography
+            variant="h6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.6,
+            }}
+            sx={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: 400,
+              fontSize: { xs: 18, md: 30 },
+              lineHeight: 1.4,
+              color: (theme) => theme.palette.text.primary,
+              maxWidth: 900,
+            }}
+          >
+            <Box component="span" sx={{ display: "block" }}>
+              And for high performers, it becomes normal.
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                mt: 1,
+                fontSize: { xs: 15, md: 22 },
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.72)",
+              }}
+            >
+              We learn to push through, to function while depleted, and to
+              live in reaction instead of action.
+            </Box>
+          </MotionTypography>
+
+          {/* 6. Solution title */}
           <MotionTypography
             variant="h4"
             initial={{ opacity: 0, y: 20 }}
@@ -492,129 +609,59 @@ const ModernOverdriveSection: React.FC = () => {
               color: (theme) => theme.palette.text.primary,
             }}
           >
-            Seena restores your{" "}
-            <Box component="span" sx={{ color: GOLD }}>
-              balance
-            </Box>
+            So we tried everything.
             <br />
-            from the{" "}
+            It still didn&apos;t{" "}
             <Box component="span" sx={{ color: GOLD }}>
-              inside out
+              hold!
             </Box>
           </MotionTypography>
 
-          {/* 6A. Desktop layout – 4 in a row with 3 connectors */}
-          <Stack
-            direction="row"
-            spacing={0}
+          {/* 7. Problem cards */}
+          <Box
             sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "repeat(2, 1fr)",
+                md: "repeat(5, 1fr)",
+              },
+              gap: 2.5,
               width: "100%",
               mt: { xs: 0, md: 4 },
-              justifyContent: "center",
-              alignItems: "center",
-              display: { xs: "none", md: "flex" },
             }}
           >
-            {pillars.map((pillar, index) => {
-              const pillarDelay = baseDelay + index * step;
-              const connectorDelay = baseDelay + (index + 0.4) * step;
+            {problems.map((problem, index) => (
+              <ProblemCard
+                key={problem.key}
+                problem={problem}
+                delay={baseDelay + index * step}
+              />
+            ))}
+          </Box>
 
-              return (
-                <React.Fragment key={pillar.title}>
-                  <PillarCard pillar={pillar} delay={pillarDelay} />
-
-                  {index < pillars.length - 1 && (
-                    <MotionBox
-                      initial={{ scaleX: 0, opacity: 0 }}
-                      whileInView={{ scaleX: 1, opacity: 1 }}
-                      viewport={{ once: true, amount: 0.3 }}
-                      transition={{
-                        duration: 0.5,
-                        ease: [0.22, 1, 0.36, 1],
-                        delay: connectorDelay,
-                      }}
-                      sx={{
-                        alignSelf: "center",
-                        transformOrigin: "left",
-                        height: 3,
-                        width: 112,
-                        mx: 1,
-                        borderRadius: 999,
-                        backgroundImage: GOLD_GRADIENT,
-                      }}
-                    />
-                  )}
-                </React.Fragment>
-              );
-            })}
-          </Stack>
-
-          {/* 6B. Mobile layout – 2×2 grid, connectors between 1–2 and 3–4 */}
-          <Stack
-            spacing={4}
+          {/* 8. Closing line */}
+          <MotionTypography
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+              delay: baseDelay + problems.length * step,
+            }}
             sx={{
-              width: "100%",
-              mt: 3,
-              display: { xs: "flex", md: "none" },
+              fontFamily: "var(--font-inter)",
+              fontWeight: 400,
+              fontSize: { xs: 18, md: 30 },
+              lineHeight: 1.4,
+              color: (theme) => theme.palette.text.primary,
+              maxWidth: 900,
             }}
           >
-            {Array.from({ length: Math.ceil(pillars.length / 2) }).map(
-              (_, rowIndex) => {
-                const leftIndex = rowIndex * 2;
-                const rightIndex = leftIndex + 1;
-                const leftPillar = pillars[leftIndex];
-                const rightPillar = pillars[rightIndex];
-
-                const leftDelay = baseDelay + leftIndex * step;
-                const rightDelay = baseDelay + rightIndex * step;
-                const connectorDelay =
-                  baseDelay + (leftIndex + 0.4) * step;
-
-                return (
-                  <Stack
-                    key={rowIndex}
-                    direction="row"
-                    spacing={2}
-                    justifyContent="center"
-                    alignItems="start"
-                  >
-                    {leftPillar && (
-                      <PillarCard pillar={leftPillar} delay={leftDelay} />
-                    )}
-
-                    {rightPillar && (
-                      <>
-                        <MotionBox
-                          initial={{ scaleX: 0, opacity: 0 }}
-                          whileInView={{ scaleX: 1, opacity: 1 }}
-                          viewport={{ once: true, amount: 0.3 }}
-                          transition={{
-                            duration: 0.5,
-                            ease: [0.22, 1, 0.36, 1],
-                            delay: connectorDelay,
-                          }}
-                          sx={{
-                            width: 40,
-                            height: { xs: 64, md: 3 },
-                            borderRadius: 999,
-                            flexShrink: 0,
-                            alignSelf: "start",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Box sx={{ height: 3, width: 40, borderRadius: 999, backgroundImage: GOLD_GRADIENT, alignSelf: "center" }} />
-                        </MotionBox>
-                        <PillarCard pillar={rightPillar} delay={rightDelay} />
-                      </>
-                    )}
-                  </Stack>
-
-                );
-              }
-            )}
-          </Stack>
+            Every solution we try works until it eventually breaks. None of
+            them are built for the long game - real life.
+          </MotionTypography>
         </Stack>
       </Container>
     </Box>
