@@ -151,8 +151,13 @@ const Hero: React.FC = () => {
             <Stack
               direction={{ xs: "column", sm: "row" }}
               spacing={{ xs: 2, sm: 3 }}
-              alignItems="center"
+              alignItems={{ xs: "stretch", sm: "center" }}
               justifyContent="center"
+              sx={{
+                width: { xs: "100%", sm: "auto" },
+                maxWidth: { xs: 340, sm: "none" },
+                mx: "auto",
+              }}
             >
               {/* Primary – same golden gradient as the header CTA */}
               <NewButton

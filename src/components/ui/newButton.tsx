@@ -8,9 +8,14 @@ type GenerateExperienceButtonProps = {
   fontSize?: number;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Wrapper = styled("div")(() => ({
+const Wrapper = styled("div")(({ theme }) => ({
   position: "relative",
   display: "inline-block",
+  // full-width on mobile so the button (width: 100% below sm) can stretch
+  width: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "auto",
+  },
   // let the button define the width; if you want full-width on mobile,
   // we already handle that inside ButtonRoot with breakpoints
   "&:hover .nebula-glow": {
