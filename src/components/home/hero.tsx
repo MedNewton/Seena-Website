@@ -116,7 +116,7 @@ const Hero: React.FC = () => {
               component="span"
               sx={{
                 display: "block",
-                fontSize: { xs: 50, sm: 70, md: 100, lg: 120 },
+                fontSize: { xs: 62, sm: 88, md: 125, lg: 150 },
               }}
             >
               Perform at
