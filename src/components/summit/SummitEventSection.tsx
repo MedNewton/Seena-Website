@@ -26,7 +26,7 @@ const SummitEventSection: FC = () => {
           zIndex: 2,
           maxWidth: 1040,
           mx: "auto",
-          mt: { xs: 0, md: -80 },
+          mt: { xs: -8, md: -80 },
           borderRadius: "20px",
           overflow: "hidden",
           background: BAND_GRADIENT,
