@@ -4,6 +4,10 @@ import type { FC } from "react";
 import { Box } from "@mui/material";
 
 import SummitHero from "@/components/summit/SummitHero";
+import SummitInsideSection from "@/components/summit/SummitInsideSection";
+import SummitUnlocksSection from "@/components/summit/SummitUnlocksSection";
+import SummitBuiltSection from "@/components/summit/SummitBuiltSection";
+import ExploreMoreSection from "@/components/home/ExploreMoreSection";
 import Footer from "@/components/layout/footer";
 
 const SummitPageClient: FC = () => {
@@ -18,6 +22,10 @@ const SummitPageClient: FC = () => {
       }}
     >
       <SummitHero />
+      <SummitInsideSection />
+      <SummitUnlocksSection />
+      <SummitBuiltSection />
+      <ExploreMoreSection excludeId="summits" dark />
       <Footer meshColors={["#0f52ba", "#6a8ff0", "#b388eb", "#0f52ba"]} />
     </Box>
   );
