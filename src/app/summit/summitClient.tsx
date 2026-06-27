@@ -4,6 +4,7 @@ import type { FC } from "react";
 import { Box } from "@mui/material";
 
 import SummitHero from "@/components/summit/SummitHero";
+import SummitEventSection from "@/components/summit/SummitEventSection";
 import SummitInsideSection from "@/components/summit/SummitInsideSection";
 import SummitUnlocksSection from "@/components/summit/SummitUnlocksSection";
 import SummitBuiltSection from "@/components/summit/SummitBuiltSection";
@@ -22,6 +23,7 @@ const SummitPageClient: FC = () => {
       }}
     >
       <SummitHero />
+      <SummitEventSection />
       <SummitInsideSection />
       <SummitUnlocksSection />
       <SummitBuiltSection />

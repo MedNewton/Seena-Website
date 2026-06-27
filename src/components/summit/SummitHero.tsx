@@ -17,7 +17,7 @@ const SummitHero: FC = () => {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: { xs: 520, md: "80vh" },
+        minHeight: { xs: "88vh", md: "100vh" },
       }}
     >
       {/* Background image */}
