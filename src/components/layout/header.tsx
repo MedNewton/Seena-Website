@@ -22,7 +22,7 @@ import { FaXTwitter, FaInstagram, FaTiktok } from "react-icons/fa6";
 
 import logo from "@/assets/images/Seena Logo-6.webp";
 import NewButton from "@/components/ui/newButton";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 
 type NavItem = {
   label: string;
@@ -32,8 +32,8 @@ type NavItem = {
 const navItems: NavItem[] = [
   { label: "PULSE", href: "/reset" },
   { label: "CIRCLES", href: "/circles" },
-  { label: "SUMMITS", href: "/experiences" },
-  { label: "LIVE", href: "/seena-live" },
+  { label: "SUMMITS", href: "/summit" },
+  { label: "LIVE", href: "/live" },
   { label: "ABOUT", href: "/about" },
 ];
 
@@ -43,6 +43,12 @@ const GOLD = "#D8A24B";
 
 const Header: React.FC = () => {
   const router = useRouter();
+  const pathname = usePathname();
+  // Pulse page uses a blue gradient CTA (dark enough to keep white text legible)
+  const ctaGradient =
+    pathname === "/pulse"
+      ? "linear-gradient(90deg, #4a6cf7 0%, #2d2a7e 55%, #181440 100%)"
+      : undefined;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -440,6 +446,7 @@ const Header: React.FC = () => {
               uppercase
               labelColor="#ffffff"
               showIcon={false}
+              gradient={ctaGradient}
               onClick={() => router.push("/#early-access")}
             />
           </Stack>

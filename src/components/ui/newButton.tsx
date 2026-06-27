@@ -11,7 +11,11 @@ type GenerateExperienceButtonProps = {
   uppercase?: boolean;
   labelColor?: string;
   showIcon?: boolean;
+  gradient?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
+
+const DEFAULT_GRADIENT =
+  "linear-gradient(90deg, #ffe8b2 0%, #d77a1e 50%, #1f1306 100%)";
 
 const Wrapper = styled("div")(({ theme }) => ({
   position: "relative",
@@ -36,12 +40,13 @@ const Wrapper = styled("div")(({ theme }) => ({
   },
 }));
 
-const Glow = styled("div")(() => ({
+const Glow = styled("div", {
+  shouldForwardProp: (prop) => prop !== "gradient",
+})<{ gradient: string }>(({ gradient }) => ({
   position: "absolute",
   inset: 0, // match button bounds exactly
   borderRadius: 12,
-  backgroundImage:
-    "linear-gradient(90deg, #E59804, #DCB821, #E59804, #DCB821)",
+  backgroundImage: gradient,
   filter: "blur(16px)",
   opacity: 0,
   transition: "opacity 0.5s ease, transform 0.5s ease",
@@ -51,7 +56,9 @@ const Glow = styled("div")(() => ({
   transformOrigin: "center center",
 }));
 
-const ButtonRoot = styled("button")(({ theme }) => ({
+const ButtonRoot = styled("button", {
+  shouldForwardProp: (prop) => prop !== "gradient",
+})<{ gradient: string }>(({ theme, gradient }) => ({
   position: "relative",
   zIndex: 1,
   display: "flex",
@@ -61,11 +68,9 @@ const ButtonRoot = styled("button")(({ theme }) => ({
   padding: "14px 44px",
   borderRadius: 12,
   border: "none",
-  // warm golden gradient: light cream -> amber -> deep brown (left to right)
-  // solid fallback + explicit size/repeat so it always covers edge-to-edge
-  backgroundColor: "#d77a1e",
-  backgroundImage:
-    "linear-gradient(90deg, #ffe8b2 0%, #d77a1e 50%, #1f1306 100%)",
+  // gradient background (overridable per page); explicit size/repeat so it
+  // always covers edge-to-edge
+  backgroundImage: gradient,
   backgroundSize: "100% 100%",
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
@@ -163,12 +168,13 @@ function NewButton({
   uppercase = false,
   labelColor = "#000000",
   showIcon = true,
+  gradient = DEFAULT_GRADIENT,
   ...rest
 }: GenerateExperienceButtonProps): ReactElement {
   return (
     <Wrapper>
-      <Glow className="nebula-glow" />
-      <ButtonRoot type={type} {...rest}>
+      <Glow className="nebula-glow" gradient={gradient} />
+      <ButtonRoot type={type} gradient={gradient} {...rest}>
         <SheenTrack className="sheen-track">
           <SheenInner />
         </SheenTrack>

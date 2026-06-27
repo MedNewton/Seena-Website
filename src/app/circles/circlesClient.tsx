@@ -7,6 +7,7 @@ import CirclesHero from "@/components/circles/CirclesHero";
 import CirclesInsideSection from "@/components/circles/CirclesInsideSection";
 import CirclesUnlocksSection from "@/components/circles/CirclesUnlocksSection";
 import CirclesBuiltSection from "@/components/circles/CirclesBuiltSection";
+import ExploreMoreSection from "@/components/home/ExploreMoreSection";
 import Footer from "@/components/layout/footer";
 
 const CirclesPageClient: FC = () => {
@@ -24,6 +25,7 @@ const CirclesPageClient: FC = () => {
       <CirclesInsideSection />
       <CirclesUnlocksSection />
       <CirclesBuiltSection />
+      <ExploreMoreSection excludeId="circles" />
       <Footer />
     </Box>
   );

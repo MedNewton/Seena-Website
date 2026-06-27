@@ -11,7 +11,7 @@ import circlesImg from "@/assets/newImages/circles_card.webp";
 import summitImg from "@/assets/newImages/summit_card.webp";
 import liveImg from "@/assets/newImages/live_card.webp";
 
-type ExploreCardConfig = {
+export type ExploreCardConfig = {
   id: string;
   title: string;
   subtitle: string;
@@ -23,49 +23,52 @@ type ExploreCardConfig = {
 
 const GOLD = "#D8A24B";
 
+// flat list of all product cards (shared across pages)
+export const EXPLORE_CARDS: ExploreCardConfig[] = [
+  {
+    id: "pulse",
+    title: "Pulse",
+    subtitle:
+      "Current state | Actionable steps | Your personalized feed | Guidance through the day",
+    cta: "Learn more",
+    note: "Launching fall 2026",
+    imageSrc: pulseImg.src,
+    href: "/reset",
+  },
+  {
+    id: "circles",
+    title: "Circles",
+    subtitle:
+      "Find your people | Stay connected | Real conversations | Shared experiences, in person",
+    cta: "Connect now",
+    imageSrc: circlesImg.src,
+    href: "/circles",
+  },
+  {
+    id: "summits",
+    title: "Summit",
+    subtitle:
+      "High-level discussions | Health leaders | Innovators | Leave better informed",
+    cta: "Register now",
+    note: "First event August 2026",
+    imageSrc: summitImg.src,
+    href: "/experiences",
+  },
+  {
+    id: "live",
+    title: "Live",
+    subtitle:
+      "Book wellness experiences | move together | In your city | Mindfulness and fitness",
+    cta: "Learn more",
+    imageSrc: liveImg.src,
+    href: "/seena-live",
+  },
+];
+
+// home layout: two rows of two
 const CARD_ROWS: ExploreCardConfig[][] = [
-  [
-    {
-      id: "pulse",
-      title: "Pulse",
-      subtitle:
-        "Current state | Actionable steps | Your personalized feed | Guidance through the day",
-      cta: "Learn more",
-      note: "Launching fall 2026",
-      imageSrc: pulseImg.src,
-      href: "/reset",
-    },
-    {
-      id: "circles",
-      title: "Circles",
-      subtitle:
-        "Find your people | Stay connected | Real conversations | Shared experiences, in person",
-      cta: "Connect now",
-      imageSrc: circlesImg.src,
-      href: "/circles",
-    },
-  ],
-  [
-    {
-      id: "summits",
-      title: "Summit",
-      subtitle:
-        "High-level discussions | Health leaders | Innovators | Leave better informed",
-      cta: "Register now",
-      note: "First event August 2026",
-      imageSrc: summitImg.src,
-      href: "/experiences",
-    },
-    {
-      id: "live",
-      title: "Live",
-      subtitle:
-        "Book wellness experiences | move together | In your city | Mindfulness and fitness",
-      cta: "Learn more",
-      imageSrc: liveImg.src,
-      href: "/seena-live",
-    },
-  ],
+  EXPLORE_CARDS.slice(0, 2),
+  EXPLORE_CARDS.slice(2, 4),
 ];
 
 const MotionBox = motion.create(Box);
@@ -76,7 +79,7 @@ type ExploreCardProps = {
   delay: number;
 };
 
-const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
+export const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
   const router = useRouter();
 
   return (

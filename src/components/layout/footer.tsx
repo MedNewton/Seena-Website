@@ -25,6 +25,7 @@ type SimpleLink = {
 
 type FooterProps = {
   transparentFooter?: boolean;
+  meshColors?: [string, string, string, string];
 };
 
 const navigationLinks: SimpleLink[] = [
@@ -53,16 +54,26 @@ const MotionCard = motion.create(Box);
 const MotionColumn = motion.create(Box);
 const MotionBox = motion.create(Box);
 
-// Mesh gradient config with your palette
-const meshOptions: MeshGradientOptions = {
-  colors: ["#dbc081", "#D77A1E", "#D77A1E", "#2b1a07"],
-  seed: 5,
-  animationSpeed: 0.9,
-  frequency: 0.00013
-  // let the library handle motion; defaults are fine for a subtle animated mesh
-};
+// Default mesh gradient palette
+const DEFAULT_MESH_COLORS: [string, string, string, string] = [
+  "#dbc081",
+  "#D77A1E",
+  "#D77A1E",
+  "#2b1a07",
+];
 
-const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
+const Footer: React.FC<FooterProps> = ({
+  transparentFooter = false,
+  meshColors,
+}) => {
+  // Mesh gradient config (palette overridable per page)
+  const meshOptions: MeshGradientOptions = {
+    colors: meshColors ?? DEFAULT_MESH_COLORS,
+    seed: 5,
+    animationSpeed: 0.9,
+    frequency: 0.00013,
+  };
+
   return (
     <Box
     id="early-access"
