@@ -23,7 +23,6 @@ const CirclesPageClient: FC = () => {
     >
       <CirclesHero title="Circles" />
       <CirclesInsideSection />
-      <CirclesUnlocksSection />
       <CirclesBuiltSection />
       <ExploreMoreSection excludeId="circles" />
       <Footer />

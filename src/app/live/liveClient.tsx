@@ -23,7 +23,6 @@ const LivePageClient: FC = () => {
     >
       <LiveHero />
       <LiveInsideSection />
-      <LiveUnlocksSection />
       <LiveBuiltSection />
       <ExploreMoreSection excludeId="live" dark />
       <Footer meshColors={["#2c61b5", "#2c61b5", "#ffd166", "#121e2f"]} />

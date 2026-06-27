@@ -23,7 +23,6 @@ const PulsePageClient: FC = () => {
     >
       <PulseHero />
       <PulseInsideSection />
-      <PulseUnlocksSection />
       <PulseBuiltSection />
       <ExploreMoreSection excludeId="pulse" dark />
       <Footer meshColors={["#2cdacd", "#2cdacd", "#2cdacd", "#2d2a7e"]} />
