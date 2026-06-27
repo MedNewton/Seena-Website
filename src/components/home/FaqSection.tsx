@@ -482,25 +482,31 @@ const FaqSection: React.FC = () => {
             delay: 0.15,
           }}
           sx={{
-            // Mobile: 2 + 2 grid, last pill spans the full row
-            display: { xs: "grid", md: "flex" },
-            gridTemplateColumns: { xs: "repeat(2, 1fr)" },
-            width: { xs: "100%", md: "auto" },
-            flexWrap: "wrap",
-            justifyContent: "center",
+            // Mobile: single horizontal scrollable row; desktop: centered wrap
+            display: "flex",
+            flexWrap: { xs: "nowrap", md: "wrap" },
+            justifyContent: { xs: "flex-start", md: "center" },
+            width: "100%",
+            maxWidth: "100%",
             gap: 1.5,
+            overflowX: { xs: "auto", md: "visible" },
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            "&::-webkit-scrollbar": { display: "none" },
+            px: { xs: 0.5, md: 0 },
           }}
         >
           {FAQ_TABS.map((tab, index) => {
             const isActive = index === activeTab;
-            const isLast = index === FAQ_TABS.length - 1;
 
             return (
               <ButtonBase
                 key={tab.label}
                 onClick={() => handleTabChange(index)}
                 sx={{
-                  gridColumn: { xs: isLast ? "span 2" : "auto" },
+                  flexShrink: 0,
+                  whiteSpace: "nowrap",
                   borderRadius: "14px",
                   px: { xs: 2.5, md: 3.5 },
                   py: { xs: 1.25, md: 1.5 },
@@ -590,9 +596,12 @@ const FaqSection: React.FC = () => {
               fontWeight: 700,
               fontSize: { xs: 15, md: 17 },
               color: "#ffffff",
-              background:
+              border: "none",
+              backgroundColor: "#d8a24b",
+              backgroundImage:
                 "linear-gradient(90deg, #f5d493 0%, #d8a24b 55%, #b06a1c 100%)",
-              border: "1.5px solid transparent",
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
               transition: "filter 250ms ease-out",
               "&:hover": {
                 filter: "brightness(1.06)",
