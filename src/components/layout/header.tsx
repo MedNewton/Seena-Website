@@ -44,11 +44,13 @@ const GOLD = "#D8A24B";
 const Header: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
-  // Pulse page uses a blue gradient CTA (dark enough to keep white text legible)
-  const ctaGradient =
-    pathname === "/pulse"
-      ? "linear-gradient(90deg, #4a6cf7 0%, #2d2a7e 55%, #181440 100%)"
-      : undefined;
+  // Per-page CTA gradient so the header button matches each page's palette.
+  const ctaGradientByPath: Record<string, string> = {
+    "/pulse": "linear-gradient(90deg, #4a6cf7 0%, #2d2a7e 55%, #181440 100%)",
+    "/summit": "linear-gradient(90deg, #0f52ba 0%, #6a8ff0 55%, #b388eb 100%)",
+    "/live": "linear-gradient(90deg, #142235 0%, #2c61b5 55%, #ffce5a 100%)",
+  };
+  const ctaGradient = ctaGradientByPath[pathname];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);

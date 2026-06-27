@@ -4,7 +4,6 @@
 import type { FC } from "react";
 import { Box, Stack, Typography, ButtonBase } from "@mui/material";
 import Image from "next/image";
-import { LuCalendar, LuClock, LuMapPin } from "react-icons/lu";
 
 import bg from "@/assets/newImages/summitHeroBG1.webp";
 
@@ -133,11 +132,11 @@ const SummitHero: FC = () => {
           </ButtonBase>
 
           {/* Booking info */}
-          <Stack spacing={1} sx={{ alignItems: "center", mt: { xs: 1, md: 1.5 } }}>
+          <Stack spacing={1.25} sx={{ alignItems: "center", mt: { xs: 1, md: 1.5 } }}>
             <Typography
               sx={{
                 fontFamily: "var(--font-inter)",
-                fontSize: { xs: 13, md: 14 },
+                fontSize: { xs: 15, md: 17 },
                 fontWeight: 600,
                 color: "rgba(255,255,255,0.95)",
               }}
@@ -151,21 +150,21 @@ const SummitHero: FC = () => {
               justifyContent="center"
               alignItems="center"
               sx={{
-                gap: { xs: 1, md: 2 },
+                gap: { xs: 1.25, md: 2.5 },
                 fontFamily: "var(--font-inter)",
-                fontSize: { xs: 13, md: 14 },
+                fontSize: { xs: 15, md: 17 },
                 fontWeight: 600,
                 color: "rgba(255,255,255,0.95)",
               }}
             >
               <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.6 }}>
-                <LuCalendar /> August 11, 2026
+                📅 August 11, 2026
               </Box>
               <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.6 }}>
-                <LuClock /> 6:00 PM – 9:00 PM
+                🕕 6:00 PM – 9:00 PM
               </Box>
               <Box sx={{ display: "inline-flex", alignItems: "center", gap: 0.6 }}>
-                <LuMapPin /> Hudson Yards, New York City
+                📍 Hudson Yards, New York City
               </Box>
             </Stack>
           </Stack>
