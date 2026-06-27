@@ -30,7 +30,7 @@ type NavItem = {
 };
 
 const navItems: NavItem[] = [
-  { label: "PULSE", href: "/reset" },
+  { label: "PULSE", href: "/pulse" },
   { label: "CIRCLES", href: "/circles" },
   { label: "SUMMITS", href: "/summit" },
   { label: "LIVE", href: "/live" },
