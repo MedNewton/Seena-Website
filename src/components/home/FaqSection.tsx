@@ -8,6 +8,16 @@ import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownR
 
 const GOLD = "#D8A24B";
 
+// gold gradient clipped to text (same as inflammation/burnout highlights)
+const goldGradientTextSx = {
+  backgroundImage:
+    "linear-gradient(90deg, #ffe8b2 0%, #d77a1e 60%, #1f1306 115%)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  WebkitTextFillColor: "transparent",
+} as const;
+
 type AnswerBlock =
   | { type: "paragraph"; text: string }
   | { type: "list"; items: string[] };
@@ -414,47 +424,50 @@ const FaqSection: React.FC = () => {
         spacing={{ xs: 3, md: 4 }}
         alignItems="center"
         sx={{
-          maxWidth: 1160,
+          maxWidth: 1400,
           mx: "auto",
-          px: { xs: 2, md: 0 },
+          px: { xs: 2, md: 4 },
         }}
       >
         {/* Title */}
         <Stack spacing={1.5} alignItems="center" textAlign="center">
           <MotionTypography
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            sx={{
+              fontFamily: "var(--font-raleway)",
+              fontWeight: 700,
+              fontSize: { xs: 16, md: 24 },
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              ...goldGradientTextSx,
+            }}
+          >
+            FAQ
+          </MotionTypography>
+
+          <MotionTypography
             variant="h2"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-            sx={{
-              fontFamily: "var(--font-bricolage)",
-              fontWeight: 500,
-              fontSize: { xs: 34, md: 56 },
-              lineHeight: 1.15,
-              color: (theme) => theme.palette.text.primary,
-            }}
-          >
-            Frequently Asked Questions
-          </MotionTypography>
-
-          <MotionTypography
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
             transition={{
-              duration: 0.55,
+              duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
               delay: 0.1,
             }}
             sx={{
-              fontFamily: "var(--font-inter)",
-              fontWeight: 300,
-              fontSize: { xs: 15, md: 19 },
-              color: "rgba(255,255,255,0.72)",
+             fontFamily: "var(--font-montserrat)",
+              fontWeight: 800,
+              fontSize: { xs: 34, md: 68 },
+              lineHeight: 1.05,
+              textTransform: "uppercase",
+              color: "#ffffff",
             }}
           >
-            Everything you need to know about Seena
+            The things everyone asks
           </MotionTypography>
         </Stack>
 
@@ -488,26 +501,24 @@ const FaqSection: React.FC = () => {
                 onClick={() => handleTabChange(index)}
                 sx={{
                   gridColumn: { xs: isLast ? "span 2" : "auto" },
-                  borderRadius: 9999,
-                  px: { xs: 2.5, md: 3.25 },
+                  borderRadius: "14px",
+                  px: { xs: 2.5, md: 3.5 },
                   py: { xs: 1.25, md: 1.5 },
                   fontFamily: "var(--font-inter)",
-                  fontWeight: isActive ? 600 : 400,
+                  fontWeight: isActive ? 700 : 600,
                   fontSize: { xs: 14, md: 16 },
-                  color: isActive ? "#1A1208" : "rgba(255,255,255,0.85)",
-                  backgroundColor: isActive
-                    ? GOLD
-                    : "rgba(255,255,255,0.06)",
-                  border: "1px solid",
-                  borderColor: isActive
-                    ? "transparent"
-                    : "rgba(255,255,255,0.08)",
+                  color: "#ffffff",
+                  background: isActive
+                    ? "linear-gradient(90deg, #f5d493 0%, #d8a24b 55%, #b06a1c 100%)"
+                    : "transparent",
+                  border: "1.5px solid",
+                  borderColor: isActive ? "transparent" : "#c47a1e",
                   transition:
-                    "background-color 250ms ease-out, color 250ms ease-out",
+                    "background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out",
                   "&:hover": {
-                    backgroundColor: isActive
-                      ? GOLD
-                      : "rgba(255,255,255,0.12)",
+                    background: isActive
+                      ? "linear-gradient(90deg, #f5d493 0%, #d8a24b 55%, #b06a1c 100%)"
+                      : "rgba(196,122,30,0.14)",
                   },
                 }}
               >
@@ -559,10 +570,10 @@ const FaqSection: React.FC = () => {
         >
           <Typography
             sx={{
-              fontFamily: "var(--font-inter)",
-              fontWeight: 300,
-              fontSize: { xs: 15, md: 18 },
-              color: "rgba(255,255,255,0.72)",
+              fontFamily: "var(--font-montserrat)",
+              fontWeight: 700,
+              fontSize: { xs: 18, md: 24 },
+              color: "#ffffff",
             }}
           >
             Still have questions?
@@ -572,19 +583,19 @@ const FaqSection: React.FC = () => {
             component="a"
             href="mailto:hello@seena.com"
             sx={{
-              borderRadius: 9999,
+              borderRadius: "14px",
               px: 4.5,
               py: 1.75,
-              fontFamily: "var(--font-inter)",
-              fontWeight: 500,
+              fontFamily: "var(--font-montserrat)",
+              fontWeight: 700,
               fontSize: { xs: 15, md: 17 },
-              color: GOLD,
-              border: `1px solid ${GOLD}`,
-              backgroundColor: "transparent",
-              transition:
-                "background-color 250ms ease-out, color 250ms ease-out",
+              color: "#ffffff",
+              background:
+                "linear-gradient(90deg, #f5d493 0%, #d8a24b 55%, #b06a1c 100%)",
+              border: "1.5px solid transparent",
+              transition: "filter 250ms ease-out",
               "&:hover": {
-                backgroundColor: "rgba(216,162,75,0.1)",
+                filter: "brightness(1.06)",
               },
             }}
           >

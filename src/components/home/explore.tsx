@@ -16,6 +16,7 @@ type ExploreCardConfig = {
   title: string;
   subtitle: string;
   cta: string;
+  note?: string;
   imageSrc: string;
   href: string;
 };
@@ -26,19 +27,20 @@ const CARD_ROWS: ExploreCardConfig[][] = [
   [
     {
       id: "pulse",
-      title: "Seena Pulse",
+      title: "Pulse",
       subtitle:
-        "Local & international wellness retreats designed to rejuvenate you",
-      cta: "Learn More",
+        "Current state | Actionable steps | Your personalized feed | Guidance through the day",
+      cta: "Learn more",
+      note: "Launching fall 2026",
       imageSrc: pulseImg.src,
       href: "/reset",
     },
     {
       id: "circles",
-      title: "Seena Circles",
+      title: "Circles",
       subtitle:
-        "Enrich your wellness by connecting with other like-minded high performers.",
-      cta: "Join Now",
+        "Find your people | Stay connected | Real conversations | Shared experiences, in person",
+      cta: "Connect now",
       imageSrc: circlesImg.src,
       href: "/circles",
     },
@@ -46,18 +48,20 @@ const CARD_ROWS: ExploreCardConfig[][] = [
   [
     {
       id: "summits",
-      title: "Seena Summits",
+      title: "Summit",
       subtitle:
-        "Learn, grow and inspire through exclusive discussion events among health leaders and innovators.",
-      cta: "Register Now",
+        "High-level discussions | Health leaders | Innovators | Leave better informed",
+      cta: "Register now",
+      note: "First event August 2026",
       imageSrc: summitImg.src,
       href: "/experiences",
     },
     {
       id: "live",
-      title: "Seena Live",
-      subtitle: "Community fitness & wellness events in your city",
-      cta: "Learn More",
+      title: "Live",
+      subtitle:
+        "Book wellness experiences | move together | In your city | Mindfulness and fitness",
+      cta: "Learn more",
       imageSrc: liveImg.src,
       href: "/seena-live",
     },
@@ -96,7 +100,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
         borderRadius: 3,
         overflow: "hidden",
         cursor: "pointer",
-        minHeight: { xs: 300, md: 390 },
+        minHeight: { xs: 300, md: 320 },
         minWidth: 0,
         display: "flex",
         flexDirection: "column",
@@ -132,10 +136,10 @@ const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
         <Box>
           <Typography
             sx={{
-              fontFamily: "var(--font-bricolage)",
-              fontSize: { xs: 28, md: 38 },
+              fontFamily: "var(--font-montserrat)",
+              fontSize: { xs: 30, md: 42 },
               lineHeight: 1.2,
-              fontWeight: 400,
+              fontWeight: 800,
             }}
           >
             {card.title}
@@ -146,7 +150,7 @@ const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
               mt: 1,
               fontFamily: "var(--font-inter)",
               fontSize: { xs: 14, md: 17 },
-              fontWeight: 300,
+              fontWeight: 400,
               lineHeight: 1.55,
               color: "rgba(249, 250, 251, 0.92)",
               maxWidth: 460,
@@ -156,35 +160,57 @@ const ExploreCard: React.FC<ExploreCardProps> = ({ card, delay }) => {
           </Typography>
         </Box>
 
-        <Button
-          onClick={(event) => {
-            event.stopPropagation();
-            router.push(card.href);
-          }}
+        <Box
           sx={{
-            borderRadius: 9999,
-            px: 3.5,
-            py: 1.25,
-            fontSize: { xs: 12, md: 14 },
-            fontWeight: 500,
-            letterSpacing: 1.4,
-            textTransform: "uppercase",
-            fontFamily: "var(--font-montserrat)",
-            color: "rgba(249,250,251,0.96)",
-            border: "1px solid rgba(249,250,251,0.85)",
-            backgroundColor: "rgba(0,0,0,0.18)",
-            whiteSpace: "nowrap",
-            transition:
-              "background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out",
-            "&:hover": {
-              backgroundColor: "rgba(249,250,251,0.95)",
-              borderColor: "transparent",
-              color: "#0B101B",
-            },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "flex-start",
+            gap: 1,
           }}
         >
-          {card.cta}
-        </Button>
+          <Button
+            onClick={(event) => {
+              event.stopPropagation();
+              router.push(card.href);
+            }}
+            sx={{
+              borderRadius: 9999,
+              px: 3.5,
+              py: 1.25,
+              fontSize: { xs: 13, md: 15 },
+              fontWeight: 700,
+              letterSpacing: 1.2,
+              textTransform: "uppercase",
+              fontFamily: "var(--font-raleway)",
+              color: "rgba(249,250,251,0.96)",
+              border: "1px solid rgba(249,250,251,0.85)",
+              backgroundColor: "rgba(0,0,0,0.18)",
+              whiteSpace: "nowrap",
+              transition:
+                "background-color 250ms ease-out, color 250ms ease-out, border-color 250ms ease-out",
+              "&:hover": {
+                backgroundColor: "rgba(249,250,251,0.95)",
+                borderColor: "transparent",
+                color: "#0B101B",
+              },
+            }}
+          >
+            {card.cta}
+          </Button>
+
+          {card.note && (
+            <Typography
+              sx={{
+                fontFamily: "var(--font-inter)",
+                fontSize: { xs: 12, md: 13 },
+                fontWeight: 400,
+                color: "rgba(249,250,251,0.8)",
+              }}
+            >
+              {card.note}
+            </Typography>
+          )}
+        </Box>
       </Stack>
     </MotionBox>
   );
@@ -211,18 +237,31 @@ const Explore: React.FC = () => {
         }}
         sx={{
           textAlign: "center",
-          color: (theme) => theme.palette.text.primary,
-          fontFamily: "var(--font-bricolage)",
-          fontSize: { xs: 32, md: 64 },
-          lineHeight: 1.1,
-          fontWeight: 600,
+          fontFamily: "var(--font-montserrat)",
+              fontWeight: 800,
+              fontSize: { xs: 34, md: 68 },
+              lineHeight: 1.05,
+              textTransform: "uppercase",
+              color: (theme) => theme.palette.text.primary,
           maxWidth: "100%",
           mx: "auto",
           mb: { xs: 4, md: 6 },
           px: { xs: 2, md: 0 },
         }}
       >
-        Shaping an <span style={{ color: GOLD }}>environment</span>
+        Shaping an{" "}
+        <span
+          style={{
+            backgroundImage:
+              "linear-gradient(90deg, #ffe8b2 0%, #d77a1e 60%, #1f1306 115%)",
+            WebkitBackgroundClip: "text",
+            backgroundClip: "text",
+            color: "transparent",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          environment
+        </span>
         <br />
         You don&apos;t have to <span style={{ color: GOLD }}>fight</span>{" "}
         against.

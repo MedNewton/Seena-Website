@@ -7,20 +7,25 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
-import bg from "@/assets/newImages/hero.webp";
+import bg from "@/assets/newImages/newHeroBG.webp";
 import NewButton from "@/components/ui/newButton";
 
 const GOLD = "rgb(216, 162, 75)";
 
 const HEADER_OFFSET = 96;
 
+// warm gold gradient applied to the "PEAK" word
+const goldGradientTextSx = {
+  background: "linear-gradient(90deg, #ffe8b2 0%, #d8a24b 45%, #a85f1a 100%)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  WebkitTextFillColor: "transparent",
+} as const;
+
 const MotionTypography = motion(Typography);
 const MotionButton = motion(Button);
 const MotionBox = motion(Box);
-
-const goldTextSx = {
-  color: GOLD,
-} as const;
 
 const Hero: React.FC = () => {
   const router = useRouter();
@@ -98,20 +103,44 @@ const Hero: React.FC = () => {
               delay: 0.3,
             }}
             sx={{
-              fontSize: { xs: 38, md: 84 },
-              lineHeight: 1.1,
-              fontWeight: 500,
-              fontFamily: "var(--font-bricolage)",
+              lineHeight: 0.98,
+              fontWeight: 900,
+              fontFamily: "var(--font-montserrat)",
+              textTransform: "uppercase",
+              color: "#ffffff",
+              textAlign: "center",
             }}
           >
-            <Box component="span" sx={goldTextSx}>
-              Perform
-            </Box>{" "}
-            at your peak
-            <br />
-            without{" "}
-            <Box component="span" sx={goldTextSx}>
-              burning out
+            {/* normal centered lines: line 1 big, line 2 bigger, line 3 smaller */}
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                fontSize: { xs: 50, sm: 70, md: 100, lg: 120 },
+              }}
+            >
+              Perform at
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                fontSize: { xs: 62, sm: 88, md: 125, lg: 150 },
+              }}
+            >
+              Your{" "}
+              <Box component="span" sx={goldGradientTextSx}>
+                peak
+              </Box>
+            </Box>
+            <Box
+              component="span"
+              sx={{
+                display: "block",
+                fontSize: { xs: 28, sm: 38, md: 52, lg: 62 },
+              }}
+            >
+              Without burning out
             </Box>
           </MotionTypography>
 
@@ -125,12 +154,14 @@ const Hero: React.FC = () => {
               delay: 0.45,
             }}
             sx={{
-              fontSize: { xs: 16, md: 22 },
+              maxWidth: 760,
+              fontSize: { xs: 18, sm: 22, md: 28, lg: 30 },
               lineHeight: 1.5,
-              fontWeight: 300,
-              fontFamily: "var(--font-bricolage)",
-              color: "rgba(249,250,251,0.92)",
-              maxWidth: 720,
+              fontWeight: 400,
+              fontStyle: "italic",
+              fontFamily: "var(--font-josefin)",
+              color: "#ffffff",
+              textAlign: "center",
             }}
           >
             Built to understand where you&apos;re at, connect you with people
@@ -162,6 +193,10 @@ const Hero: React.FC = () => {
               {/* Primary – same golden gradient as the header CTA */}
               <NewButton
                 label="Join Early Access"
+                labelFontFamily="var(--font-raleway)"
+                labelWeight={700}
+                uppercase
+                labelColor="#ffffff"
                 onClick={() => router.push("/#early-access")}
               />
 
@@ -170,18 +205,18 @@ const Hero: React.FC = () => {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => scrollToSection("app")}
                 sx={{
-                  borderRadius: 9999,
+                  borderRadius: "12px",
                   px: 5.5,
                   py: 0,
                   // match NewButton: 14px padding + 16px line + 1px border = 46px
                   height: 46,
                   fontSize: 16,
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
+                  fontWeight: 700,
+                  letterSpacing: "0.06em",
                   lineHeight: 1,
-                  textTransform: "none",
-                  fontFamily: "var(--font-montserrat)",
-                  color: "rgba(249,250,251,0.96)",
+                  textTransform: "uppercase",
+                  fontFamily: "var(--font-raleway)",
+                  color: "#ffffff",
                   backgroundColor: "transparent",
                   boxShadow: "none",
                   border: `1px solid ${GOLD}`,

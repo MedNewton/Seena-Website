@@ -16,6 +16,7 @@ const HomePageClient: React.FC = () => {
       <Hero />
       <Stack gap={2} sx={{
         px: { xs: 0, md: 3 },
+        backgroundColor: "#000000"
       }}>
         <ModernOverdriveSection />
         <SeenaDifferentSection />

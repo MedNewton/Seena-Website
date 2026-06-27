@@ -6,7 +6,8 @@ import {
   Bricolage_Grotesque,
   Inter,
   Montserrat,
-  Raleway
+  Raleway,
+  Josefin_Sans
 } from "next/font/google";
 import ThemeRegistry from "@/components/layout/themeRegistry";
 import Header from "@/components/layout/header";
@@ -26,8 +27,15 @@ const inter = Inter({
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   variable: "--font-montserrat",
+});
+
+const josefinSans = Josefin_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
+  variable: "--font-josefin",
 });
 
 const raleway = Raleway({
@@ -61,6 +69,7 @@ export default function RootLayout({
           inter.variable,
           montserrat.variable,
           raleway.variable,
+          josefinSans.variable,
         ].join(" ")}
       >
         <ThemeRegistry>

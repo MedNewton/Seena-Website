@@ -33,8 +33,9 @@ const MoveHealGrow: React.FC = () => {
       <Typography
         sx={{
           mb: { xs: 1.5, md: 2.5 },
+          fontFamily: "var(--font-montserrat)",
           fontSize: { xs: 14, md: 17 },
-          fontWeight: 400,
+          fontWeight: 700,
           color: "#FFFFFF",
         }}
       >
@@ -44,9 +45,11 @@ const MoveHealGrow: React.FC = () => {
       <Typography
         component="h2"
         sx={{
-          fontSize: { xs: 28, md: 60 },
-          fontWeight: 500,
-          lineHeight: 1.15,
+          fontFamily: "var(--font-montserrat)",
+          fontSize: { xs: 30, md: 64 },
+          fontWeight: 800,
+          lineHeight: 1.05,
+          textTransform: "uppercase",
           mb: { xs: 2, md: 3 },
           px: { xs: 3, md: 0 },
           color: "#FFFFFF",
@@ -54,7 +57,9 @@ const MoveHealGrow: React.FC = () => {
           mx: "auto",
         }}
       >
-        Join the movement for high performance without self-destruction
+        Join the movement
+        <br />
+        for high performance
       </Typography>
 
       {/* Text + form */}
@@ -71,10 +76,12 @@ const MoveHealGrow: React.FC = () => {
           sx={{
             maxWidth: 860,
             mx: "auto",
+            fontFamily: "var(--font-inter)",
             fontSize: { xs: 15, md: 21 },
             lineHeight: 1.6,
-            fontWeight: 300,
-            color: "rgba(255,255,255,0.88)",
+            fontWeight: 400,
+            fontStyle: "italic",
+            color: "rgba(255,255,255,0.92)",
           }}
         >
           Get early access to Seena and be part of a new culture built for
@@ -115,7 +122,7 @@ const MoveHealGrow: React.FC = () => {
               sx={{
                 maxWidth: { xs: 420, sm: 350 },
                 "& .MuiOutlinedInput-root": {
-                  borderRadius: 999,
+                  borderRadius: "14px",
                   color: "#FFFFFF",
                   backgroundColor: "transparent",
                   "& .MuiOutlinedInput-notchedOutline": {
@@ -151,12 +158,14 @@ const MoveHealGrow: React.FC = () => {
                 width: { xs: "100%", sm: "auto" },
                 maxWidth: { xs: 420, sm: "none" },
                 flexShrink: 0,
-                borderRadius: 999,
+                borderRadius: "14px",
                 px: 4.5,
                 py: 1.75,
+                fontFamily: "var(--font-montserrat)",
                 fontSize: 15,
-                fontWeight: 500,
-                textTransform: "none",
+                fontWeight: 700,
+                letterSpacing: 1,
+                textTransform: "uppercase",
                 whiteSpace: "nowrap",
                 backgroundColor: "#FFFFFF",
                 color: "#000000",
@@ -171,7 +180,7 @@ const MoveHealGrow: React.FC = () => {
                 ? "Joining..."
                 : submitted
                 ? "Thanks for joining !"
-                : "Get Early Access"}
+                : "Join Waitlist"}
             </Button>
           </Stack>
 

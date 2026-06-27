@@ -6,7 +6,6 @@ import { Box, Stack, Typography } from "@mui/material";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const GOLD = "#D69134";
-const CARD_BG = "#170F07";
 
 const features = [
   {
@@ -67,7 +66,8 @@ const SeenaDifferentSection: React.FC = () => {
           mx: "auto",
           borderRadius: "28px",
           border: "1px solid rgba(214,145,52,0.22)",
-          background: `radial-gradient(120% 90% at 50% 0%, rgba(214,145,52,0.12), transparent 60%), ${CARD_BG}`,
+          background:
+            "linear-gradient(135deg, #c98a3e 0%, #834314 48%, #130b03 100%)",
           overflow: "hidden",
           px: { xs: 3, md: 10 },
           py: { xs: 6, md: 10 },
@@ -116,12 +116,11 @@ const SeenaDifferentSection: React.FC = () => {
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
             sx={{
-              fontFamily: "var(--font-montserrat)",
-              fontWeight: 600,
-              fontSize: { xs: 13, md: 15 },
+              fontFamily: "var(--font-raleway)",
+              fontWeight: 800,
+              fontSize: { xs: 14, md: 18 },
               letterSpacing: 2,
               textTransform: "uppercase",
-              color: GOLD,
             }}
           >
             Seena is different
@@ -139,14 +138,15 @@ const SeenaDifferentSection: React.FC = () => {
               delay: 0.1,
             }}
             sx={{
-              fontFamily: "var(--font-bricolage)",
-              fontWeight: 500,
+              fontFamily: "var(--font-montserrat)",
+              fontWeight: 800,
               fontSize: { xs: 34, md: 64 },
               lineHeight: 1.15,
+              textTransform: "uppercase",
               color: (theme) => theme.palette.text.primary,
             }}
           >
-            Built to adapt to life&apos;s ups and downs.
+            Built to adapt to<br /> life&apos;s ups and downs.
           </MotionTypography>
 
           {/* Subtitle */}
@@ -161,11 +161,10 @@ const SeenaDifferentSection: React.FC = () => {
             }}
             sx={{
               fontFamily: "var(--font-inter)",
-              fontWeight: 300,
-              fontSize: { xs: 16, md: 22 },
+              fontWeight: 400,
+              fontStyle: "italic",
+              fontSize: { xs: 18, md: 24 },
               lineHeight: 1.55,
-              color: "rgba(255,255,255,0.85)",
-              maxWidth: 860,
             }}
           >
             Seena brings together state-aware guidance, the right people
@@ -207,11 +206,10 @@ const SeenaDifferentSection: React.FC = () => {
                 <Typography
                   sx={{
                     fontFamily: "var(--font-montserrat)",
-                    fontWeight: 600,
-                    fontSize: 13,
+                    fontWeight: 700,
+                    fontSize: { xs: 18, md: 22 },
                     letterSpacing: 2,
                     textTransform: "uppercase",
-                    color: GOLD,
                     mb: 2,
                   }}
                 >
@@ -224,7 +222,7 @@ const SeenaDifferentSection: React.FC = () => {
                     width: 64,
                     height: 64,
                     borderRadius: "50%",
-                    backgroundColor: "rgba(214,145,52,0.16)",
+                    backgroundColor: "rgba(255,255,255,0.18)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -242,8 +240,8 @@ const SeenaDifferentSection: React.FC = () => {
                       width: 28,
                       height: 28,
                       borderRadius: "50%",
-                      backgroundColor: "#D8A24B",
-                      boxShadow: "0 0 18px rgba(216,162,75,0.55)",
+                      backgroundColor: "#FFF3DA",
+                      boxShadow: "0 0 18px rgba(255,243,218,0.75)",
                     }}
                   />
                 </Box>
@@ -251,8 +249,8 @@ const SeenaDifferentSection: React.FC = () => {
                 <Typography
                   sx={{
                     mt: 2.5,
-                    fontFamily: "var(--font-bricolage)",
-                    fontWeight: 500,
+                    fontFamily: "var(--font-montserrat)",
+                    fontWeight: 700,
                     fontSize: { xs: 22, md: 26 },
                     color: (theme) => theme.palette.text.primary,
                     mb: 1.25,
@@ -264,8 +262,8 @@ const SeenaDifferentSection: React.FC = () => {
                 <Typography
                   sx={{
                     fontFamily: "var(--font-inter)",
-                    fontWeight: 300,
-                    fontSize: { xs: 14, md: 15 },
+                    fontWeight: 400,
+                    fontSize: { xs: 14, md: 16 },
                     lineHeight: 1.7,
                     color: "rgba(255,255,255,0.72)",
                     maxWidth: 360,

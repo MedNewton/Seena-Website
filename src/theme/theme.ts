@@ -13,7 +13,7 @@ const brand: BrandPaletteOptions = brandColors;
 const palette: PaletteOptions = {
   primary: { main: "#FFFFFF" },
   secondary: { main: "#8F8E8E" },
-  background: { default: "#0C0C0C" },
+  background: { default: "#000000" },
   text: { primary: "#FFFFFF", secondary: "#364153" },
   info: { main: "#000000" },
   error: { main: "#DC2626" },

@@ -68,11 +68,11 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
     id="early-access"
       component="footer"
       sx={{
-        mt: { xs: 8, md: 12 },
+        pt: { xs: 8, md: 12 },
         pb: { xs: 6, md: 8 },
         px: { xs: 2, md: 3 },
         color: "#FFFFFF",
-        backgroundColor: (theme) => theme.palette.background.default,
+        backgroundColor: "#000000",
       }}
     >
       <MotionCard
@@ -176,10 +176,12 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: 28, md: 44 },
-                    fontWeight: 500,
-                    lineHeight: 1.1,
-                    fontFamily: "var(--font-bricolage)",
+                    fontFamily: "var(--font-montserrat)",
+              fontWeight: 800,
+              fontSize: { xs: 34, md: 44 },
+              lineHeight: 1.05,
+              textTransform: "uppercase",
+              color: "#ffffff",
                     textAlign: { xs: "center", md: "left" },
                   }}
                 >
@@ -191,7 +193,7 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                 <Typography
                   sx={{
                     mt: 2,
-                    fontSize: { xs: 14, md: 16 },
+                    fontSize: { xs: 16, md: 20 },
                     fontWeight: 300,
                     fontFamily: "var(--font-inter)",
                     maxWidth: { xs: "100%", md: 500 },
@@ -412,7 +414,6 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                 component="span"
                 sx={{
                   fontSize: { xs: "26vw", md: "min(16vw, 235px)" },
-                  fontWeight: 900,
                   letterSpacing: { xs: 4, md: 6 },
                   lineHeight: 0.9,
                   whiteSpace: "pre",
@@ -422,6 +423,8 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
                   backgroundClip: "text",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
+                  fontFamily: "var(--font-montserrat)",
+                  fontWeight: 800,
                 }}
               >
                 {"THE NEW STANDARD  ●  THE NEW STANDARD  ●  "}

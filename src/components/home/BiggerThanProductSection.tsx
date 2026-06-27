@@ -13,7 +13,15 @@ import carousel4 from "@/assets/newImages/carousel/4.webp";
 import carousel5 from "@/assets/newImages/carousel/5.webp";
 import carousel6 from "@/assets/newImages/carousel/6.webp";
 
-const GOLD = "#D69134";
+// gold gradient clipped to text (same as other section highlights)
+const goldGradientTextSx = {
+  backgroundImage:
+    "linear-gradient(90deg, #ffe8b2 0%, #d77a1e 60%, #1f1306 115%)",
+  WebkitBackgroundClip: "text",
+  backgroundClip: "text",
+  color: "transparent",
+  WebkitTextFillColor: "transparent",
+} as const;
 
 const MotionBox = motion.create(Box);
 const MotionTypography = motion.create(Typography);
@@ -54,12 +62,12 @@ const BiggerThanProductSection: React.FC = () => {
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
           sx={{
-            fontFamily: "var(--font-montserrat)",
-            fontWeight: 600,
-            fontSize: { xs: 13, md: 15 },
+            fontFamily: "var(--font-raleway)",
+            fontWeight: 700,
+            fontSize: { xs: 14, md: 18 },
             letterSpacing: 2,
             textTransform: "uppercase",
-            color: GOLD,
+            ...goldGradientTextSx,
           }}
         >
           This is bigger than a product
@@ -77,15 +85,23 @@ const BiggerThanProductSection: React.FC = () => {
             delay: 0.1,
           }}
           sx={{
-            fontFamily: "var(--font-bricolage)",
-            fontWeight: 500,
-            fontSize: { xs: 34, md: 64 },
-            lineHeight: 1.15,
-            color: (theme) => theme.palette.text.primary,
-            maxWidth: 1100,
+            fontFamily: "var(--font-montserrat)",
+              fontWeight: 800,
+              fontSize: { xs: 34, md: 68 },
+              lineHeight: 1.05,
+              textTransform: "uppercase",
+            color: "#ffffff",
           }}
         >
-          We&apos;re building a better way to live at a high level.
+          We&apos;re building a{" "}
+          <Box component="span" sx={goldGradientTextSx}>
+            better way
+          </Box>
+          <br />
+          to live at a{" "}
+          <Box component="span" sx={goldGradientTextSx}>
+            high level
+          </Box>
         </MotionTypography>
 
         {/* Subtitle */}
@@ -100,10 +116,11 @@ const BiggerThanProductSection: React.FC = () => {
           }}
           sx={{
             fontFamily: "var(--font-inter)",
-            fontWeight: 300,
+            fontWeight: 400,
+            fontStyle: "italic",
             fontSize: { xs: 16, md: 22 },
             lineHeight: 1.55,
-            color: "rgba(255,255,255,0.85)",
+            color: "rgba(255,255,255,0.9)",
             maxWidth: 1000,
           }}
         >

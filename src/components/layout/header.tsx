@@ -1,7 +1,7 @@
 // src/components/layout/Header.tsx
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Box,
@@ -45,6 +45,16 @@ const Header: React.FC = () => {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = (): void => {
+      setScrolled(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const handleNavClick =
     (href: string) =>
@@ -102,15 +112,10 @@ const Header: React.FC = () => {
         component="header"
         sx={{
           position: "fixed",
-          top: { xs: 0, md: 16 },
-          left: { xs: 0, md: "50%" },
-          transform: { xs: "none", md: "translateX(-50%)" },
+          top: 0,
+          left: 0,
           zIndex: (theme) => theme.zIndex.appBar + 1,
-          width: {
-            xs: "100%",
-            md: "min(1300px, 90% - 32px)",
-          },
-          px: { xs: 0, md: 0 }
+          width: "100%",
         }}
       >
         <MotionBox
@@ -126,45 +131,38 @@ const Header: React.FC = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderRadius: { xs: 0, md: 999 },
-            pl: 2,
-            pr: 1,
+            borderRadius: 0,
+            pl: { xs: 2, md: 6 },
+            pr: { xs: 1, md: 4 },
             py: 1,
             overflow: "visible", // allow dropdown to render outside
-            // iOS-style liquid glass: translucent, heavily blurred + saturated,
-            // with a specular highlight along the top edge
-            background: {
-              xs: "linear-gradient(120deg, rgba(30,32,38,0.45), rgba(20,22,28,0.35))",
-              md: "linear-gradient(120deg, rgba(30,32,38,0.4), rgba(20,22,28,0.28))",
-            },
-            backdropFilter: "blur(28px) saturate(180%)",
-            WebkitBackdropFilter: "blur(28px) saturate(180%)",
-            border: { xs: "none", md: "1px solid rgba(255,255,255,0.16)" },
-            boxShadow: {
-              xs: "0 22px 55px rgba(0,0,0,0.45)",
-              md: "inset 0 1px 0 0 rgba(255,255,255,0.22), inset 0 -1px 0 0 rgba(255,255,255,0.05), 0 22px 55px rgba(0,0,0,0.45)",
-            },
+            // transparent by default; iOS-style liquid glass once scrolled
+            background: scrolled
+              ? "linear-gradient(120deg, rgba(30,32,38,0.4), rgba(20,22,28,0.28))"
+              : "transparent",
+            backdropFilter: scrolled ? "blur(28px) saturate(180%)" : "none",
+            WebkitBackdropFilter: scrolled ? "blur(28px) saturate(180%)" : "none",
+            borderBottom: scrolled
+              ? "1px solid rgba(255,255,255,0.16)"
+              : "1px solid transparent",
+            boxShadow: scrolled
+              ? "inset 0 1px 0 0 rgba(255,255,255,0.10), 0 22px 55px rgba(0,0,0,0.45)"
+              : "none",
             transition:
-              "background 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out, transform 180ms ease-out",
-            "&:hover": {
-              boxShadow: {
-                md: "inset 0 1px 0 0 rgba(255,255,255,0.28), inset 0 -1px 0 0 rgba(255,255,255,0.06), 0 24px 65px rgba(0,0,0,0.55)",
-              },
-              transform: { md: "translateY(-1px)" },
-            },
+              "background 220ms ease-out, box-shadow 220ms ease-out, border-color 220ms ease-out, backdrop-filter 220ms ease-out",
           }}
         >
           {/* Left: Logo / Brand */}
-          <Box sx={{ position: "relative", width: 80, height: 40 }}>
+          <Box sx={{ position: "relative", display: "flex", alignItems: "center" }}>
             <MuiLink component={Link} href="/" underline="none">
               <Typography
                 sx={{
                   fontFamily: "var(--font-raleway)",
-                  fontSize: 24,
+                  fontSize: { xs: 28, md: 34 },
                   fontWeight: 800,
                   color: "#FFFFFF",
                   fontStyle: "italic",
-                  letterSpacing: 1.75,
+                  letterSpacing: 2,
                   textTransform: "uppercase",
                 }}
               >
@@ -173,13 +171,16 @@ const Header: React.FC = () => {
             </MuiLink>
           </Box>
 
-          {/* Center: Nav links (desktop only) */}
+          {/* Center: Nav links (desktop only) — absolutely centered to the header */}
           <Stack
             direction="row"
-            spacing={5}
+            spacing={6}
             sx={{
               alignItems: "center",
-              flex: 1,
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
               justifyContent: "center",
               display: { xs: "none", md: "flex" },
             }}
@@ -197,11 +198,11 @@ const Header: React.FC = () => {
                     sx={(theme) => ({
                       position: "relative",
                       textDecoration: "none",
-                      fontSize: 14,
-                      letterSpacing: 1.8,
-                      fontWeight: 500,
+                      fontSize: 17,
+                      letterSpacing: 1.6,
+                      fontWeight: 700,
                       textTransform: "uppercase",
-                      fontFamily: "var(--font-montserrat)",
+                      fontFamily: "var(--font-raleway)",
                       color: "rgba(248,250,252,0.85)",
                       pb: 0.5,
                       "&::after": {
@@ -247,11 +248,11 @@ const Header: React.FC = () => {
                       sx={(theme) => ({
                         position: "relative",
                         textDecoration: "none",
-                        fontSize: 14,
-                        letterSpacing: 1.8,
-                        fontWeight: 500,
+                        fontSize: 17,
+                        letterSpacing: 1.6,
+                        fontWeight: 700,
                         textTransform: "uppercase",
-                        fontFamily: "var(--font-montserrat)",
+                        fontFamily: "var(--font-raleway)",
                         color: "rgba(248,250,252,0.85)",
                         pb: 0.5,
                         cursor: "pointer",
@@ -432,34 +433,13 @@ const Header: React.FC = () => {
             alignItems="center"
             sx={{ display: { xs: "none", md: "flex" } }}
           >
-            <Box
-              component="button"
-              type="button"
-              onClick={() => router.push("/login")}
-              sx={{
-                borderRadius: 9999,
-                px: 4,
-                height: 46,
-                fontSize: 16,
-                fontWeight: 600,
-                letterSpacing: "-0.01em",
-                lineHeight: 1,
-                fontFamily: "var(--font-montserrat)",
-                color: "rgba(249,250,251,0.96)",
-                backgroundColor: "transparent",
-                border: `1px solid ${GOLD}`,
-                cursor: "pointer",
-                transition: "background-color 250ms ease-out",
-                "&:hover": {
-                  backgroundColor: "rgba(216,162,75,0.08)",
-                },
-              }}
-            >
-              Login
-            </Box>
-
             <NewButton
-              label="Get Access"
+              label="Join us"
+              labelFontFamily="var(--font-raleway)"
+              labelWeight={700}
+              uppercase
+              labelColor="#ffffff"
+              showIcon={false}
               onClick={() => router.push("/#early-access")}
             />
           </Stack>
