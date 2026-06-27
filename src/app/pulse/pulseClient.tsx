@@ -24,7 +24,11 @@ const PulsePageClient: FC = () => {
       <PulseHero />
       <PulseInsideSection />
       <PulseBuiltSection />
-      <ExploreMoreSection excludeId="pulse" dark />
+      <ExploreMoreSection
+        excludeId="pulse"
+        dark
+        accentGradient="linear-gradient(150deg, #2d2a7e 0%, #277f9b 55%, #2cdacd 100%)"
+      />
       <Footer meshColors={["#2cdacd", "#2cdacd", "#2cdacd", "#2d2a7e"]} />
     </Box>
   );

@@ -24,7 +24,10 @@ const CirclesPageClient: FC = () => {
       <CirclesHero title="Circles" />
       <CirclesInsideSection />
       <CirclesBuiltSection />
-      <ExploreMoreSection excludeId="circles" />
+      <ExploreMoreSection
+        excludeId="circles"
+        accentGradient="linear-gradient(135deg, #1a0f04 0%, #7a430f 55%, #c98a3e 100%)"
+      />
       <Footer />
     </Box>
   );

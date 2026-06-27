@@ -24,7 +24,11 @@ const LivePageClient: FC = () => {
       <LiveHero />
       <LiveInsideSection />
       <LiveBuiltSection />
-      <ExploreMoreSection excludeId="live" dark />
+      <ExploreMoreSection
+        excludeId="live"
+        dark
+        accentGradient="linear-gradient(150deg, #142235 0%, #2c61b5 55%, #ffce5a 100%)"
+      />
       <Footer meshColors={["#2c61b5", "#2c61b5", "#ffd166", "#121e2f"]} />
     </Box>
   );

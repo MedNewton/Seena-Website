@@ -17,17 +17,33 @@ const MotionTypography = motion.create(Typography);
 type ExploreMoreSectionProps = {
   excludeId: string;
   dark?: boolean;
+  /**
+   * Gradient applied to the highlighted words in the heading so the section
+   * matches the host page's palette. Falls back to solid gold when omitted.
+   */
+  accentGradient?: string;
 };
 
 const ExploreMoreSection: React.FC<ExploreMoreSectionProps> = ({
   excludeId,
   dark = false,
+  accentGradient,
 }) => {
   const cards = EXPLORE_CARDS.filter((card) => card.id !== excludeId);
   const topTwo = cards.slice(0, 2);
   const last = cards[2];
 
   const headingColor = dark ? "#ffffff" : "#0a0a0a";
+
+  const accentSx = accentGradient
+    ? {
+        backgroundImage: accentGradient,
+        WebkitBackgroundClip: "text",
+        backgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        color: "transparent",
+      }
+    : { color: GOLD };
 
   return (
     <Box
@@ -58,10 +74,10 @@ const ExploreMoreSection: React.FC<ExploreMoreSectionProps> = ({
           px: { xs: 2, md: 0 },
         }}
       >
-        Shaping an <Box component="span" sx={{ color: GOLD }}>environment</Box>
+        Shaping an <Box component="span" sx={accentSx}>environment</Box>
         <br />
         You don&apos;t have to{" "}
-        <Box component="span" sx={{ color: GOLD }}>fight</Box> against.
+        <Box component="span" sx={accentSx}>fight</Box> against.
       </MotionTypography>
 
       {/* Cards: 2 on top (accordion), 1 large beneath */}
