@@ -2,153 +2,220 @@
 "use client";
 
 import type { FC } from "react";
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-} from "@mui/material";
-import Image, { type StaticImageData } from "next/image";
+import { Box, Typography, Button, Stack } from "@mui/material";
+import Image from "next/image";
+import { MeshGradient } from "@mesh-gradient/react";
+import { type MeshGradientOptions } from "@mesh-gradient/core";
+
+import circlesCard from "@/assets/newImages/circles_card.webp";
 
 export interface CirclesHeroProps {
-  title: string;              // e.g. "SEENA Collective"
-  image: StaticImageData;
+  title: string; // e.g. "Circles"
 }
 
-const CirclesHero: FC<CirclesHeroProps> = ({ title, image }) => {
+// same palette / config as the footer mesh gradient
+const meshOptions: MeshGradientOptions = {
+  colors: ["#dbc081", "#D77A1E", "#D77A1E", "#2b1a07"],
+  seed: 5,
+  animationSpeed: 0.9,
+  frequency: 0.00013,
+};
+
+const CirclesHero: FC<CirclesHeroProps> = ({ title }) => {
   return (
     <Box
       sx={{
         position: "relative",
         width: "100%",
-        overflow: "hidden",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        minHeight: { xs: 360, md: 540, lg: 640 },
-        pt: { xs: 8, md: 0 },
-        backgroundImage:
-          'url("data:image/svg+xml;utf8,%3Csvg xmlns=%22http:%2F%2Fwww.w3.org%2F2000%2Fsvg%22 width=%224000%22 height=%222000%22%3E%3Cg filter=%22url(%23a)%22%3E%3Cpath fill=%22%231F1306%22 d=%22M-2000-1000h8000v4000h-8000z%22%2F%3E%3Cpath d=%22m4467.408-1609.408-1108 2954 1352 214 1593-1709%22 fill=%22%23D77A1E%22%2F%3E%3Cpath d=%22m859-364-62 2895 898 233 2175-1661%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22M4042 814 1805 1844l1821 1647 868-1869%22 fill=%22%231F1306%22%2F%3E%3Cpath d=%22m-722.366 1278.479-689 1918 1166 283 1261-759%22 fill=%22%23FFE8B2%22%2F%3E%3Cpath d=%22m1071.24 1654.113-1376 387 420 2164 1884-2063%22 fill=%22%23d77a1e%22%2F%3E%3Cpath d=%22m3588 1759-1974 572 105 1741 2119-1587%22 fill=%22%231F1306%22%2F%3E%3C%2Fg%3E%3Cdefs%3E%3Cfilter id=%22a%22 x=%22-400%22 y=%22-400%22 width=%224800%22 height=%222800%22 filterUnits=%22userSpaceOnUse%22 color-interpolation-filters=%22sRGB%22%3E%3CfeFlood flood-opacity=%220%22 result=%22BackgroundImageFix%22%2F%3E%3CfeBlend in=%22SourceGraphic%22 in2=%22BackgroundImageFix%22 result=%22shape%22%2F%3E%3CfeGaussianBlur stdDeviation=%22400%22 result=%22effect1_foregroundBlur_1_2%22%2F%3E%3C%2Ffilter%3E%3C%2Fdefs%3E%3C%2Fsvg%3E")',
-        backgroundSize: "cover",
-        backgroundPosition: "center center",
-        backgroundRepeat: "repeat",
-        pointerEvents: "none",
+        // page background shows through below the gradient layer
+        backgroundColor: "transparent",
       }}
     >
-      {/* Content */}
+      {/* Mesh gradient background layer — fixed height so the card below
+          straddles its bottom edge */}
+      <Box
+        aria-hidden
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: { xs: 560, md: 700 },
+          overflow: "hidden",
+          backgroundColor: "#1F1306",
+          zIndex: 0,
+        }}
+      >
+        <MeshGradient
+          options={meshOptions}
+          style={{
+            position: "absolute",
+            inset: "-20%",
+            width: "140%",
+            height: "140%",
+            pointerEvents: "none",
+          }}
+        />
+      </Box>
+
+      {/* Content (normal flow, above the gradient layer) */}
       <Box
         sx={{
           position: "relative",
           zIndex: 1,
-          width: "100%",
-          px: { xs: 3, md: 6 },
-          py: { xs: 6, md: 10 },
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
-          justifyContent: "center",
-          textAlign: "center",
+          pt: { xs: 12, md: 14 },
+          pb: { xs: 6, md: 8 },
+          px: { xs: 2, md: 4 },
         }}
       >
+        {/* Heading content */}
         <Stack
-          spacing={3}
+          spacing={{ xs: 2.5, md: 3 }}
           sx={{
-            maxWidth: 900,
+            width: "100%",
+            maxWidth: 1000,
             alignItems: "center",
+            textAlign: "center",
           }}
         >
-          {/* Small label */}
+          {/* Eyebrow */}
           <Typography
             sx={{
               fontFamily: "var(--font-montserrat)",
-              fontSize: 12,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-              color: "rgba(248,250,252,0.8)",
-            }}
-          >
-            START HERE
-          </Typography>
-
-          {/* Main title */}
-          <Typography
-            component="h1"
-            sx={{
-              fontFamily: "var(--font-bricolage)",
-              fontSize: { xs: 32, md: 52 },
-              fontWeight: 500,
-              letterSpacing: 0.4,
+              fontSize: { xs: 16, md: 20 },
+              fontWeight: 700,
               color: "#FFFFFF",
             }}
           >
             {title}
           </Typography>
 
+          {/* Main title */}
+          <Typography
+            component="h1"
+            sx={{
+              fontFamily: "var(--font-montserrat)",
+              fontSize: { xs: 40, md: 72 },
+              fontWeight: 800,
+              lineHeight: 1.1,
+              color: "#FFFFFF",
+              maxWidth: 920,
+            }}
+          >
+            Get into circles that challenge you to elevate
+          </Typography>
+
           {/* Subtitle */}
           <Typography
             sx={{
-              fontFamily: "var(--font-bricolage)",
-              fontSize: { xs: 18, md: 26 },
+              fontFamily: "var(--font-inter)",
+              fontSize: { xs: 15, md: 20 },
               fontWeight: 400,
-              color: "#F9FAFB",
-            }}
-          >
-            The heart of the SEENA community
-          </Typography>
-
-          {/* Description */}
-          <Typography
-            sx={{
-              mt: 1,
-              fontFamily: "var(--font-inter)",
-              fontSize: { xs: 14, md: 18 },
-              lineHeight: 1.7,
+              lineHeight: 1.5,
               color: "rgba(249,250,251,0.92)",
-              maxWidth: 780,
+              maxWidth: 720,
             }}
           >
-            Connect with members worldwide, share experiences across wellness
-            dimensions, join local conversations, and help shape the next SEENA
-            Circles.
-          </Typography>
-
-          {/* CTA button */}
-          <Box sx={{ mt: { xs: 2, md: 3 } }}>
-            <Button
-              sx={{
-                minWidth: 260,
-                borderRadius: 999,
-                px: { xs: 4, md: 6 },
-                py: { xs: 1.6, md: 1.8 },
-                fontFamily: "var(--font-montserrat)",
-                fontSize: { xs: 14, md: 15 },
-                fontWeight: 600,
-                letterSpacing: 1.5,
-                textTransform: "none",
-                backgroundColor: "#FFFFFF",
-                color: "#000000",
-                boxShadow: "0 14px 40px rgba(0,0,0,0.35)",
-                "&:hover": {
-                  backgroundColor: "#F9FAFB",
-                  boxShadow: "0 16px 46px rgba(0,0,0,0.45)",
-                },
-              }}
-            >
-              Enter SEENA Collective
-            </Button>
-          </Box>
-
-          {/* Small note under button */}
-          <Typography
-            sx={{
-              mt: 1,
-              fontFamily: "var(--font-inter)",
-              fontSize: 13,
-              color: "rgba(209,213,219,0.95)",
-            }}
-          >
-            All members are automatically part of this circle.
+            The people you meet in circles don&apos;t just share your interests.
+            They raise the bar for what you expect from yourself.
           </Typography>
         </Stack>
+
+        {/* Founding-cohort image card — straddles the gradient bottom edge */}
+        <Box
+          sx={{
+            position: "relative",
+            width: "100%",
+            maxWidth: 1140,
+            mt: { xs: 4, md: 6 },
+            borderRadius: "16px",
+            overflow: "hidden",
+            minHeight: { xs: 280, md: 300 },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "space-between",
+            textAlign: "center",
+            px: { xs: 3, md: 5 },
+            py: { xs: 4, md: 5 },
+            boxShadow: "0 24px 60px rgba(0,0,0,0.35)",
+          }}
+        >
+          {/* Card background image */}
+          <Image
+            src={circlesCard}
+            alt=""
+            fill
+            sizes="(max-width: 1200px) 100vw, 1140px"
+            style={{ objectFit: "cover" }}
+          />
+
+          {/* Readability overlay */}
+          <Box
+            sx={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(90deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.25) 100%)",
+              pointerEvents: "none",
+            }}
+          />
+
+          {/* Card content */}
+          <Typography
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              fontFamily: "var(--font-montserrat)",
+              fontSize: { xs: 20, md: 26 },
+              fontWeight: 700,
+              color: "#FFFFFF",
+            }}
+          >
+            The first circle. the founding cohort
+          </Typography>
+
+          <Button
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              my: { xs: 2, md: 0 },
+              minWidth: 240,
+              borderRadius: "14px",
+              px: { xs: 4, md: 6 },
+              py: { xs: 1.4, md: 1.6 },
+              fontFamily: "var(--font-raleway)",
+              fontSize: { xs: 14, md: 15 },
+              fontWeight: 700,
+              letterSpacing: 1,
+              textTransform: "uppercase",
+              color: "#FFFFFF",
+              border: "1.5px solid rgba(255,255,255,0.9)",
+              backgroundColor: "transparent",
+              transition: "background-color 250ms ease-out",
+              "&:hover": {
+                backgroundColor: "rgba(255,255,255,0.12)",
+              },
+            }}
+          >
+            Join now
+          </Button>
+
+          <Typography
+            sx={{
+              position: "relative",
+              zIndex: 1,
+              fontFamily: "var(--font-inter)",
+              fontSize: { xs: 13, md: 14 },
+              color: "rgba(249,250,251,0.9)",
+            }}
+          >
+            Access is by application. Space is limited to 20 guests.
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );
