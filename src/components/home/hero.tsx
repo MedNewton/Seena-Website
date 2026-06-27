@@ -103,7 +103,7 @@ const Hero: React.FC = () => {
               delay: 0.3,
             }}
             sx={{
-              lineHeight: 0.98,
+              lineHeight: 1,
               fontWeight: 900,
               fontFamily: "var(--font-montserrat)",
               textTransform: "uppercase",
