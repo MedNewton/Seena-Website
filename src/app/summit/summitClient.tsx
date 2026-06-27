@@ -25,7 +25,6 @@ const SummitPageClient: FC = () => {
       <SummitHero />
       <SummitEventSection />
       <SummitInsideSection />
-      <SummitUnlocksSection />
       <SummitBuiltSection />
       <ExploreMoreSection excludeId="summits" dark />
       <Footer meshColors={["#0f52ba", "#6a8ff0", "#b388eb", "#0f52ba"]} />
