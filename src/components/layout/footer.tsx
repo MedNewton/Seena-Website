@@ -72,7 +72,6 @@ const Footer: React.FC<FooterProps> = ({ transparentFooter = false }) => {
         pb: { xs: 6, md: 8 },
         px: { xs: 2, md: 3 },
         color: "#FFFFFF",
-        backgroundColor: "#000000",
       }}
     >
       <MotionCard

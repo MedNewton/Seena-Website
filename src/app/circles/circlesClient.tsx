@@ -4,6 +4,9 @@ import type { FC } from "react";
 import { Box } from "@mui/material";
 
 import CirclesHero from "@/components/circles/CirclesHero";
+import CirclesInsideSection from "@/components/circles/CirclesInsideSection";
+import CirclesUnlocksSection from "@/components/circles/CirclesUnlocksSection";
+import CirclesBuiltSection from "@/components/circles/CirclesBuiltSection";
 import Footer from "@/components/layout/footer";
 
 const CirclesPageClient: FC = () => {
@@ -18,6 +21,9 @@ const CirclesPageClient: FC = () => {
       }}
     >
       <CirclesHero title="Circles" />
+      <CirclesInsideSection />
+      <CirclesUnlocksSection />
+      <CirclesBuiltSection />
       <Footer />
     </Box>
   );
