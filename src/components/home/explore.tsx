@@ -33,7 +33,7 @@ export const EXPLORE_CARDS: ExploreCardConfig[] = [
     cta: "Learn more",
     note: "Launching fall 2026",
     imageSrc: pulseImg.src,
-    href: "/reset",
+    href: "/pulse",
   },
   {
     id: "circles",
@@ -52,7 +52,7 @@ export const EXPLORE_CARDS: ExploreCardConfig[] = [
     cta: "Register now",
     note: "First event August 2026",
     imageSrc: summitImg.src,
-    href: "/experiences",
+    href: "/summit",
   },
   {
     id: "live",
@@ -61,7 +61,7 @@ export const EXPLORE_CARDS: ExploreCardConfig[] = [
       "Book wellness experiences | move together | In your city | Mindfulness and fitness",
     cta: "Learn more",
     imageSrc: liveImg.src,
-    href: "/seena-live",
+    href: "/live",
   },
 ];
 

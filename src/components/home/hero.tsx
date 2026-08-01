@@ -203,7 +203,7 @@ const Hero: React.FC = () => {
               {/* Secondary – gradient border, transparent background */}
               <MotionButton
                 whileTap={{ scale: 0.97 }}
-                onClick={() => scrollToSection("app")}
+                onClick={() => scrollToSection("seena-different")}
                 sx={{
                   borderRadius: "12px",
                   px: 5.5,

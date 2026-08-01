@@ -51,6 +51,7 @@ const SeenaDifferentSection: React.FC = () => {
   return (
     <Box
       component="section"
+      id="seena-different"
       sx={{
         width: "100%",
         px: { xs: 2, md: 4 },
